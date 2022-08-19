@@ -1,0 +1,49 @@
+section#slider
+    .container
+        .row
+            .col-sm-12
+                div[id="slider-carousel" class="carousel slide" data-ride="carousel"]
+                    ol.carousel-indicators
+                        li[data-target="#slider-carousel" data-slide-to="0" class="active"]
+                        li[data-target="#slider-carousel" data-slide-to="1"]
+                        li[data-target="#slider-carousel" data-slide-to="2"]
+
+                    .carousel-inner
+                        .item.active
+                            .col-sm-6
+                                h1
+                                    span Z
+                                    |   - ANESHOP
+                                h2 Free E-Commerce Template
+                                p    Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                button[type="button" class="btn btn-default get_it_now"] Get it now
+                            .col-sm-6
+                                = image_tag('home/girl1', class: "girl img-responsive")
+                                = image_tag('home/pricing', class: "banner_pricing")
+                        .item
+                            .col-sm-6
+                                h1
+                                    span Z
+                                    |   - ANESHOP
+                                h2 Free E-Commerce Template
+                                p    Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                button[type="button" class="btn btn-default get_it_now"] Get it now
+                            .col-sm-6
+                                = image_tag('home/girl2', class: "banner_girl img-responsive")
+                                = image_tag('home/pricing', class: "banner_pricing")
+                        .item 
+                            .col-sm-6
+                                h1 
+                                    span Z 
+                                    |   - ANESHOP
+                                h2 Free E-Commerce Template
+                                p    Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                button[type="button" class="btn btn-default get_it_now"] Get it now
+                            .col-sm-6
+                                = image_tag('home/girl3', class: "girl img-responsive")
+                                = image_tag('home/pricing', class: "banner_pricing")
+                    a[href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev"]
+                        i.fa.fa-angle-left
+                    a[href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next"]
+                        i.fa.fa-angle-right
+
