@@ -1,0 +1,15 @@
+= render 'home/slider'
+section
+    .container
+        .row
+            .col-sm-3
+                .left-sidebar
+                    = render "home/category"
+                    = render "home/brands"
+                    = render "home/sales"
+                    = render "home/fanpage"
+            .col-sm-9
+                .right-sidebar
+                    = render 'home/features_items'
+                    = render 'home/category_tab'
+                    = render 'home/recommended_items'
