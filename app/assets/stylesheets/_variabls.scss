@@ -1,0 +1,20 @@
+// Font Family
+$roboto: "Roboto", sans-serif;
+$abel: abel;
+
+// text Colors ---------------
+$white: #ffffff;
+$black: #000000;
+$text: #696763;
+
+// Theme Color
+$theme-color-key: #fe980f;
+
+// Responsive Variables
+$xx-layout: "only screen and (min-width: 1366px) and (max-width: 1600px)";
+$xl-layout: "only screen and (min-width: 1200px) and (max-width: 1365px)";
+$lg-layout: "(min-width: 1200px)";
+$md-layout: "(min-width: 992px) and (max-width: 1199px)";
+$sm-layout: "(min-width: 768px) and (max-width: 991px)";
+$xs-layout: "(max-width: 767px)";
+$xs-portrait-layout: "(max-width: 480px)";

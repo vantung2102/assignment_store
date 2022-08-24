@@ -1,15 +1,15 @@
-= render 'home/slider'
+= render 'home/shared/slider'
 section
     .container
         .row
             .col-sm-3
                 .left-sidebar
-                    = render "home/category"
-                    = render "home/brands"
-                    = render "home/sales"
-                    = render "home/fanpage"
+                    = render "home/shared/category"
+                    = render "home/shared/brands"
+                    = render "home/shared/sales"
+                    = render "home/shared/fanpage"
             .col-sm-9
                 .right-sidebar
-                    = render 'home/features_items'
-                    = render 'home/category_tab'
-                    = render 'home/recommended_items'
+                    = render 'home/shared/features_items'
+                    = render 'home/shared/category_tab'
+                    = render 'home/shared/recommended_items'

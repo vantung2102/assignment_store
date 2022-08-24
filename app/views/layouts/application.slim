@@ -7,10 +7,16 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'font-awesome.min'
+    / = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / = stylesheet_link_tag 'font-awesome.min'
     
   body
     = render 'layouts/header'
+    .container-fluid
+      p.notice 
+        = notice
+      p.alert
+        = alert
     / ==== loader ====
     #loader.display-flex
       .position-center-center
