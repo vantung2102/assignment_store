@@ -1,0 +1,44 @@
+section#form
+  .container
+    .row
+      .col-sm-5
+        .login-form
+          h2 Login to your account
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            = f.email_field :email, autocomplete: "email", placeholder: "Enter Email"
+            = f.password_field :password, autocomplete: "new-password", placeholder: "Enter Password"
+            span 
+              = f.check_box :remember_me, class: "checkbox"
+              |Keep me signed in
+            button[type="submit" class="btn btn-default"] Login
+        .login_with_social
+          .top
+            div
+            span OR
+            div
+          .facebook_google
+            = image_tag("login/fb_icon", class: "fb")
+            = button_to 'Facebook', user_facebook_omniauth_authorize_path
+
+            = image_tag("login/google", class: "google")
+            = button_to 'Google', user_facebook_omniauth_authorize_path
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          = link_to "Forgot your password?", new_password_path(resource_name)
+      
+      .col-sm-2.display-flex
+        h2.or OR
+      
+      .col-sm-5
+        .register-form
+          h2 New User Signup!
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = render "devise/shared/error_messages", resource: resource
+            = f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Enter Name"
+            = f.email_field :email, autocomplete: "email", placeholder: "Enter Email"
+            = f.phone_field :phone, autocomplete: "phone", placeholder: "Enter Phone"
+            select[name="gender"]
+              option value="1" male
+              option value="2" female
+            = f.password_field :password, autocomplete: "new-password", placeholder: "Enter Password"
+            = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Enter Password Confirmation"
+            button[type="submit" class="btn btn-default"] Register
