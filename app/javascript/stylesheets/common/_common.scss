@@ -1,0 +1,82 @@
+/*----------------------------------------*/
+/*  1. Template default SCSS
+/*----------------------------------------*/
+
+/*-- Google Font --*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,1000,300,600,700);
+@import url(http://fonts.googleapis.com/css?family=Abel);
+
+/*-- Common Style --*/
+body {
+  font-family: $roboto !important;
+  position: relative;
+  font-weight: 400;
+}
+
+ul li {
+  list-style: none;
+}
+
+a:hover {
+  outline: none;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: none;
+  outline-offset: 0;
+}
+
+a {
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $roboto;
+}
+
+.btn:hover,
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/*----------------  Common Classes -----------*/
+
+.navbar-toggle {
+  background-color: #000;
+}
+
+.display-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-right {
+  padding-right: 0;
+}
+
+.new,
+.sale {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.alert {
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+}

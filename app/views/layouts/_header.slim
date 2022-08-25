@@ -79,9 +79,14 @@ header#header
                                     i.fa.fa-shopping-cart
                                     |  Cart
                             li 
-                                a
-                                    i.fa.fa-lock
-                                    |  Login
+                                - if user_signed_in?
+                                    = link_to logout_path 
+                                        i.fa.fa-lock
+                                        |  Logout
+                                - else 
+                                    = link_to login_path
+                                        i.fa.fa-lock
+                                        |  Login
     / --------------------- header bottom ----------------------
     .header_bottom 
         .container 
@@ -104,11 +109,11 @@ header#header
                                     <i class="fa fa-angle-down"></i>
                                     ul[class="sub-menu" role="menu"]
                                         li 
-                                            a Products
+                                            |Products
                                         li 
-                                            a Checkout
+                                            |Checkout
                                         li 
-                                            a Cart
+                                            |Cart
                                         li 
                                             a Login
                                         li 
