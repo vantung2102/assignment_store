@@ -1,0 +1,10 @@
+// @import "../../../../../node_modules/bootstrap/scss/functions";
+
+// @import "../../../../../node_modules/bootstrap/scss/variables";
+// @import "../../../node_modules/bootstrap/scss/variables";
+@import "./scss/common/core";
+@import "./scss/common/variables";
+@import "./scss/common/common";
+@import "./scss/common/utilities";
+@import "./scss/layouts/navbar";
+@import "./scss/layouts/sidebar";

@@ -5,18 +5,24 @@ html
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     / = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    / = stylesheet_link_tag 'font-awesome.min'
+    = stylesheet_link_tag 'bootstrap.min'
+    = stylesheet_link_tag 'font-awesome.min'
     
   body
     = render 'layouts/header'
-    .container-fluid
-      p.notice 
-        = notice
-      p.alert
-        = alert
+    - if notice
+      .container-fluid#notice_wraper
+        p.notice = notice
+        / p.alert
+        /   = alert
+    - elsif flash
+        - flash.each do |message_type, message|
+          div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px; align-items: center;text-align: center;background: #e8a62d59;color: red;"
+            button class="close" data-dismiss="alert" type="button" ×
+            = message
     / ==== loader ====
     #loader.display-flex
       .position-center-center

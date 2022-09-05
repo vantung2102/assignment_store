@@ -1,0 +1,52 @@
+= form_for @user, url: url, :html => {:class => "form-horizontal denser"} do |f|
+    - if @user.errors.any?
+        #error_explanation
+        h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+        ul
+            - @user.errors.full_messages.each do |message|
+                li = message
+    fieldset
+        .form-group.control-group.string_type
+            = f.label :username, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.text_field :name, class:"form-control", required:"required",  maxlength:"255", size:"50"
+                span.help-block Required. Length up to 20.
+        .form-group.control-group.string_type
+            = f.label :phone, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.text_field :phone, class:"form-control"
+                span.help-block Optional. Length of 10-15.
+        .form-group.control-group.string_type
+            = f.label :email, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.text_field :email, class:"form-control"
+                span.help-block Optional. Length up to 255.
+        .form-group.control-group.string_type
+            = f.label :gender, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.select :gender, [['Men', 1], ['Women', 2]], { :multiple => true}, class: "form-control"
+                span.help-block Optional.
+        .form-group.control-group.string_type
+            = f.label :password, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.password_field :password, class:"form-control"
+                span.help-block Required. Length up to 255.
+        .form-group.control-group.string_type
+            = f.label :password_confirmation, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.password_field :password_confirmation, class:"form-control"
+                span.help-block Required. Length up to 255.
+        .form-group.control-group.string_type
+            = f.label :address, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                = f.text_area :address, class:"form-control", cols:"48", rows:"3"
+                span.help-block Optional. Length up to 255.
+        .form-group.control-group.string_type
+            = f.label :roles, class:"col-sm-2 control-label"
+            .col-sm-10.controls
+                - check = @user.has_role?(:admin) ? 2 : 1
+                = f.select :roles, options_for_select([['User', 1], ['Admin', 2]], selected: check), { :multiple => false}, class: "form-control"
+                span.help-block Optional.
+    .form-group.form-actions
+        .col-sm-offset-2.col-sm-10
+            = f.submit class: "btn btn-primary btn-edit"

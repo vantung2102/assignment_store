@@ -1,11 +1,18 @@
 class User < ApplicationRecord
+  rolify
+  # enum role: [:user, :admin]
+  # after_create :set_default_role
+  # has_many :users_roles
+  # has_many :roles, through: :users_roles
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable,
          :omniauthable , omniauth_providers: %i[facebook]
 
-  validates :password, password: true
+  validates :password, password: true, unless: -> { password.blank? }
   validates :phone, phone_number: true
 
   def self.from_omniauth(auth)

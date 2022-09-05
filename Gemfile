@@ -59,6 +59,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
 
 gem 'devise'
+gem 'pundit'
+gem "rolify"
+
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-google-oauth2"

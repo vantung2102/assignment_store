@@ -1,0 +1,144 @@
+@import "../common/variabls";
+// ==================== Register - Login ==========================
+#form {
+  display: block;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  overflow: hidden;
+
+  h2 {
+    color: #696763;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .login_with_social {
+    .top {
+      display: flex;
+      align-items: center;
+      padding-bottom: 20px;
+      padding-top: 20px;
+
+      div {
+        height: 1px;
+        width: 100%;
+        background-color: #696763;
+        flex: 1;
+      }
+
+      span {
+        color: #696763;
+        padding: 0 5px;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+    }
+
+    .facebook_google {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      form input {
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid rgba(0, 0, 0, 0.26);
+        background-color: #fff;
+        color: rgba(0, 0, 0, 0.87);
+        padding: 0 2px;
+        border-radius: 2px;
+        height: 40px;
+        width: 210px;
+        font-family: $roboto;
+
+        @media #{$md-layout} {
+          width: 185px;
+        }
+
+        @media #{$sm-layout} {
+          width: 125px;
+        }
+      }
+
+      .fb {
+        position: absolute;
+        top: 10px;
+        left: 40px;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+
+        @media #{$sm-layout} {
+          left: 7px;
+        }
+      }
+
+      .google {
+        position: absolute;
+        top: 10px;
+        right: 130px;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+
+        @media #{$sm-layout} {
+          right: 85px;
+        }
+      }
+    }
+  }
+}
+
+.login-form,
+.register-form {
+  // h2 {
+  //   color: #696763;
+  //   font-family: "Roboto", sans-serif;
+  //   font-size: 20px;
+  //   font-weight: 300;
+  //   margin-bottom: 30px;
+  // }
+
+  form input,
+  form select {
+    background: #f0f0e9;
+    border: medium none;
+    color: #696763;
+    display: block;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+  }
+
+  form {
+    span {
+      line-height: 25px;
+    }
+
+    span input {
+      width: 15px;
+      float: left;
+      height: 15px;
+      margin-right: 5px;
+    }
+
+    button {
+      background: #fe980f;
+      border: medium none;
+      border-radius: 0;
+      color: #ffffff;
+      display: block;
+      font-family: "Roboto", sans-serif;
+      padding: 6px 25px;
+      width: 100%;
+    }
+  }
+}

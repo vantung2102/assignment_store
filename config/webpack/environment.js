@@ -1,13 +1,16 @@
 const { environment } = require("@rails/webpacker");
 
-// // Get the actual sass-loader config
-// const sassLoader = environment.loaders.get("sass");
-// const sassLoaderConfig = sassLoader.use.find(function (element) {
-//   return element.loader == "sass-loader";
-// });
+// Add the following lines
+const webpack = require("webpack");
 
-// // Use Dart-implementation of Sass (default is node-sass)
-// const options = sassLoaderConfig.options;
-// options.implementation = require("sass");
+environment.plugins.append(
+  "Provide",
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    Popper: ["popper.js", "default"], // Not a typo, we're still using popper.js here
+  })
+);
+// End new addition
 
 module.exports = environment;
