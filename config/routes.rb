@@ -15,4 +15,11 @@ Rails.application.routes.draw do
       get 'logout', to: 'devise/sessions#destroy'
     end
   # end
+
+  namespace :admin do
+    get '/', to: 'home#index'
+    delete 'users/:id/delete', to: 'users#destroy'
+    resources :users do
+    end
+  end
 end

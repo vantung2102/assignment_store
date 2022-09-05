@@ -1,0 +1,119 @@
+/*-------- 2. Animation CSS ---------*/
+// @import "variabls";
+@keyframes spinLeft {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes spinRight {
+  from {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+
+  to {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============== Loader ================
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+  z-index: 100000000;
+  opacity: 1;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+}
+
+div.ldr {
+  width: 8vmax;
+  height: 8vmax;
+  border-right: 4px solid #fe980f;
+  border-radius: 100%;
+  -webkit-animation: spinRight 1000ms linear infinite;
+  animation: spinRight 1000ms linear infinite;
+}
+
+div.ldr:before,
+div.ldr:after {
+  content: "";
+  width: 6vmax;
+  height: 6vmax;
+  display: block;
+  position: absolute;
+  top: calc(50% - 3vmax);
+  left: calc(50% - 3vmax);
+  border-left: 3px solid #fe980f;
+  border-radius: 100%;
+  -webkit-animation: spinLeft 1000ms linear infinite;
+  animation: spinLeft 1000ms linear infinite;
+}
+
+div.ldr:after {
+  width: 4vmax;
+  height: 4vmax;
+  top: calc(50% - 2vmax);
+  left: calc(50% - 2vmax);
+  border: 0;
+  border-right: 2px solid #fe980f;
+  -webkit-animation: none;
+  animation: none;
+}
+
+// ============== scroll ================
+
+a#scrollUp {
+  bottom: 45px;
+  right: 10px;
+  padding: 5px 10px;
+  background: #fe980f;
+  color: #fff;
+  -webkit-animation: bounce 2s ease infinite;
+  animation: bounce 2s ease infinite;
+}
+
+a#scrollUp i {
+  font-size: 30px;
+}

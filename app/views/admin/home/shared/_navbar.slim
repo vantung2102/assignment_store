@@ -1,0 +1,92 @@
+nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row"
+    / ================= Logo ====================
+    div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start"
+        .me-3
+            button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize"
+              i.fa.fa-bars
+        div
+            a[class="navbar-brand brand-logo" href="/admin"]
+                = image_tag("home/logo")
+
+            / a class="navbar-brand brand-logo-mini" href="index.html"
+            / img src="images/logo-mini.svg" alt="logo"
+    / ====================== Header ====================
+    div class="navbar-menu-wrapper d-flex align-items-top"
+        ul.navbar-nav
+            li class="nav-item font-weight-semibold d-none d-lg-block ms-0"
+                h1.welcome-text
+                    |Good Morning, 
+                    span class="text-black fw-bold" John Doe
+                h3 class="welcome-sub-text" Your performance summary this week
+        ul.navbar-nav.ms-auto
+            li.nav-item
+                form class="search-form" action="#"
+                    i.fa.fa-search
+                    input type="search" class="form-control" placeholder="Search Here" title="Search here"
+            li.nav-item.dropdown.dropdown-list-toggle
+                a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                    i.fa.fa-envelope
+                div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown"
+                    a class="dropdown-item py-3 border-bottom"
+                        p class="mb-0 font-weight-medium float-left" You have 4 new notifications
+                        span class="badge badge-pill badge-primary float-right" View all
+                    a class="dropdown-item preview-item py-3"
+                        .preview-thumbnail
+                            i class="mdi mdi-alert m-auto text-primary"
+                        .preview-item-content
+                            h6 class="preview-subject fw-normal text-dark mb-1" Application Error
+                            p class="fw-light small-text mb-0" Just now
+                    a class="dropdown-item preview-item py-3"
+                        .preview-thumbnail
+                            i class="mdi mdi-settings m-auto text-primary"
+                        .preview-item-content">
+                            h6 class="preview-subject fw-normal text-dark mb-1" Settings
+                            p class="fw-light small-text mb-0" Private message
+                    a class="dropdown-item preview-item py-3"
+                        .preview-thumbnail
+                            i class="mdi mdi-airballoon m-auto text-primary"
+                        .preview-item-content
+                            h6 class="preview-subject fw-normal text-dark mb-1" New user registration
+                            p class="fw-light small-text mb-0" 2 days ago
+            li.nav-item.dropdown
+                a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                    i.fa.fa-bell
+                    span.count
+                div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown"
+                    a.dropdown-item.py-3
+                        p class="mb-0 font-weight-medium float-left" You have 7 unread mails
+                        span class="badge badge-pill badge-primary float-right" View all
+                    .dropdown-divider"
+                    a class="dropdown-item preview-item"
+                        .preview-thumbnail
+                            img src="images/faces/face10.jpg" alt="image" class="img-sm profile-pic"
+                        .preview-item-content.flex-grow.py-2
+                            p class="preview-subject ellipsis font-weight-medium text-dark" Marian Garner
+                            p class="fw-light small-text mb-0" The meeting is cancelled
+            li.nav-item.dropdown.d-none.d-lg-block.user-dropdown
+                a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                    / img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"
+                    = image_tag("admin/avatars/1", class: "img-xs rounded-circle")
+                div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown"
+                    div class="dropdown-header text-center"
+                        / img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image"
+                        = image_tag("admin/avatars/1")
+                        p class="mb-1 mt-3 font-weight-semibold" Allen Moreno
+                        p class="fw-light text-muted mb-0" allenmoreno@gmail.com
+                    a.dropdown-item
+                        i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"
+                        |My Profile
+                    a.dropdown-item
+                        i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"
+                        |My Profile
+                    a.dropdown-item
+                        i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"
+                        |My Profile
+                    a.dropdown-item
+                        i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"
+                        |My Profile
+                    a.dropdown-item
+                        i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"
+                        |My Profile
+        button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas"
+            span class="mdi mdi-menu"

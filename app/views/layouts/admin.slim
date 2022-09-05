@@ -1,0 +1,24 @@
+doctype html
+html[lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free"]
+  head
+    title Admin | AssignmentStore
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'font-awesome.min'
+    
+  body
+    .container-scroller
+      = render "admin/home/shared/navbar"
+      .container-fluid.page-body-wrapper
+          = render "admin/home/shared/sidebar"
+          .main-panel
+            .content-wrapper
+              .row
+                = yield
+    
+    = javascript_include_tag "jquery"
+    = javascript_include_tag "bootstrap.min"
+    

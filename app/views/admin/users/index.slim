@@ -1,0 +1,87 @@
+.page-header
+    h1 List of Users
+ol.breadcrumb
+    li.dashboard
+        a class="pjax" href=""
+            |Dashboard
+    li.active Users
+.container
+    - flash.each do |message_type, message|
+        div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px;"
+            button class="close" data-dismiss="alert" type="button" ×
+            = message
+ul.nav.nav-tabs.action_items
+    li.active
+        a class="pjax"
+            i.fa.fa-list
+            span List
+    li
+        a class="pjax" href="#{new_admin_user_url}"
+            i.fa.fa-plus
+            span New
+    li
+        a class="pjax"
+            i.fa.fa-share
+            span Export
+    div class="right" style="float:right"
+        li class="dropdown" 
+            a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+                i.fa.fa-filter
+                |Add filter
+                b.caret
+            ul class="dropdown-menu" style="left:auto; right:0;"
+                li
+                    a href="#" Id
+div class="col-lg-12 grid-margin stretch-card"
+    .card
+        .card-body
+            .table-responsive
+                table.table.table-striped
+                    thead
+                        tr
+                            th STT
+                            th ID
+                            th User
+                            th Full Name
+                            th Phone
+                            th Email
+                            th Role
+                            th Sign In Count
+                            th Created At
+                            th Updated At
+                            th Other
+
+                    tbody
+                        - i = 0
+                        - @data[:users].each do |user|
+                            - i += 1
+                            tr
+                                td = i
+                                td = user.id
+                                td.py-1
+                                    = image_tag("admin/avatars/face1")
+                                td = user.name
+                                td = user.phone
+                                td = user.email
+                                td 
+                                    - is_admin = user.has_role? :admin
+                                    label[class="badge badge-#{is_admin ? "info" : "success"}"] 
+                                        - if is_admin
+                                            | Admin
+                                        - else 
+                                            | User
+                                td = user.id
+                                td = user.created_at
+                                td = user.updated_at
+                                td 
+                                    ul.others
+                                        li
+                                            a href="" title="view"
+                                                i.fa.fa-eye
+                                        li
+                                            a href="#{edit_admin_user_path(user.id)}" title="edit"
+                                                i.fa.fa-edit
+                                        li
+                                            a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#{admin_user_url(user.id)}"
+                                                i.fa.fa-trash-o
+                       

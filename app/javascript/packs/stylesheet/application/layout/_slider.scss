@@ -1,0 +1,93 @@
+@import "../common/variabls";
+// ==================== Slider ==========================
+#slider {
+  padding-bottom: 45px;
+
+  #slider-carousel {
+    .carousel-indicators {
+      li {
+        background: #c4c4be;
+
+        &.active {
+          background: $theme-color-key;
+        }
+      }
+    }
+
+    .carousel-inner {
+      .item {
+        padding-left: 100px;
+
+        h1 {
+          color: #b4b1ab;
+          font-family: abel;
+          font-size: 48px;
+          margin-top: 115px;
+        }
+
+        h1 span {
+          color: $theme-color-key;
+        }
+
+        h2 {
+          color: #363432;
+          font-family: $roboto;
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 22px;
+          margin-top: 10px;
+        }
+
+        p {
+          color: #363432;
+          font-size: 16px;
+          font-weight: 300;
+          font-family: $roboto;
+        }
+
+        .get_it_now {
+          background: $theme-color-key;
+          border: 0 none;
+          border-radius: 0;
+          color: #ffffff;
+          font-family: $roboto;
+          font-size: 16px;
+          font-weight: 300;
+          margin-top: 23px;
+        }
+
+        .banner_girl {
+          margin-left: 0;
+        }
+
+        .banner_pricing {
+          position: absolute;
+          right: 40%;
+          top: 52%;
+        }
+      }
+
+      @media #{$xs-layout} {
+        .item {
+          padding-left: 0;
+
+          h1 {
+            font-size: 35px;
+          }
+
+          h2 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .control-carousel {
+      position: absolute;
+      top: 50%;
+      font-size: 60px;
+      color: #c2c2c1;
+      display: block;
+    }
+  }
+}
