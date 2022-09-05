@@ -2,7 +2,7 @@
     h1 List of Users
 ol.breadcrumb
     li.dashboard
-        a class="pjax" href=""
+        a.pjax href=""
             |Dashboard
     li.active Users
 .container
@@ -12,27 +12,27 @@ ol.breadcrumb
             = message
 ul.nav.nav-tabs.action_items
     li.active
-        a class="pjax"
+        a.pjax
             i.fa.fa-list
             span List
     li
-        a class="pjax" href="#{new_admin_user_url}"
+        a.pjax href="#{new_admin_user_url}"
             i.fa.fa-plus
             span New
     li
-        a class="pjax"
+        a.pjax
             i.fa.fa-share
             span Export
     div class="right" style="float:right"
-        li class="dropdown" 
+        li.dropdown 
             a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
                 i.fa.fa-filter
                 |Add filter
                 b.caret
-            ul class="dropdown-menu" style="left:auto; right:0;"
+            ul.dropdown-menu style="left:auto; right:0;"
                 li
                     a href="#" Id
-div class="col-lg-12 grid-margin stretch-card"
+.col-lg-12.grid-margin.stretch-card
     .card
         .card-body
             .table-responsive
@@ -65,7 +65,7 @@ div class="col-lg-12 grid-margin stretch-card"
                                 td = user.email
                                 td 
                                     - is_admin = user.has_role? :admin
-                                    label[class="badge badge-#{is_admin ? "info" : "success"}"] 
+                                    label class="badge badge-#{is_admin ? "info" : "success"}"
                                         - if is_admin
                                             | Admin
                                         - else 
@@ -73,11 +73,11 @@ div class="col-lg-12 grid-margin stretch-card"
                                 td = user.id
                                 td = user.created_at
                                 td = user.updated_at
-                                td 
+                                td style="width: 80px"
                                     ul.others
                                         li
-                                            a href="" title="view"
-                                                i.fa.fa-eye
+                                            a href="#{admin_user_url(user.id)}" title="view"
+                                                i.fa.fa-info-circle
                                         li
                                             a href="#{edit_admin_user_path(user.id)}" title="edit"
                                                 i.fa.fa-edit

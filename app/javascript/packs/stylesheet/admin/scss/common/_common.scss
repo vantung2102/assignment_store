@@ -59,6 +59,7 @@
 .others {
   display: flex;
   justify-content: space-between;
+  padding-left: 0;
 
   li a i {
     color: #6c757d;
@@ -226,4 +227,24 @@
   color: #52cdff;
   border: 1px solid #52cdff;
   background-color: transparent;
+}
+
+.badge-warning {
+  color: #ffaf00;
+  border: 1px solid #ffaf00;
+  background-color: transparent;
+}
+
+.form-show {
+  h4 {
+    font-size: 2rem;
+  }
+
+  span {
+    font-size: 11px;
+  }
+
+  dd {
+    font-size: 15px;
+  }
 }

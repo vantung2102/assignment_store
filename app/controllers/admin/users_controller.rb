@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-    before_action :set_user, only: %i[ edit update destroy ]
+    before_action :set_user, only: %i[ show edit update destroy ]
     before_action :authorize_admin!, only: %i[ update destroy ]
 
     def index
@@ -9,6 +9,8 @@ class Admin::UsersController < Admin::BaseController
             users: users
         }
     end
+
+    def show;end
 
     def new
         @user = User.new

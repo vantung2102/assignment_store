@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'home#index'
     delete 'users/:id/delete', to: 'users#destroy'
-    resources :users do
-    end
+    resources :users
+    resources :categories
   end
 end
