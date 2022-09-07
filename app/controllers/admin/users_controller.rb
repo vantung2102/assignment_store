@@ -22,7 +22,6 @@ class Admin::UsersController < Admin::BaseController
         status = create ? :success : :danger
         flash[status] = message
         redirect_to admin_users_path
-        
     end
 
     def edit;end

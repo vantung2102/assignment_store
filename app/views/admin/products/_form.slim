@@ -1,0 +1,46 @@
+= form_for @product, url: url, :html => {:class => "form-horizontal denser"} do |f|
+  fieldset
+    .form-group.control-group
+      = f.label :title, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :title, class:"form-control"
+    .form-group.control-group
+      = f.label :meta_title, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :meta_title, class:"form-control"
+    / .form-group.control-group
+    /   = f.label :brand, class:"col-sm-2 control-label"
+    /   .col-sm-10.controls
+    /       = f.text_field :brand, class:"form-control"
+    .form-group.control-group
+      = f.label :categories, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          / = f.text_field :categories, class:"form-control"
+          = f.collection_check_boxes :options, [[true, 'Yes'], [false, 'No']], :first, :last
+    .form-group.control-group
+      = f.label :price, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :price, class:"form-control"
+    .form-group.control-group
+      = f.label :discount, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :discount, class:"form-control"
+    .form-group.control-group
+      = f.label :content, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :content, class:"form-control"
+    .form-group.control-group
+      = f.label :quantity, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :quantity, class:"form-control"
+    .form-group.control-group
+      = f.label :price, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_field :price, class:"form-control"
+    .form-group.control-group
+      = f.label :content, class:"col-sm-2 control-label"
+      .col-sm-10.controls
+          = f.text_area :content, class:"form-control", cols:"48", rows:"3"
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10
+        = f.submit class: "btn btn-primary btn-edit"

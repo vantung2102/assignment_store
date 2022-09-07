@@ -65,7 +65,7 @@ ul.nav.nav-tabs.action_items
                   dd.well = @category.content
                   dt
                     span.label.label-warning Created At
-                  dd.well = @category.created_at
+                  dd.well = @category.created_at.strftime("%H:%M %d/%m/%Y")
                   dt
                     span.label.label-warning Updated At
-                  dd.well = @category.updated_at
+                  dd.well = @category.updated_at.strftime("%H:%M %d/%m/%Y")

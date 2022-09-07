@@ -1,6 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
   before_action :set_category, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ create update destroy ]
+  before_action :authorize_admin!, only: %i[ update destroy ]
 
   def index
       categories = Category.all
@@ -43,15 +43,16 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   private
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    def category_params
-      params.require(:category).permit(:title, :meta_title, :content, :category_id)
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    def authorize_admin!
-      authorize @user
-    end
+  def category_params
+    params.require(:category).permit(:title, :meta_title, :content, :category_id)
+  end
+
+  def authorize_admin!
+    authorize @user
+  end
 end

@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     delete 'users/:id/delete', to: 'users#destroy'
     resources :users
     resources :categories
+    resources :products
   end
 end

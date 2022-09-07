@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-    # before_action :authenticate_admin!
     def update?
         authenticate_admin
     end
