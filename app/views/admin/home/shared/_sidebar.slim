@@ -1,41 +1,40 @@
 nav[class="sidebar sidebar-offcanvas" id="sidebar"]
   ul.nav
     li.nav-item.active
-        a class="nav-link" href="/admin"
+        a.nav-link href="/admin"
             i.fa.fa-columns
             span.menu-title Dashboard
-    li.nav-item.nav-category MANAGE USER
+    li.nav-item.nav-category.active
+        i.fa.fa-user 
+        | MANAGE USER
     li.nav-item
-        a.nav-link
-            i.fa.fa-user
+        a.nav-link[href="#{admin_users_url}"]
             span.menu-title Users
-    li.nav-item.nav-category Products
+    li.nav-item.nav-category
+        i.fa.fa-shopping-cart
+        | MANAGE Products
     li.nav-item
         a.nav-link
-            i.fa.fa-shopping-cart
+            span.menu-title Brands
+    li.nav-item
+        a.nav-link[href="#{admin_categories_url}"]
+            span.menu-title Categories
+    li.nav-item
+        a.nav-link
+            span.menu-title Category Products
+    li.nav-item
+        a.nav-link
             span.menu-title Products
     li.nav-item
         a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
-            span.menu-title Brands
-    li.nav-item
-        a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
-            span.menu-title Product Categories
-    li.nav-item
-        a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
             span.menu-title Product rates
     li.nav-item
         a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
             span.menu-title Product favorites
     li.nav-item.nav-category Orders
     li.nav-item
         a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
             span.menu-title Orders
     li.nav-item
         a.nav-link
-            i class="menu-icon mdi mdi-floor-plan"
             span.menu-title Order Details

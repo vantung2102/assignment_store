@@ -4,6 +4,7 @@ class Admin::BaseController < ActionController::Base
 
     protect_from_forgery with: :exception
     before_action :authenticate_user!
+    # before_action :authenticate_admin!
 
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -16,5 +17,11 @@ class Admin::BaseController < ActionController::Base
 
     def is_admin?
         current_user.has_role? :admin
+    end
+
+    def authenticate_admin!
+        unless is_admin?
+            redirect_to root_path
+        end
     end
 end

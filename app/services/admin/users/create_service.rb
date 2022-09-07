@@ -1,27 +1,26 @@
 class Admin::Users::CreateService < ApplicationService
-    ROLE = { user: 1, admin: 2 }.freeze
-
-    def initialize(user_params, role)
+    def initialize(user_params)
         @user_params = user_params
-        @role = role[:roles].to_i
+        @role = user_params[:roles]
     end
 
     def call
-        user = User.new(user_params)
-        create = user.save
-        message =   if create && role == ROLE[:admin]
-                        user.add_role :admin
-                        "User was successfully created with role admin."
-                    elsif create && role == ROLE[:user]
-                        user.add_role :user
-                        "User was successfully created with role user."
-                    else
-                        "User was failure created ."
-                    end
-        [create, message]  
+        @user = User.new(user_params.except(:roles))
+        create = @user.save
+
+        if create
+            add_role(@user)
+        end
+
+        [create, @user]  
     end
 
     private
 
     attr_accessor :user_params, :role
+
+    def add_role(user)
+        role == 'admin' ? user.add_role(:admin) : user.add_role(:user)
+    end
+
 end

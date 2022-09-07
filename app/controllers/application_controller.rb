@@ -23,5 +23,5 @@ class ApplicationController < ActionController::Base
           session[:previous_url] = nil
           previous_path || root_path
         end
-      end
+    end
 end

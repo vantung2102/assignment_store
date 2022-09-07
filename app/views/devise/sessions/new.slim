@@ -37,8 +37,8 @@ section#form
             = f.email_field :email, autocomplete: "email", placeholder: "Enter Email"
             = f.phone_field :phone, autocomplete: "phone", placeholder: "Enter Phone"
             select[name="gender"]
-              option value="1" male
-              option value="2" female
+              option value="men" men
+              option value="women" women
             = f.password_field :password, autocomplete: "new-password", placeholder: "Enter Password"
             = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Enter Password Confirmation"
             button[type="submit" class="btn btn-default"] Register

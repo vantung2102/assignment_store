@@ -5,7 +5,7 @@ class Admin::Users::UpdateService < ApplicationService
     end
 
     def call
-        update = @user.update(user_params)
+        update = user.update(user_params.except(:roles))
         message = update ? "User was successfully updated." : "User was failure updated."
         [update, message]  
     end

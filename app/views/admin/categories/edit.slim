@@ -1,7 +1,7 @@
 .page-header
     h1 
-        |Edit User : 
-        = @user.name 
+        |Edit Category : 
+        = @category.title 
 .container
     - flash.each do |message_type, message|
         div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px;"
@@ -17,11 +17,11 @@ ol.breadcrumb
     li.active Edit
 ul.nav.nav-tabs.action_items
     li
-        a class="pjax" href="#{admin_users_url}"
+        a class="pjax" href="#{admin_categories_url}"
             i.fa.fa-list
             span List
     li
-        a class="pjax" href="#{new_admin_user_url}"
+        a class="pjax" href="#{new_admin_category_url}"
             i.fa.fa-plus
             span New
     li.active
@@ -41,4 +41,4 @@ ul.nav.nav-tabs.action_items
             ul class="dropdown-menu" style="left:auto; right:0;"
                 li
                     a href="#" Id
-= render "admin/users/form", url: admin_user_path
+= render "admin/categories/form", url: admin_category_path
