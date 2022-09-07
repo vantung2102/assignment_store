@@ -22,8 +22,8 @@ section#form
             = f.email_field :email, autocomplete: "email", placeholder: "Enter Email"
             = f.phone_field :phone, autocomplete: "phone", placeholder: "Enter Phone"
             select[name="gender"]
-              option value="1" male
-              option value="2" female
+              option value="men" men
+              option value="women" women
             em 
             | Password is  
             = @minimum_password_length 

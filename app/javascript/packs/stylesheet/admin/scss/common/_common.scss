@@ -157,19 +157,11 @@
 
   input,
   textarea {
-    width: auto !important;
+    width: 30% !important;
   }
 
   select {
     width: 20%;
-  }
-
-  .help-block {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color: #737373;
-    font-size: 15px;
   }
 
   .input-group {
@@ -247,4 +239,22 @@
   dd {
     font-size: 15px;
   }
+}
+
+.invalid-feedback {
+  font-size: 15px;
+}
+
+.preview.img-thumbnail {
+  max-width: 300px;
+  max-height: 200px;
+  display: none;
+}
+
+.text-muted {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 15px;
 }

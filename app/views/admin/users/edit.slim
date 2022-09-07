@@ -1,7 +1,7 @@
 .page-header
     h1 
         |Edit User : 
-        =@user.name 
+        = @user.name 
 .container
     - flash.each do |message_type, message|
         div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px;"

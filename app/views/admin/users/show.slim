@@ -2,17 +2,13 @@
     h1 Details for user 
 ol.breadcrumb
     li.dashboard
-        a class="pjax" href=""
-            |Dashboard
-    li.active Categories
-.container
-    - flash.each do |message_type, message|
-        div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px;"
-            button class="close" data-dismiss="alert" type="button" ×
-            = message
+        a class="pjax" href="" Dashboard
+    li.dashboard
+      a class="pjax" href="" Categories
+    li.active Show
 ul.nav.nav-tabs.action_items
     li
-        a class="pjax"
+        a class="pjax" href="#{admin_users_url}"
             i.fa.fa-list
             span List
     li.active
@@ -49,8 +45,8 @@ ul.nav.nav-tabs.action_items
                   dt
                     span.label.label-warning Avatar
                   dd.well
-                    a
-                      = image_tag("admin/avatars/1")
+                    a href="#{url_for(@user.display_image) }"
+                      = image_tag(@user.display_image, class: "preview img-thumbnail") if @user.avatar.attached?
                   dt
                     span.label.label-warning Full Name
                   dd.well = @user.name
@@ -69,10 +65,10 @@ ul.nav.nav-tabs.action_items
                       | User
                   dt
                     span.label.label-warning Sign In Count	
-                  dd.well = @user.id
+                  dd.well = @user.sign_in_count
                   dt
                     span.label.label-warning Created At
-                  dd.well = @user.created_at
+                  dd.well = @user.created_at.strftime("%H:%M %d/%m/%Y")
                   dt
                     span.label.label-warning Updated At
-                  dd.well = @user.updated_at
+                  dd.well = @user.updated_at.strftime("%H:%M %d/%m/%Y")

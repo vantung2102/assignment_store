@@ -12,7 +12,7 @@ ol.breadcrumb
             = message
 ul.nav.nav-tabs.action_items
     li.active
-        a.pjax
+        a class="pjax" href="#{admin_users_url}"
             i.fa.fa-list
             span List
     li
@@ -48,8 +48,7 @@ ul.nav.nav-tabs.action_items
                             th Role
                             th Sign In Count
                             th Created At
-                            th Updated At
-                            th Other
+                            th Action
 
                     tbody
                         - i = 0
@@ -59,7 +58,10 @@ ul.nav.nav-tabs.action_items
                                 td = i
                                 td = user.id
                                 td.py-1
-                                    = image_tag("admin/avatars/face1")
+                                    - if user.avatar.attached?
+                                        = image_tag(user.display_image)
+                                    - else
+                                        = image_tag("admin/avatars/user")
                                 td = user.name
                                 td = user.phone
                                 td = user.email
@@ -70,9 +72,8 @@ ul.nav.nav-tabs.action_items
                                             | Admin
                                         - else 
                                             | User
-                                td = user.id
-                                td = user.created_at
-                                td = user.updated_at
+                                td = user.sign_in_count
+                                td = user.created_at.strftime("%H:%M %d/%m/%Y")
                                 td style="width: 80px"
                                     ul.others
                                         li
