@@ -57,10 +57,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
+gem 'stimulus-rails'
 
 gem 'devise'
 gem 'pundit'
 gem "rolify"
+gem 'friendly_id'
 
 gem "omniauth"
 gem "omniauth-facebook"
@@ -72,6 +74,9 @@ gem 'image_processing'
 
 gem 'active_storage_validations'
 gem 'active_model_serializers'
+
+gem 'carrierwave'
+gem 'ckeditor'
 
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'

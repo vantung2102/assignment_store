@@ -245,10 +245,15 @@
   font-size: 15px;
 }
 
-.preview.img-thumbnail {
-  max-width: 300px;
-  max-height: 200px;
-  display: none;
+// .preview {
+//   display: block;
+// }
+
+.preview {
+  .img-thumbnail {
+    height: 250px;
+    width: 250px;
+  }
 }
 
 .text-muted {
@@ -256,5 +261,22 @@
   margin-top: 5px;
   margin-bottom: 10px;
   color: #737373;
+  font-size: 15px;
+}
+
+.ckeditor {
+  .invalid-feedback {
+    display: block;
+  }
+}
+
+ul {
+  &.select2-results__options {
+    li {
+      font-size: 15px;
+    }
+  }
+}
+.select2-selection__rendered {
   font-size: 15px;
 }

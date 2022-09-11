@@ -1,26 +1,26 @@
 class Admin::Users::CreateService < ApplicationService
-    def initialize(user_params)
-        @user_params = user_params
-        @role = user_params[:roles]
+  def initialize(user_params)
+    @user_params = user_params
+    @role = user_params[:roles]
+  end
+
+  def call
+    @user = User.new(user_params.except(:roles))
+    create = @user.save
+    message = create ? "User was successfully created." : "User was failure created."
+
+    if create
+      add_role(@user)
     end
 
-    def call
-        @user = User.new(user_params.except(:roles))
-        create = @user.save
+    [create, @user, message]  
+  end
 
-        if create
-            add_role(@user)
-        end
+  private
 
-        [create, @user]  
-    end
+  attr_accessor :user_params, :role
 
-    private
-
-    attr_accessor :user_params, :role
-
-    def add_role(user)
-        role == 'admin' ? user.add_role(:admin) : user.add_role(:user)
-    end
-
+  def add_role(user)
+    role == 'admin' ? user.add_role(:admin) : user.add_role(:user)
+  end
 end

@@ -1,57 +1,62 @@
 class Admin::ProductsController < Admin::BaseController
-  # before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authorize_admin!, only: %i[ create update destroy ]
 
   def index
-      products = Category.all
+      products = Product.all
 
       @data = {
-          products: products
+        products: products
       }
   end
 
   def show;end
 
   def new
-      @category = Category.new
+      @product = Product.new
   end
 
   def create
-    create, message = Admin::Categories::CreateService.call(category_params)
+    create, @product, message = Admin::Products::CreateService.call(product_params)
 
-    status = create ? :success : :danger
-    flash[status] = message
-    redirect_to admin_categories_path
+    if create
+      flash[:success] = message
+      redirect_to admin_products_path
+    else
+      flash[:danger] = message
+      render :new
+    end
   end
 
   def edit;end
 
   def update
-    update, message = Admin::Categories::UpdateService.call(@category, category_params)
+    update, message = Admin::Products::UpdateService.call(@product, product_params)
 
     status = update ? :success : :danger
     flash[status] = message
-    redirect_to edit_admin_category_url(@category)
+    render :edit
   end
 
   def destroy
-    destroy, message = Admin::Categories::DestroyService.call(@category)
+    destroy, message = Admin::Products::DestroyService.call(@product)
 
     status = destroy ? :success : :danger
     flash[status] = message
-    redirect_to admin_categories_path
+    redirect_to admin_products_path
   end
 
   private
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    def category_params
-      params.require(:category).permit(:title, :meta_title, :content, :category_id)
-    end
+  def set_product
+    @product = Product.friendly.find(params[:id])
+  end
 
-    def authorize_admin!
-      authorize @user
-    end
+  def product_params
+    params.require(:product).permit(:title, :meta_title, :categories, :price, :discount, :content, :quantity, images: [], category_ids: [],)
+  end
+
+  def authorize_admin!
+    authorize current_user
+  end
 end

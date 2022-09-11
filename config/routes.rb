@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :users,
   path: '',
@@ -21,5 +22,6 @@ Rails.application.routes.draw do
     delete 'users/:id/delete', to: 'users#destroy'
     resources :users
     resources :categories
+    resources :products
   end
 end

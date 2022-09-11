@@ -17,11 +17,15 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def create
-    create, message = Admin::Categories::CreateService.call(category_params)
+    create, @category, message = Admin::Categories::CreateService.call(category_params)
 
-    status = create ? :success : :danger
-    flash[status] = message
-    redirect_to admin_categories_path
+    if create
+      flash[:success] = message
+      redirect_to admin_categories_path
+    else
+      flash[:danger] = message
+      render :new
+    end
   end
 
   def edit;end
@@ -31,7 +35,7 @@ class Admin::CategoriesController < Admin::BaseController
 
     status = update ? :success : :danger
     flash[status] = message
-    redirect_to edit_admin_category_url(@category)
+    render :edit
   end
 
   def destroy
@@ -43,15 +47,16 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   private
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    def category_params
-      params.require(:category).permit(:title, :meta_title, :content, :category_id)
-    end
+  def set_category
+    @category = Category.friendly.find(params[:id])
+  end
 
-    def authorize_admin!
-      authorize @user
-    end
+  def category_params
+    params.require(:category).permit(:title, :meta_title, :content, :category_id)
+  end
+
+  def authorize_admin!
+    authorize current_user
+  end
 end

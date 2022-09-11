@@ -1,5 +1,9 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   rolify
+
+  after_initialize :set_default_role
 
   has_one_attached :avatar
 
@@ -29,5 +33,11 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.provider = auth.provider
     end
+  end
+
+  private
+
+  def set_default_role
+    self.roles ||= :user
   end
 end

@@ -12,6 +12,8 @@ Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
+import "../controllers";
+
 window.jQuery = window.$ = require("jquery");
 import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 

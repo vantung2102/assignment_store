@@ -21,5 +21,7 @@ module AssignmentStore
     config.autoload_paths << config.root.join('lib')
     config.autoload_paths << config.root.join('lib/concerns')
     config.autoload_paths << config.root.join('app/serializers')
+
+    config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
   end
 end
