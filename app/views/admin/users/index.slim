@@ -1,87 +1,77 @@
 .page-header
-    h1 List of Users
+  h1 List of Users
 ol.breadcrumb
-    li.dashboard
-        a.pjax href=""
-            |Dashboard
-    li.active Users
-.container
-    - flash.each do |message_type, message|
-        div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px;"
-            button class="close" data-dismiss="alert" type="button" ×
-            = message
-ul.nav.nav-tabs.action_items
-    li.active
-        a.pjax
-            i.fa.fa-list
-            span List
-    li
-        a.pjax href="#{new_admin_user_url}"
-            i.fa.fa-plus
-            span New
-    li
-        a.pjax
-            i.fa.fa-share
-            span Export
-    div class="right" style="float:right"
-        li.dropdown 
-            a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
-                i.fa.fa-filter
-                |Add filter
-                b.caret
-            ul.dropdown-menu style="left:auto; right:0;"
-                li
-                    a href="#" Id
-.col-lg-12.grid-margin.stretch-card
-    .card
-        .card-body
-            .table-responsive
-                table.table.table-striped
-                    thead
-                        tr
-                            th STT
-                            th ID
-                            th User
-                            th Full Name
-                            th Phone
-                            th Email
-                            th Role
-                            th Sign In Count
-                            th Created At
-                            th Updated At
-                            th Other
+  li.dashboard
+    a.pjax href="#{admin_url}" Dashboard
+  li.active Users
 
-                    tbody
-                        - i = 0
-                        - @data[:users].each do |user|
-                            - i += 1
-                            tr
-                                td = i
-                                td = user.id
-                                td.py-1
-                                    = image_tag("admin/avatars/face1")
-                                td = user.name
-                                td = user.phone
-                                td = user.email
-                                td 
-                                    - is_admin = user.has_role? :admin
-                                    label class="badge badge-#{is_admin ? "info" : "success"}"
-                                        - if is_admin
-                                            | Admin
-                                        - else 
-                                            | User
-                                td = user.id
-                                td = user.created_at
-                                td = user.updated_at
-                                td style="width: 80px"
-                                    ul.others
-                                        li
-                                            a href="#{admin_user_url(user.id)}" title="view"
-                                                i.fa.fa-info-circle
-                                        li
-                                            a href="#{edit_admin_user_path(user.id)}" title="edit"
-                                                i.fa.fa-edit
-                                        li
-                                            a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="#{admin_user_url(user.id)}"
-                                                i.fa.fa-trash-o
-                       
+= render "admin/shared/flash_message_errors"
+
+ul.nav.nav-tabs.action_items
+  li.active
+    a class="pjax" href="#{admin_users_url}"
+      i.fa.fa-list
+      span List
+  li
+    a.pjax href="#{new_admin_user_url}"
+      i.fa.fa-plus
+      span New
+  li
+    a.pjax
+      i.fa.fa-share
+      span Export
+
+.col-lg-12.grid-margin.stretch-card
+  .card
+    .card-body
+        .table-responsive
+          table.table.table-striped
+            thead
+              tr
+                th STT
+                th ID
+                th User
+                th Full Name
+                th Phone
+                th Email
+                th Role
+                th Sign In Count
+                th Created At
+                th Action
+            tbody
+              - i = 0
+              - @data[:users].each do |user|
+                - i += 1
+                tr
+                  td = i
+                  td = user.id
+                  td.py-1
+                    - if user.avatar.attached?
+                      = image_tag(user.display_image)
+                    - else
+                      = image_tag("admin/avatars/user")
+                  td = user.name
+                  td = user.phone
+                  td = user.email
+                  td 
+                    - is_admin = user.has_role? :admin
+                    label class="badge badge-#{is_admin ? "info" : "success"}"
+                      - if is_admin
+                        | Admin
+                      - else 
+                        | User
+                  td = user.sign_in_count
+                  td = user.created_at.strftime("%H:%M %d/%m/%Y")
+                  td style="width: 80px"
+                    ul.others
+                      li
+                        a href="#{admin_user_url(user.id)}" title="view"
+                          i.fa.fa-info-circle
+                      li
+                        a href="#{edit_admin_user_path(user.id)}" title="edit"
+                          i.fa.fa-edit
+                      li
+                        a[data-confirm="Are you sure?" rel="nofollow" 
+                          data-method="delete" href="#{admin_user_url(user.id)}"]
+                          i.fa.fa-trash-o
+                          

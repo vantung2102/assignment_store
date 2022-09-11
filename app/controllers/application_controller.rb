@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
     end
     
     def after_sign_in_path_for(resource)
-        if is_admin?
-          stored_location_for(resource) || admin_path
-        else
-          previous_path = session[:previous_url]
-          session[:previous_url] = nil
-          previous_path || root_path
-        end
+      if is_admin?
+        stored_location_for(resource) || admin_path
+      else
+        previous_path = session[:previous_url]
+        session[:previous_url] = nil
+        previous_path || root_path
       end
+    end
 end

@@ -4,10 +4,10 @@ class Admin::Categories::CreateService < ApplicationService
   end
 
   def call
-      category = Category.new(category_params)
-      create = category.save
-      message = create ? "Category was successfully created." : "Category was failure created."
-      [create, message]  
+    category = Category.new(category_params)
+    create = category.save
+    message = create ? "Category was successfully created." : "Category was failure created."
+    [create, category, message]  
   end
 
   private

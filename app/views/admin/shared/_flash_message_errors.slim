@@ -1,0 +1,5 @@
+.container
+  - flash.each do |message_type, message|
+    div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px; text-align: center;"
+      button class="close" data-dismiss="alert" type="button" ×
+      = message

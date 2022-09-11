@@ -1,12 +1,12 @@
 class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ update destroy ]
+  before_action :authorize_admin!, only: %i[ create update destroy ]
 
   def index
-      products = Category.all
+      products = Product.all
 
       @data = {
-          categories: products
+        products: products
       }
   end
 
@@ -17,11 +17,15 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def create
-    create, message = Admin::products::CreateService.call(product_params)
+    create, @product, message = Admin::Products::CreateService.call(product_params)
 
-    status = create ? :success : :danger
-    flash[status] = message
-    redirect_to admin_products_path
+    if create
+      flash[:success] = message
+      redirect_to admin_products_path
+    else
+      flash[:danger] = message
+      render :new
+    end
   end
 
   def edit;end
@@ -31,11 +35,11 @@ class Admin::ProductsController < Admin::BaseController
 
     status = update ? :success : :danger
     flash[status] = message
-    redirect_to edit_admin_product_url(@product)
+    render :edit
   end
 
   def destroy
-    destroy, message = Admin::products::DestroyService.call(@product)
+    destroy, message = Admin::Products::DestroyService.call(@product)
 
     status = destroy ? :success : :danger
     flash[status] = message
@@ -45,14 +49,14 @@ class Admin::ProductsController < Admin::BaseController
   private
 
   def set_product
-    @product = product.find(params[:id])
+    @product = Product.friendly.find(params[:id])
   end
 
   def product_params
-    params.require(:product).permit(:title, :meta_title, :content, :product_id)
+    params.require(:product).permit(:title, :meta_title, :categories, :price, :discount, :content, :quantity, images: [], category_ids: [],)
   end
 
   def authorize_admin!
-    authorize @user
+    authorize current_user
   end
 end

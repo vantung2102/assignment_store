@@ -157,19 +157,11 @@
 
   input,
   textarea {
-    width: auto !important;
+    width: 30% !important;
   }
 
   select {
     width: 20%;
-  }
-
-  .help-block {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color: #737373;
-    font-size: 15px;
   }
 
   .input-group {
@@ -247,4 +239,44 @@
   dd {
     font-size: 15px;
   }
+}
+
+.invalid-feedback {
+  font-size: 15px;
+}
+
+// .preview {
+//   display: block;
+// }
+
+.preview {
+  .img-thumbnail {
+    height: 250px;
+    width: 250px;
+  }
+}
+
+.text-muted {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 15px;
+}
+
+.ckeditor {
+  .invalid-feedback {
+    display: block;
+  }
+}
+
+ul {
+  &.select2-results__options {
+    li {
+      font-size: 15px;
+    }
+  }
+}
+.select2-selection__rendered {
+  font-size: 15px;
 }

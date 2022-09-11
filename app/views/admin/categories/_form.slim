@@ -1,31 +1,21 @@
-= form_for @category, url: url, :html => {:class => "form-horizontal denser"} do |f|
-    - if @category.errors.any?
-        #error_explanation
-        h2 = "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
-        ul
-            - @category.errors.full_messages.each do |message|
-                li = message
-    fieldset
-        .form-group.control-group
-            = f.label "Parent Category", class:"col-sm-2 control-label"
-            .col-sm-10.controls
-              = f.select :category_id , options_for_select(Category.all.collect{ |u| [u.title, u.id] }, selected: @category.category_id), { include_blank: true}, class: "form-control"
-              span.help-block Optional.
-        .form-group.control-group
-            = f.label :title, class:"col-sm-2 control-label"
-            .col-sm-10.controls
-                = f.text_field :title, class:"form-control"
-                span.help-block Required. Length up to 20.
-        .form-group.control-group
-            = f.label :meta_title, class:"col-sm-2 control-label"
-            .col-sm-10.controls
-                = f.text_field :meta_title, class:"form-control"
-                span.help-block Optional. Length of 20.
-        .form-group.control-group
-            = f.label :content, class:"col-sm-2 control-label"
-            .col-sm-10.controls
-                = f.text_area :content, class:"form-control", cols:"48", rows:"3"
-                span.help-block Optional. Length up to 255.
-    .form-group.form-actions
-        .col-sm-offset-2.col-sm-10
-            = f.submit class: "btn btn-primary btn-edit"
+= simple_form_for @category, url: url, :html => {:class => "form-horizontal denser"} do |f|
+  .form-group.control-group
+    = f.label "Parent Category", class:"col-sm-2 control-label"
+    .col-sm-10.controls
+      = f.association :parent_category, selected: @category.category_id, 
+                      :input_html => { class: "input_select2" }, include_blank: true, label: false, hint: 'Optional.'
+  .form-group.control-group
+    = f.label :title, class:"col-sm-2 control-label"
+    .col-sm-10.controls
+        = f.input :title, label: false, hint: 'Required. Length from 3 to 30'
+  .form-group.control-group
+    = f.label :meta_title, class:"col-sm-2 control-label"
+    .col-sm-10.controls
+        = f.input :meta_title, label: false, hint: 'Required. Length from 3 to 30'
+  .form-group.control-group
+    = f.label :content, class:"col-sm-2 control-label"
+    .col-sm-10.controls
+      = f.input :content, :as => :ckeditor, class:"form-control ckeditor", label: false, ckeditor: { language: 'uk'}, hint: 'Required. Length up to 1000'
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10
+        = f.submit class: "btn btn-primary btn-edit"

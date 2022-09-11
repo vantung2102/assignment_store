@@ -1,6 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
   before_action :set_category, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ update destroy ]
+  before_action :authorize_admin!, only: %i[ create update destroy ]
 
   def index
       categories = Category.all
@@ -17,11 +17,15 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def create
-    create, message = Admin::Categories::CreateService.call(category_params)
+    create, @category, message = Admin::Categories::CreateService.call(category_params)
 
-    status = create ? :success : :danger
-    flash[status] = message
-    redirect_to admin_categories_path
+    if create
+      flash[:success] = message
+      redirect_to admin_categories_path
+    else
+      flash[:danger] = message
+      render :new
+    end
   end
 
   def edit;end
@@ -31,7 +35,7 @@ class Admin::CategoriesController < Admin::BaseController
 
     status = update ? :success : :danger
     flash[status] = message
-    redirect_to edit_admin_category_url(@category)
+    render :edit
   end
 
   def destroy
@@ -45,7 +49,7 @@ class Admin::CategoriesController < Admin::BaseController
   private
 
   def set_category
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
   end
 
   def category_params
@@ -53,6 +57,6 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def authorize_admin!
-    authorize @user
+    authorize current_user
   end
 end
