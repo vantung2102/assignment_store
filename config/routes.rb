@@ -6,17 +6,14 @@ Rails.application.routes.draw do
   path_names: { sign_in: 'login', sign_out: 'logout', edit: 'profile', sign_up: 'register' },
   controllers: { omniauth_callbacks: "omniauth_callbacks" }
   
-  # scope '(:locale)', locale: /en|ja|vi/ do
-    root 'home#index'
+  # User
+  devise_scope :user do 
+    get 'register', to: 'devise/registrations#new'
+    get 'login', to: 'devise/sessions#new'
+    get 'logout', to: 'devise/sessions#destroy'
+  end
 
-    # User
-    devise_scope :user do 
-      get 'register', to: 'devise/registrations#new'
-      get 'login', to: 'devise/sessions#new'
-      get 'logout', to: 'devise/sessions#destroy'
-    end
-  # end
-
+  # Admin
   namespace :admin do
     get '/', to: 'home#index'
     delete 'users/:id/delete', to: 'users#destroy'
@@ -24,4 +21,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
   end
+
+  
+  root 'home#index'
+  get 'category=:slug', to: 'home#change_category'
 end
