@@ -1,4 +1,4 @@
-function ProductsController(options) {
+function Product(options) {
   var module = this;
 
   module.handleImageProductInput = function () {
@@ -37,6 +37,6 @@ function ProductsController(options) {
 }
 
 $(document).ready(function () {
-  product = new ProductsController();
+  product = new Product();
   product.init();
 });

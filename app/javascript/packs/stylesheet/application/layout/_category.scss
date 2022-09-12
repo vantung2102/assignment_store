@@ -79,6 +79,7 @@
           font-weight: 700;
           text-decoration: none;
           text-transform: uppercase;
+          cursor: pointer;
         }
 
         .panel-title .badge {
@@ -104,11 +105,17 @@
           font-size: 14px;
           font-weight: 550;
           text-transform: uppercase;
+          cursor: pointer;
         }
 
         ul li:hover a {
           color: $theme-color-key;
+          text-decoration: none;
         }
+      }
+
+      .active {
+        color: $theme-color-key !important;
       }
     }
   }
@@ -173,11 +180,29 @@
             height: 190px;
           }
 
-          h2 {
-            color: $theme-color-key;
-            font-family: $roboto;
-            font-size: 24px;
-            font-weight: 700;
+          .price {
+            h2 {
+              color: $theme-color-key;
+              font-family: $roboto;
+              font-size: 24px;
+              font-weight: 700;
+            }
+
+            .price_old {
+              position: relative;
+              color: #40403e;
+              font-family: $roboto;
+              font-size: 15px;
+              font-weight: 700;
+              margin: 20px 0 10px 5px;
+            }
+          }
+
+          .rate-star {
+            i {
+              color: $theme-color-key;
+              padding: 0 2px 0 2px;
+            }
           }
 
           p {
@@ -217,6 +242,12 @@
           font-size: 13px;
           padding-left: 0;
           padding-right: 0;
+
+          &:hover {
+            background: $theme-color-key;
+            color: #fff;
+            cursor: pointer;
+          }
         }
 
         ul li a i {

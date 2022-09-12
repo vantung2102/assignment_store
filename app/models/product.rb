@@ -16,6 +16,6 @@ class Product < ApplicationRecord
   validates :images, content_type: [:png, :jpg, :jpeg, :gif], attached: true
 
   def display_image
-    image.variant resize_to_limit: [300, 200]
+    images[0].variant resize_to_limit: [300, 200]
   end
 end
