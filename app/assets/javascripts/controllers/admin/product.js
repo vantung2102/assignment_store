@@ -1,42 +1,33 @@
-function Product(options) {
-  var module = this;
+const handleImageProductInput = () => {
+  $(document).on("change", "#product_images", function () {
+    const $preview = $(".preview");
+    $(".preview").empty();
 
-  module.handleImageProductInput = function () {
-    $(document).on("change", "#product_images", function () {
-      const $preview = $(".preview");
-      $(".preview").empty();
+    const newFiles = $(this).prop("files");
 
-      const newFiles = $(this).prop("files");
+    if (newFiles) $.each(newFiles, readAndPreview);
 
-      if (newFiles) $.each(newFiles, readAndPreview);
-
-      function readAndPreview(i, file) {
-        if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-          return alert(file.name + " is not an image");
-        }
-
-        const reader = new FileReader();
-
-        $(reader).on("load", function () {
-          $preview.append(
-            $("<img/>", {
-              src: this.result,
-              class: "img-thumbnail",
-            })
-          );
-        });
-
-        reader.readAsDataURL(file);
+    function readAndPreview(i, file) {
+      if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+        return alert(file.name + " is not an image");
       }
-    });
-  };
 
-  module.init = function () {
-    module.handleImageProductInput();
-  };
-}
+      const reader = new FileReader();
 
-$(document).ready(function () {
-  product = new Product();
-  product.init();
+      $(reader).on("load", function () {
+        $preview.append(
+          $("<img/>", {
+            src: this.result,
+            class: "img-thumbnail",
+          })
+        );
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+};
+
+document.addEventListener("turbolinks:load", () => {
+  handleImageProductInput();
 });

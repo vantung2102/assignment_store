@@ -7,17 +7,17 @@ class User::ProductsCategoryService < ApplicationService
     category = Category.friendly.find_by(slug: slug)
     
     child_category = category.child_category
-    @products = []
+    products = []
 
     if child_category.present?
       child_category.each do |item|
-        @products.concat(item.products)
+        products.concat(item.products)
       end
     else
-      @products = category.products.limit(6)
+      products = category.products.limit(6)
     end
     
-    @products
+    products
   end
 
   private
