@@ -8,6 +8,7 @@ function Home(options) {
 
       $.ajax({
         url: "category/" + slug,
+
         type: "GET",
         beforeSend: function (xhr) {
           xhr.setRequestHeader(
@@ -23,7 +24,6 @@ function Home(options) {
             category.addClass("active");
 
             $(".features_items").replaceWith(response.html);
-
             window.history.pushState({}, "", "?category=" + slug);
           }
         },
