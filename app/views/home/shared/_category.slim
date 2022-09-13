@@ -1,74 +1,27 @@
 h2.title_sidebar Category
 .panel-group.category-products
+  - @categories.each do |category|
     .panel.panel-default
+      - child_category = category.child_category
+      - if child_category.nil?
         .panel-heading
-            h4.panel-title
-                a[data-toggle="collapse" data-parent="#accordian" href="#mens"]
-                    span.badge.pull-right
-                        i.fa.fa-plus
-                    |Mens
-        .panel-collapse.collapse#mens
-            .panel-body
-                ul
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-    .panel.panel-default
+          h4.panel-title
+            a href="#" 
+              = category.title
+      - else
         .panel-heading
-            h4.panel-title
-                a[data-toggle="collapse" data-parent="#accordian" href="#menss"]
-                    span.badge.pull-right
-                        i.fa.fa-plus
-                    |Mens
-        .panel-collapse.collapse#menss
-            .panel-body
-                ul
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-                    li 
-                        <a href="#">Fendi</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <a href="#">Bags</a>
+          h4.panel-title
+            a[data-toggle="collapse" data-parent="#accordian" href="##{category.title}" 
+            aria-expanded="#{params[:category] != category.slug ? "false" : "true"}"]
+              span.badge.pull-right
+                i.fa.fa-plus
+                a[class="category #{params[:category] == category.slug ? "active" : nil}"
+                  id="#{category.slug}_#{category.id}"]
+                  = category.title
+        .panel-collapse[class="collapse" id="#{category.title}"]
+          .panel-body
+            ul
+              - category.child_category.each do |child_category|
+                  li: a[class="category #{params[:category] == child_category.slug ? "active" : nil}" 
+                        id="#{child_category.slug}_#{child_category.id}"]
+                    = child_category.title

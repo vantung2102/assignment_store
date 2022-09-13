@@ -10,14 +10,13 @@ html
     / = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'bootstrap.min'
     = stylesheet_link_tag 'font-awesome.min'
+    = javascript_include_tag "jquery"
     
   body
     = render 'layouts/header'
     - if notice
       .container-fluid#notice_wraper
         p.notice = notice
-        / p.alert
-        /   = alert
     - elsif flash
         - flash.each do |message_type, message|
           div class="alert alert-dismissible alert-#{message_type}" style="font-size: 15px; align-items: center;text-align: center;background: #e8a62d59;color: red;"
@@ -31,7 +30,6 @@ html
       = yield
     = render 'layouts/footer'
 
-    = javascript_include_tag "jquery"
     = javascript_include_tag "bootstrap.min"
     = javascript_include_tag "jquery.scrollUp.min"
     = javascript_include_tag "main"

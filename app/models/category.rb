@@ -10,4 +10,6 @@ class Category < ApplicationRecord
   validates :title, presence: true, length: { minimum:3, maximum: 30 }
   validates :meta_title, presence: true, length: { minimum:3, maximum: 30 }
   validates :content, presence: true, length: { minimum:6, maximum: 500 }
+
+  scope :show_categories, -> { where category_id: nil }
 end
