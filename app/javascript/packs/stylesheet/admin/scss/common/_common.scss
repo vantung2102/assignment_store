@@ -280,3 +280,29 @@ ul {
 .select2-selection__rendered {
   font-size: 15px;
 }
+
+.attribute_values {
+  margin-left: 40px;
+}
+
+.remove_fields,
+.add_fields {
+  margin-bottom: 5px;
+
+  a {
+    color: #fff;
+  }
+}
+
+.links,
+.btn-remove-nested {
+  i {
+    color: #fff;
+    margin-right: 5px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}

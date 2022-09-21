@@ -1,0 +1,32 @@
+.page-header
+  h1 
+    |Edit Brand : 
+    = @brand.title 
+
+= render "admin/shared/flash_message_errors"
+
+ol.breadcrumb
+  li.dashboard
+    a class="pjax" href="#{admin_url}" Dashboard
+  li.dashboard.active
+    a class="pjax" href="#{admin_brands_url}" User
+  li.active Edit
+ul.nav.nav-tabs.action_items
+  li
+    a class="pjax" href="#{admin_brands_url}"
+      i.fa.fa-list
+      span List
+  li
+    a class="pjax" href="#{new_admin_brand_url}"
+      i.fa.fa-plus
+      span New
+  li.active
+    a class="pjax"
+      i.fa.fa-edit
+      span Edit
+  li
+    a class="pjax"
+      i.fa.fa-share
+      span Export
+
+= render "admin/brands/form", url: admin_brand_path

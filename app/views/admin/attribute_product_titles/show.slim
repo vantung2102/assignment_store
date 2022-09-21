@@ -1,0 +1,50 @@
+.page-header
+  h1 Details for Brand
+ol.breadcrumb
+  li.dashboard
+    a class="pjax" href="#{admin_url}" Dashboard
+  li.dashboard.active
+    a class="pjax" href="#{admin_brand_url}" Brand
+  li.active Show
+
+= render "admin/shared/flash_message_errors"
+
+ul.nav.nav-tabs.action_items
+  li
+    a class="pjax" href="#{admin_brands_url}"
+      i.fa.fa-list
+      span List
+  li.active
+    a class="pjax"
+      i.fa.fa-info
+      span Show
+  li
+    a class="pjax" href="#{new_admin_brand_url}"
+      i.fa.fa-plus
+      span New
+  li
+    a class="pjax"
+      i.fa.fa-share
+      span Export
+    
+.col-lg-12.grid-margin.stretch-card.form-show
+  .card
+    .card-body
+      .table-responsive
+        h4 Basic info
+        dl
+          dt: span.label.label-warning Id
+          dd.well = @brand.id
+
+          dt: span.label.label-warning Title
+          dd.well = @brand.title
+
+          dt: span.label.label-warning Slug
+          dd.well = @brand.slug
+
+          dt: span.label.label-warning Created At
+          dd.well = @brand.created_at.strftime("%H:%M %d/%m/%Y")
+
+          dt: span.label.label-warning Updated At
+          dd.well = @brand.updated_at.strftime("%H:%M %d/%m/%Y")
+                  

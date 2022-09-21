@@ -210,6 +210,10 @@
             font-size: 14px;
             font-weight: 400;
             color: #696763;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 5px 0 5px;
           }
 
           .add-to-cart {
@@ -265,6 +269,7 @@
       background-color: $theme-color-key;
       color: #fff;
       border-radius: 10px;
+      outline: none;
     }
   }
 

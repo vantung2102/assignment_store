@@ -5,9 +5,13 @@ class Admin::Products::UpdateService < ApplicationService
   end
 
   def call
-    update = product.update(product_params)
-    message = update ? "Product was successfully updated." : "Product was failure updated."
-    [update, message]
+    if product_params[:product_attributes_attributes].nil?
+      update = product.update(product_params.except(:product_attributes_attributes))
+    else
+      update = product.update(product_params)
+    end
+
+    update
   end
 
   private
