@@ -41,7 +41,7 @@ ul.nav.nav-tabs.action_items
               th Action
           tbody
             - i = 0
-            - @data[:products].each do |product|
+            - @products.each do |product|
               - i += 1
               tr
                 td = i
@@ -67,4 +67,6 @@ ul.nav.nav-tabs.action_items
                       a [ class="delete" data-confirm="Are you sure?" rel="nofollow" 
                           data-method="delete" href="#{admin_product_url(product.id)}" ]
                         i.fa.fa-trash-o
+        == pagy_bootstrap_nav(@pagy)
+
                           

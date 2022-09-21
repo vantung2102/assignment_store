@@ -1,33 +1,7 @@
 .features_items
   h2.title_feature_item Products
-  - if @products.present?
-    - @products.each do |product|
-      .col-sm-4.col-xs-6 
-        .product-image-wrapper
-          .single-products
-            .productinfo
-              = image_tag(product.display_image)
-              .price.display-flex
-                h2.price_new = discount(product.price, product.discount)
-                del.price_old = product.price
-              .rate-star
-                i.fa.fa-star
-                i.fa.fa-star
-                i.fa.fa-star
-                i.fa.fa-star
-                i.fa.fa-star
-              p = product.title
-              a.btn.btn-default.add-to-cart
-                i.fa.fa-shopping-cart  Add to cart
-            = image_tag("home/sale", class: "sale")
-          .choose 
-            ul.nav.nav-pills.nav-justified
-              li: a
-                i.fa.fa-plus-square
-                |  See Detail
-              li: a
-                i.fa.fa-plus-square
-                |  Quick View
-- if @products.count >= 6
+  = render "home/shared/list_products"
+
+- if last_page?(@products, params[:page], @status)
   .load_more
     button.btn.btn-load_more Load More

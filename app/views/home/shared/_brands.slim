@@ -1,28 +1,14 @@
 h2.title_sidebar Brands
 .panel-group.brands_products
+  - @brands.each do |brand|
     .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <span class="pull-right">(50)</span>
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <span class="pull-right">(50)</span>
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <span class="pull-right">(50)</span>
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <span class="pull-right">(50)</span>
-                <a href="#">Bags</a>
-    .panel.panel-default
-        .panel-heading
-            h4.panel-title
-                <span class="pull-right">(50)</span>
-                <a href="#">Bags</a>
+      .panel-heading
+        h4.panel-title
+          span.pull-right 
+            | (
+            = brand.products.count
+            | )
+          a[class="brand__item #{params[:brand] == brand.slug ? "active" : nil}" id="#{brand.slug}_#{brand.id}"]
+            = brand.title
+
         

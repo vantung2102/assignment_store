@@ -13,7 +13,19 @@
       = f.association :categories, selected: @product.category_ids, label: false, hint: 'Required.',
                       :input_html => { class: "input_select2" }
   .form-group.control-group
-    = f.label :price, class:"col-sm-2 control-label"
+    = f.label :brand, class:"col-sm-2 control-label"
+    .col-sm-10.controls
+      = f.input :brand_id, collection: Brand.all, selected: @product.brand_id, label: false, hint: 'Required.', 
+                include_blank: true, :input_html => { class: "input_select2" }
+  .form-group.control-group
+    = f.label :attributes, class:"col-sm-2 control-label"
+    .col-sm-10.controls
+      = f.simple_fields_for :product_attributes do |attribute|
+        = render 'admin/products/attributes_form', f: attribute
+      .links
+        = link_to_add_association 'Add attribute', f, :product_attributes, :partial => 'admin/products/attributes_form', class: "btn btn-info"
+  .form-group.control-group
+    = f.label :price_base, class:"col-sm-2 control-label"
     .col-sm-10.controls
       = f.input :price, label: false, hint: 'Required. Original cost'
   .form-group.control-group

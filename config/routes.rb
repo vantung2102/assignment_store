@@ -16,13 +16,17 @@ Rails.application.routes.draw do
   # Admin
   namespace :admin do
     get '/', to: 'home#index'
-    delete 'users/:id/delete', to: 'users#destroy'
-    resources :users
+    resources :attribute_product_titles
+    resources :brands
     resources :categories
+    delete 'users/:id/delete', to: 'users#destroy'
     resources :products
+    resources :users
   end
 
   
   root 'home#index'
   get 'category/:slug', to: 'home#change_category'
+  get 'brand/:slug', to: 'home#change_brand'
+  get 'product/load_more', to: 'home#load_more_product'
 end

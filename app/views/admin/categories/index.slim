@@ -38,7 +38,7 @@ ul.nav.nav-tabs.action_items
               th Action
           tbody
             - i = 0
-            - @data[:categories].each do |category|
+            - @categories.each do |category|
               - is_category = category.parent_category
               - i += 1
               tr
@@ -64,3 +64,4 @@ ul.nav.nav-tabs.action_items
                       a [ data-confirm="Are you sure?" rel="nofollow" data-method="delete" 
                           href="#{admin_category_url(category.id)}" ]
                         i.fa.fa-trash-o
+        == pagy_bootstrap_nav(@pagy)
