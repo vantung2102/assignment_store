@@ -1,58 +1,88 @@
-nav[class="sidebar sidebar-offcanvas" id="sidebar"]
+nav.sidebar.sidebar-offcanvas
   ul.nav
-    li.nav-item.active
-      a.nav-link href="/admin"
-        i.fa.fa-columns
-        span.menu-title Dashboard
     li.nav-item.nav-category.active
-      i.fa.fa-user 
-      | MANAGE USER
-    li.nav-item
-      a.nav-link[href="#{admin_users_url}"]
-        span.menu-title Users
+      a.nav-link[href="/admin"]
+        i.fa-solid.fa-house-user
+        span.menu-title.ms-3 Dashboard
     li.nav-item.nav-category
-      i.fa.fa-shopping-cart
-      | MANAGE Products
-    li.nav-item
-      a.nav-link[href="#{admin_attribute_product_titles_url}"]
-        span.menu-title Attributes
-    li.nav-item
-      a.nav-link[href="#{admin_brands_url}"]
-        span.menu-title Brands
-    li.nav-item
-      a.nav-link[href="#{admin_categories_url}"]
-        span.menu-title Categories
-    li.nav-item
-      a.nav-link
-        span.menu-title Colors
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Brands
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Categories
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Colors
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Favorites
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Rates
-    li.nav-item
-      a.nav-link
-        span.menu-title Product Sizes
-    li.nav-item
-      a.nav-link[href="#{admin_products_url}"]
-        span.menu-title Products
-    li.nav-item
-      a.nav-link[href="#{}"]
-        span.menu-title Size
-    li.nav-item.nav-category Orders
-    li.nav-item
-      a.nav-link
-        span.menu-title Orders
-    li.nav-item
-      a.nav-link
-        span.menu-title Order Details
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa.fa-user 
+          span.menu-title.ms-3 user
+        .pull-right
+          i.fa-solid.fa-caret-down
+      .panel-collapse.collapse
+        .panel-body.pt-0.pb-0
+          ul.menu-sub.p-0
+            li.menu-item.active
+              a.menu-link[href="#{admin_users_url}"]
+                i.fa-solid.fa-circle.me-4
+                span User
+            li.menu-item
+              a.menu-link[href=""]
+                i.fa-solid.fa-circle.me-4
+                span Admin
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa-sharp.fa-solid.fa-shirt
+          span.menu-title.ms-3 products
+        .pull-right
+          i.fa-solid.fa-caret-down
+      .panel-collapse.collapse
+        .panel-body.pt-0.pb-0
+          ul.menu-sub.p-0
+            li.menu-item
+              a.menu-link[href="#{admin_attribute_product_titles_url}"]
+                i.fa-solid.fa-circle.me-4
+                span Attributes
+            li.menu-item
+              a.menu-link[href="#{admin_brands_url}"]
+                i.fa-solid.fa-circle.me-4
+                span Brands
+            li.menu-item
+              a.menu-link[href="#{admin_categories_url}"]
+                i.fa-solid.fa-circle.me-4
+                span Categories
+            li.menu-item
+              a.menu-link[href="#{admin_products_url}"]
+                i.fa-solid.fa-circle.me-4
+                span Products
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa.fa-shopping-cart
+          span.menu-title.ms-3 orders
+        .pull-right
+          i.fa-solid.fa-caret-down
+      .panel-collapse.collapse
+        .panel-body.pt-0.pb-0
+          ul.menu-sub.p-0
+            li.menu-item
+              a.menu-link[href=""]
+                i.fa-solid.fa-circle.me-4
+                span Orders
+            li.menu-item
+              a.menu-link[href=""]
+                i.fa-solid.fa-circle.me-4
+                span Order detail
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa-sharp.fa-solid.fa-headset
+          span.menu-title.ms-3 Supports
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa-solid.fa-comment
+          span.menu-title.ms-3 Chats
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa-solid.fa-chart-line
+          span.menu-title.ms-3 Charts
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        span
+          i.fa-solid.fa-book
+          span.menu-title.ms-3 introduction

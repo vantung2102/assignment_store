@@ -5,9 +5,7 @@ html[lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'font-awesome.min'
     = stylesheet_link_tag 'select2.min'
     
   body
@@ -20,8 +18,6 @@ html[lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme
               .row
                 = yield
 
-    = javascript_include_tag "jquery"
-    = javascript_include_tag "select2.min"
-    = javascript_include_tag "controllers/admin/main"
-    = javascript_include_tag Ckeditor.cdn_url
+  = javascript_include_tag "select2.min"
+  = javascript_include_tag Ckeditor.cdn_url
     

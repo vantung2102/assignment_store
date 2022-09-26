@@ -9,10 +9,10 @@ class Client::Home::LoadMoreService < ApplicationService
     
     if (page >= 1) && (page <= total_page)
       offset = page.to_i * PER_PAGE
-      products = Product.limit(offset)
+      products = Product.with_attached_images.limit(offset)
       status = nil
     else
-      products = Product.limit(PER_PAGE)
+      products = Product.with_attached_images.limit(PER_PAGE)
       status = "error_page"
     end
     [products, status]

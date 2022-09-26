@@ -5,7 +5,7 @@ class Client::Home::ProductsBrandService < ApplicationService
 
   def call
     brand = Brand.friendly.find_by(slug: slug)
-    products = brand.products.limit(6)
+    products = brand.with_attached_images.products.limit(6)
   end
 
   private

@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get 'category/:slug', to: 'home#change_category'
   get 'brand/:slug', to: 'home#change_brand'
   get 'product/load_more', to: 'home#load_more_product'
+  resources :product_detail, only: [ :show ] do
+    get '/:slug', to: 'product_detail#show'
+  end
 end

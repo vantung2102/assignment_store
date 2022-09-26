@@ -12,4 +12,5 @@ class Category < ApplicationRecord
   validates :content, presence: true, length: { minimum:6, maximum: 500 }
 
   scope :show_categories, -> { where category_id: nil }
+  scope :include_categories, -> { includes(:child_category) }
 end
