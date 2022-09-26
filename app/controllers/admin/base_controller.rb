@@ -1,5 +1,6 @@
 class Admin::BaseController < ActionController::Base
   include Pundit::Authorization
+  include Pagy::Backend
   layout 'admin'
 
   protect_from_forgery with: :exception

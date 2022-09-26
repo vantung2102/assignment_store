@@ -15,6 +15,8 @@ ActiveStorage.start();
 import "../controllers";
 
 window.jQuery = window.$ = require("jquery");
+require("jquery");
+require("@nathanvda/cocoon");
 import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
 import "../packs/controllers/admin";

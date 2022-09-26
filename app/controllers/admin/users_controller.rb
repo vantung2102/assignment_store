@@ -3,11 +3,7 @@ class Admin::UsersController < Admin::BaseController
   before_action :authorize_admin!, only: %i[ update destroy ]
 
   def index
-      users = User.all
-
-      @data = {
-          users: users
-      }
+    @pagy, @users = pagy(User.all, items: 10)
   end
 
   def show;end

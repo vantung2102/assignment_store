@@ -3,27 +3,25 @@ class Admin::ProductsController < Admin::BaseController
   before_action :authorize_admin!, only: %i[ create update destroy ]
 
   def index
-      products = Product.all
-
-      @data = {
-        products: products
-      }
+    @pagy, @products = pagy(Product.all, items: 10)
   end
 
   def show;end
 
   def new
       @product = Product.new
+      @product_attributes = @product.product_attributes.build
+      @attribute_values = @product_attributes.attribute_values.build
   end
 
   def create
-    create, @product, message = Admin::Products::CreateService.call(product_params)
+    create, @product, @product_attributes, @attribute_values = Admin::Products::CreateService.call(product_params)
 
     if create
-      flash[:success] = message
+      flash[:success] = "Product was successfully created."
       redirect_to admin_products_path
     else
-      flash[:danger] = message
+      flash[:danger] = "Product was failure created."
       render :new
     end
   end
@@ -31,11 +29,15 @@ class Admin::ProductsController < Admin::BaseController
   def edit;end
 
   def update
-    update, message = Admin::Products::UpdateService.call(@product, product_params)
-
-    status = update ? :success : :danger
-    flash[status] = message
-    render :edit
+    update = Admin::Products::UpdateService.call(@product, product_params)
+    
+    if update
+      flash[:success] = "Product was successfully updated."
+      render :edit
+    else
+      flash[:danger] = "Product was failure updated."
+      render :edit
+    end
   end
 
   def destroy
@@ -53,7 +55,29 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def product_params
-    params.require(:product).permit(:title, :meta_title, :categories, :price, :discount, :content, :quantity, images: [], category_ids: [],)
+    params.require(:product).permit(
+      :title,
+      :meta_title,
+      :categories, 
+      :content,
+      :quantity,
+      :brand_id,
+      :price,
+      :discount,
+      images: [],
+      category_ids: [],
+      product_attributes_attributes: [
+        :id,
+        :attribute_product_title_id,
+        :_destroy,
+        attribute_values_attributes: [
+          :id,
+          :value,
+          :price_attribute_product,
+          :_destroy
+        ]
+      ]
+    )
   end
 
   def authorize_admin!

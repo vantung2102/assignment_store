@@ -3,11 +3,7 @@ class Admin::CategoriesController < Admin::BaseController
   before_action :authorize_admin!, only: %i[ create update destroy ]
 
   def index
-      categories = Category.all
-
-      @data = {
-          categories: categories
-      }
+      @pagy, @categories = pagy(Category.all, items: 10)
   end
 
   def show;end

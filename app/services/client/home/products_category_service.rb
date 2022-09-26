@@ -1,4 +1,4 @@
-class User::ProductsCategoryService < ApplicationService
+class Client::Home::ProductsCategoryService < ApplicationService
   def initialize(slug)
     @slug = slug
   end

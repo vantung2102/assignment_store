@@ -1,40 +1,58 @@
 nav[class="sidebar sidebar-offcanvas" id="sidebar"]
   ul.nav
     li.nav-item.active
-        a.nav-link href="/admin"
-            i.fa.fa-columns
-            span.menu-title Dashboard
+      a.nav-link href="/admin"
+        i.fa.fa-columns
+        span.menu-title Dashboard
     li.nav-item.nav-category.active
-        i.fa.fa-user 
-        | MANAGE USER
+      i.fa.fa-user 
+      | MANAGE USER
     li.nav-item
-        a.nav-link[href="#{admin_users_url}"]
-            span.menu-title Users
+      a.nav-link[href="#{admin_users_url}"]
+        span.menu-title Users
     li.nav-item.nav-category
-        i.fa.fa-shopping-cart
-        | MANAGE Products
+      i.fa.fa-shopping-cart
+      | MANAGE Products
     li.nav-item
-        a.nav-link
-            span.menu-title Brands
+      a.nav-link[href="#{admin_attribute_product_titles_url}"]
+        span.menu-title Attributes
     li.nav-item
-        a.nav-link[href="#{admin_categories_url}"]
-            span.menu-title Categories
+      a.nav-link[href="#{admin_brands_url}"]
+        span.menu-title Brands
     li.nav-item
-        a.nav-link
-            span.menu-title Category Products
+      a.nav-link[href="#{admin_categories_url}"]
+        span.menu-title Categories
     li.nav-item
-        a class="nav-link" href="#{admin_products_url}"
-            span.menu-title Products
+      a.nav-link
+        span.menu-title Colors
     li.nav-item
-        a.nav-link
-            span.menu-title Product rates
+      a.nav-link
+        span.menu-title Product Brands
     li.nav-item
-        a.nav-link
-            span.menu-title Product favorites
+      a.nav-link
+        span.menu-title Product Categories
+    li.nav-item
+      a.nav-link
+        span.menu-title Product Colors
+    li.nav-item
+      a.nav-link
+        span.menu-title Product Favorites
+    li.nav-item
+      a.nav-link
+        span.menu-title Product Rates
+    li.nav-item
+      a.nav-link
+        span.menu-title Product Sizes
+    li.nav-item
+      a.nav-link[href="#{admin_products_url}"]
+        span.menu-title Products
+    li.nav-item
+      a.nav-link[href="#{}"]
+        span.menu-title Size
     li.nav-item.nav-category Orders
     li.nav-item
-        a.nav-link
-            span.menu-title Orders
+      a.nav-link
+        span.menu-title Orders
     li.nav-item
-        a.nav-link
-            span.menu-title Order Details
+      a.nav-link
+        span.menu-title Order Details

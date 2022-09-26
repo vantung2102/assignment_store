@@ -1,0 +1,7 @@
+.nested-fields
+  = f.label :value
+  = f.input :value, label: false
+  = f.label :price_attribute_product
+  = f.input :price_attribute_product, label: false
+  
+  = link_to_remove_association "delete value", f, class: "btn btn-danger"

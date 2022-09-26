@@ -4,6 +4,12 @@ class Product < ApplicationRecord
 
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories, dependent: :destroy
+  
+  has_many :product_attributes, dependent: :destroy, inverse_of: :product
+  has_many :attributes_product_titles, through: :product_attributes
+  accepts_nested_attributes_for :product_attributes, reject_if: :all_blank, allow_destroy: true
+
+  belongs_to :brand
 
   has_many_attached :images
 
@@ -13,6 +19,8 @@ class Product < ApplicationRecord
   validates :discount, presence: true, numericality: { greater_than: 0, less_than: :price }
   validates :quantity, presence: true, numericality: { greater_than: 0, less_than: 500 }
   validates :content, presence: true, length: { minimum: 6, maximum: 1000 } 
+  validates :brand_id, presence: true
+  validates :categories, presence: true
   validates :images, content_type: [:png, :jpg, :jpeg, :gif], attached: true
 
   def display_image

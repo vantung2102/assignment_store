@@ -4,8 +4,8 @@ class Category < ApplicationRecord
 
   belongs_to :parent_category, class_name: 'Category', optional: true, foreign_key: :category_id
   has_many :child_category, class_name: 'Category', dependent: :destroy
-  has_many :product_categories
-  has_many :products, through: :product_categories
+  has_many :product_categories, dependent: :destroy
+  has_many :products, through: :product_categories, dependent: :destroy
 
   validates :title, presence: true, length: { minimum:3, maximum: 30 }
   validates :meta_title, presence: true, length: { minimum:3, maximum: 30 }
