@@ -20,8 +20,23 @@ const handleSelectAttributes = () => {
   });
 };
 
+const handleClickSidebar = () => {
+  $(".navbar-toggler.navbar-toggler").on("click", function () {
+    var body = $("body");
+    body.toggleClass("sidebar-icon-only");
+  });
+
+  $(".nav-link").on("click", function () {
+    $(this)
+      .closest(".nav-item.nav-category")
+      .find(".panel-collapse.collapse")
+      .toggleClass("show");
+  });
+};
+
 document.addEventListener("turbolinks:load", () => {
   handleSelectInput();
   handleSelectInputTag();
   handleSelectAttributes();
+  handleClickSidebar();
 });

@@ -6,12 +6,13 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     / = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     / = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'bootstrap.min'
     = stylesheet_link_tag 'font-awesome.min'
+    = stylesheet_link_tag 'slick'
     = javascript_include_tag "jquery"
-    = javascript_include_tag "controllers/user/home"
+    = javascript_include_tag "controllers/client/home"
   body
     = render 'layouts/header'
     - if notice
@@ -30,7 +31,8 @@ html
       = yield
     = render 'layouts/footer'
 
-    = javascript_include_tag "bootstrap.min"
-    = javascript_include_tag "jquery.scrollUp.min"
-    = javascript_include_tag "main"
+  = javascript_include_tag "bootstrap.min"
+  = javascript_include_tag "jquery.scrollUp.min"
+  = javascript_include_tag "slick"
+  = javascript_include_tag "controllers/client/main"
     

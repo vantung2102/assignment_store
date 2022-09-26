@@ -1,0 +1,113 @@
+.category-tab.shop-details-tab
+  .col-sm-12
+    ul.nav.nav-tabs
+      li.active
+        a[href="#productsother" data-toggle="tab"] Products Other
+      li
+        a[href="#description" data-toggle="tab"] Description
+      li
+        a[href="#reviews" data-toggle="tab"] Reviews
+  .tab-content
+    .tab-pane.fade#productsother.active.in
+      .col-sm-3.col-xs-6
+        .product-image-wrapper
+          .single-products
+            .productinfo
+              = image_tag("home/product1")
+              h2 $50
+              p Lorem ipsum dolor sit
+              a.btn.btn-default.add-to-cart
+                i.fa.fa-shopping-cart 
+                |   Add to cart
+      .col-sm-3.col-xs-6
+          .product-image-wrapper
+              .single-products
+                  .productinfo
+                      = image_tag("home/product1")
+                      h2 $50
+                      p Lorem ipsum dolor sit
+                      a.btn.btn-default.add-to-cart
+                          i.fa.fa-shopping-cart 
+                          |   Add to cart
+      .col-sm-3.col-xs-6
+          .product-image-wrapper
+              .single-products
+                  .productinfo
+                      = image_tag("home/product1")
+                      h2 $50
+                      p Lorem ipsum dolor sit
+                      a.btn.btn-default.add-to-cart
+                          i.fa.fa-shopping-cart 
+                          |   Add to cart
+      .col-sm-3.col-xs-6
+          .product-image-wrapper
+              .single-products
+                  .productinfo
+                      = image_tag("home/product1")
+                      h2 $50
+                      p Lorem ipsum dolor sit
+                      a.btn.btn-default.add-to-cart
+                          i.fa.fa-shopping-cart 
+                          |   Add to cart
+    .tab-pane.fade#description
+      = raw @product.content
+    .tab-pane.fade#reviews
+      .col-sm-12
+        .rating
+          h4.rating__title Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore recusandae blanditiis soluta nostrum non tempore vitae modi vel explicabo earum itaque ab maxime unde
+          .rating-star.left
+            .rating-left
+              .rating-top
+                p.point 4.5
+                .rate-star
+                  i.fa.fa-star
+                  i.fa.fa-star
+                  i.fa.fa-star
+                  i.fa.fa-star
+                  i.fa.fa-star
+                p.rating-total 18 đánh giá
+              ul.rating-list
+                li
+                  .number-star 
+                    |5
+                    i.fa.fa-star
+                  .timeline-star
+                    p[class="timing" style="width: 50%"]
+                  p 50%
+                li
+                  .number-star 
+                    |4
+                    i.fa.fa-star
+                  .timeline-star
+                    p[class="timing" style="width: 50%"]
+                  p 50%
+                li
+                  .number-star 
+                    |3
+                    i.fa.fa-star
+                  .timeline-star
+                    p[class="timing" style="width: 50%"]
+                  p 50%
+                li
+                  .number-star 
+                    |2
+                    i.fa.fa-star
+                  .timeline-star
+                    p[class="timing" style="width: 50%"]
+                  p 50%
+                li
+                  .number-star 
+                    |1
+                    i.fa.fa-star
+                  .timeline-star
+                    p[class="timing" style="width: 50%"]
+                  p 50%
+                
+        form#form_comment
+          .mb-3
+            textarea[id="reply_comment" placeholder="Write a comment..."]
+            label[class="form-label"] Upload images
+            input[type="file" id="file_images"]
+            input[type="submit" id="btn_send_comment"]
+        = render "product_detail/shared/reply_comment"          
+                    

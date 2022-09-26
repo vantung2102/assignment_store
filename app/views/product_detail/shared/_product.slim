@@ -1,0 +1,77 @@
+.product-details
+    .col-sm-5
+      .view-product.pro-dec-big-img-slider
+        - @product.images.each do |img|
+          .item-img
+            = image_tag(img)
+            a[href="" rel="prettyPhoto"]
+              h3 ZOOM
+        
+      #similar-product
+        .product-dec-slider-small
+          - @product.images.each do |img|
+            .item.active
+              = image_tag(img)
+          
+          a.left.item-control
+            i.fa.fa-angle-left
+          a.right.item-control
+            i.fa.fa-angle-right
+
+    .col-sm-7
+      .product-information
+        = image_tag('home/new.jpg', class: 'newarrival')
+        h2 = @product.title
+        .rate-star
+          i.fa.fa-star
+          i.fa.fa-star
+          i.fa.fa-star
+          i.fa.fa-star
+          i.fa.fa-star
+          | (5.0)
+        .select-other
+          span 50 Review
+          span 50 Favorite
+          span 50 Order
+        .price.display-flex
+          span.price_new 
+            |$ 
+            = discount(@product.price, @product.discount)
+          del.price_old 
+            |$ 
+            = @product.price
+        .quantity
+          label Quantity: 
+          input type="number" id="numberInput" class="quantity" value="1"
+          a href="javascript:void(0)" id="add-to-cart-detail" name="add-to-cart-detail" class="btn btn-fefault cart add-to-cart-detail"
+            i.fa.fa-shopping-cart  
+            |  Add to cart
+        .attribute_product
+          .item
+            - attributes = @product.product_attributes.includes(:attribute_product_title, :attribute_values)
+            - attributes.each do |attribute|
+              p: b
+                = attribute.attribute_product_title.title
+              .select__items
+                - attribute.attribute_values.each do |value|
+                  button.active = value.value
+        p 
+          b Quantity in stock: 
+          = @product.quantity
+        p
+          b Viewes: 
+          |40
+        p 
+          b Brand: 
+          = @product.brand.title
+        p
+          b Categories:
+          ul
+            - @product.categories.each do |category|
+              li 
+                = category.title
+        p
+          b Share: 
+          a.share_shop
+            i.fa.fa-facebook-square
+        

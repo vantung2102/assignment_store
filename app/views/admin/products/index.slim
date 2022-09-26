@@ -64,9 +64,9 @@ ul.nav.nav-tabs.action_items
                       a href="#{edit_admin_product_path(product.id)}" title="edit"
                         i.fa.fa-edit
                     li
-                      a [ class="delete" data-confirm="Are you sure?" rel="nofollow" 
-                          data-method="delete" href="#{admin_product_url(product.id)}" ]
-                        i.fa.fa-trash-o
+                      a [class="delete" data-confirm="Are you sure?" rel="nofollow" 
+                          data-method="delete" href="#{admin_product_url(product.id)}"]
+                        i.fa-solid.fa-trash
         == pagy_bootstrap_nav(@pagy)
 
                           

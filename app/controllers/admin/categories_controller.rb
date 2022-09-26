@@ -49,7 +49,12 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def category_params
-    params.require(:category).permit(:title, :meta_title, :content, :category_id)
+    params.require(:category).permit(
+      :title,
+      :meta_title,
+      :content,
+      :category_id
+    )
   end
 
   def authorize_admin!

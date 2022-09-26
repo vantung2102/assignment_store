@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::BaseController
   def show;end
 
   def new
-      @user = User.new
+    @user = User.new
   end
 
   def create
@@ -49,7 +49,17 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :gender, :address, :email, :password, :password_confirmation, :avatar, :roles)
+    params.require(:user).permit(
+      :name,
+      :phone,
+      :gender,
+      :address,
+      :email,
+      :password,
+      :password_confirmation,
+      :avatar,
+      :roles
+    )
   end
 
   def authorize_admin!

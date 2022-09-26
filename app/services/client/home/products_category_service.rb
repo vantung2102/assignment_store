@@ -11,10 +11,10 @@ class Client::Home::ProductsCategoryService < ApplicationService
 
     if child_category.present?
       child_category.each do |item|
-        products.concat(item.products)
+        products.concat(item.products.with_attached_images)
       end
     else
-      products = category.products.limit(6)
+      products = category.products.with_attached_images.limit(6)
     end
     
     products

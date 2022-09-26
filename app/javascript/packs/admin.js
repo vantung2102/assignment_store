@@ -12,17 +12,10 @@ Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
-import "../controllers";
-
 window.jQuery = window.$ = require("jquery");
 require("jquery");
+import "bootstrap";
 require("@nathanvda/cocoon");
-import "../../../node_modules/bootstrap/scss/bootstrap.scss";
-
+import "@fortawesome/fontawesome-free/css/all";
 import "../packs/controllers/admin";
-// import "../packs/controllers/admin/users/helpers";
-// import "../packs/controllers/admin/users/perfect-scrollbar";
-// import "../packs/controllers/admin/users/menu";
-
-// import "@fortawesome/fontawesome-free/css/all.css";
 import "./stylesheet/admin/application.scss";

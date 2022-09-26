@@ -4,7 +4,8 @@
       .product-image-wrapper
         .single-products
           .productinfo
-            = image_tag(product.display_image)
+            a[href="#{product_detail_url(product.id, product.slug)}"]
+              = image_tag(product.display_image)
             .price.display-flex
               h2.price_new = discount(product.price, product.discount)
               del.price_old = product.price

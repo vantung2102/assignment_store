@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @categories = Category.show_categories.limit(10)
-    @brands = Brand.all.limit(10)
+    @categories = Category.show_categories.include_categories
+    @brands = Brand.all.include_products
 
     if params[:category].nil? && params[:brand].nil? && params[:page].nil?
-      @products = Product.all.limit(PER_PAGE)
+      @products = Product.with_attached_images.limit(PER_PAGE)
     else
       if !params[:category].nil?
         @products = Client::Home::ProductsCategoryService.call(params[:category])
@@ -31,8 +31,6 @@ class HomeController < ApplicationController
   end
 
   def load_more_product
-    @products = Client::Home::LoadMoreService.call(params[:page])
-
     total_page = (Product.count.to_f / PER_PAGE).ceil
     page = params[:page].nil? ? 1 : params[:page].to_i
     

@@ -1,7 +1,9 @@
-$("#loader").fadeOut("slow");
-$(".show_body").css("display", "block");
+const handleLoader = () => {
+  $("#loader").fadeOut("slow");
+  $(".show_body").css("display", "block");
+};
 
-$(document).ready(function () {
+const handleScrollUp = () => {
   $(function () {
     $.scrollUp({
       scrollName: "scrollUp", // Element ID
@@ -20,4 +22,38 @@ $(document).ready(function () {
       zIndex: 2147483647, // Z-Index for the overlay
     });
   });
+};
+
+const handleSliderSlick = () => {
+  $(".pro-dec-big-img-slider").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    draggable: false,
+    fade: false,
+    asNavFor: ".product-dec-slider-small",
+  });
+
+  $(".product-dec-slider-small").slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: ".pro-dec-big-img-slider",
+    dots: false,
+    focusOnSelect: true,
+    fade: false,
+    prevArrow:
+      '<a class="left item-control"><i class="fa fa-angle-left"></i></a>',
+    nextArrow:
+      '<a class="right item-control"><i class="fa fa-angle-right"></i></a>',
+  });
+
+  $(".item-control:not(.slick-arrow)")
+    .closest(".slick-slide:not(.slick-cloned)")
+    .remove();
+};
+
+document.addEventListener("turbolinks:load", () => {
+  handleLoader();
+  handleScrollUp();
+  handleSliderSlick();
 });
