@@ -12,16 +12,10 @@ Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
-// window.jQuery = window.$ = require("jquery");
-// import "./stylesheet/application/application.scss";
-// import "@fortawesome/fontawesome-free/css/all.css";
-// import "./stylesheet/application/application.scss";
-import "./stylesheet/application/common/_common";
-import "./stylesheet/application/common/_animation.scss";
+window.jQuery = window.$ = require("jquery");
 
-import "./stylesheet/application/layout/_header.scss";
-import "./stylesheet/application/layout/_slider.scss";
-import "./stylesheet/application/layout/_category.scss";
-import "./stylesheet/application/layout/_product_detail.scss";
-import "./stylesheet/application/layout/_login.scss";
-import "./stylesheet/application/layout/_footer.scss";
+import Swal from "sweetalert2";
+window.Swal = Swal;
+import "@fortawesome/fontawesome-free/css/all";
+import "../packs/controllers/application";
+import "./stylesheet/application/application";

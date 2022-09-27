@@ -15,6 +15,9 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def create
+    
+    binding.pry
+    
     create, @product, @product_attributes, @attribute_values = Admin::Products::CreateService.call(product_params)
 
     if create

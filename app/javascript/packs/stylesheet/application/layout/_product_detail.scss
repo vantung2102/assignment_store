@@ -365,7 +365,8 @@
       }
     }
 
-    textarea {
+    textarea,
+    #reply_comment {
       border: none;
       margin-bottom: 25px;
       outline: none;
@@ -523,6 +524,15 @@
           }
         }
       }
+    }
+
+    .preview .img-thumbnail {
+      height: 250px;
+      width: 250px;
+    }
+
+    .form-reply {
+      display: none;
     }
   }
 }

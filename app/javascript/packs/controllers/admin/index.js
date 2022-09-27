@@ -37,7 +37,10 @@ const handleClickSidebar = () => {
   });
 };
 
+import User from "./users/user";
+
 document.addEventListener("turbolinks:load", () => {
+  // const user = new User();
   handleSelectInput();
   handleSelectInputTag();
   handleSelectAttributes();
