@@ -4,7 +4,7 @@ class Product < ApplicationRecord
 
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories, dependent: :destroy
-  
+  has_many :comments, dependent: :destroy
   has_many :product_attributes, dependent: :destroy, inverse_of: :product
   has_many :attribute_product_titles, through: :product_attributes
   accepts_nested_attributes_for :product_attributes, reject_if: :all_blank, allow_destroy: true

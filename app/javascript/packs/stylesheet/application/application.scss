@@ -1,9 +1,11 @@
-// @import "~bootstrap/scss/bootstrap";
-// @import "./common/variabls";
-// @import "./common/animation";
-// @import "./common/common";
-// @import "./layout/header";
-// @import "./layout/category";
-// @import "./layout/login";
-// @import "./layout/footer";
-@import "~bootstrap/scss/bootstrap.scss";
+@import "../lib/bootstrap.min.css";
+@import "../lib/slick.css";
+
+@import "./common/common";
+@import "./common/animation";
+@import "./layout/header";
+@import "./layout/slider";
+@import "./layout/category";
+@import "./layout/product_detail";
+@import "./layout/login";
+@import "./layout/footer";

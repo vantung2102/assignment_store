@@ -1,0 +1,36 @@
+li.item_comment
+  a.pull-left
+    img class="media-object" src="/assets/home/iframe3.png" alt=""
+  .item_comment-user
+    p.item_comment-name 
+      = comment.user.name
+    .rate-star
+      i.fa.fa-star
+      i.fa.fa-star
+      i.fa.fa-star
+      i.fa.fa-star
+      i.fa.fa-star
+    p.item_comment-time 
+      = comment.created_at
+    ul
+      li
+        i.fa.fa-thumbs-o-up
+      li.reply-comment
+        i.fa-regular.fa-comment
+      li
+        i.fa.fa-edit
+      li
+        i.fa.fa-trash-o
+      
+    .content_comment
+      p = comment.content
+
+    .list_comment_chidren
+    - if comment.child_comment.present?
+      - comment.child_comment.each do |child|
+        = render "product_detail/shared/child_comment", child: child
+    .form-reply
+      form#form_comment
+        .mb-3
+          textarea.in-reply-comment[id="reply_comment #{comment.product.slug} #{comment.id}" placeholder="Write a comment..."]
+          input.btn_reply_comment[type="button" value="Submit"]

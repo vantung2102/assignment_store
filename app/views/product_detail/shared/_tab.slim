@@ -8,7 +8,7 @@
       li
         a[href="#reviews" data-toggle="tab"] Reviews
   .tab-content
-    .tab-pane.fade#productsother.active.in
+    .tab-pane.fade#productsother
       .col-sm-3.col-xs-6
         .product-image-wrapper
           .single-products
@@ -51,7 +51,7 @@
                           |   Add to cart
     .tab-pane.fade#description
       = raw @product.content
-    .tab-pane.fade#reviews
+    .tab-pane.fade#reviews.active.in
       .col-sm-12
         .rating
           h4.rating__title Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore recusandae blanditiis soluta nostrum non tempore vitae modi vel explicabo earum itaque ab maxime unde
@@ -103,11 +103,9 @@
                     p[class="timing" style="width: 50%"]
                   p 50%
                 
-        form#form_comment
-          .mb-3
-            textarea[id="reply_comment" placeholder="Write a comment..."]
-            label[class="form-label"] Upload images
-            input[type="file" id="file_images"]
-            input[type="submit" id="btn_send_comment"]
-        = render "product_detail/shared/reply_comment"          
+        = render "product_detail/shared/form"
+        .response-area
+          ul.list_comment
+            - @comments.each do |comment|
+              = render "product_detail/shared/list_comment", comment: comment
                     
