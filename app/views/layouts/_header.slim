@@ -16,15 +16,15 @@ header#header
           .social-icons
             ul.nav.nav-bar
               li: a
-                i.fa.fa-facebook
+                i.fa-brands.fa-facebook-f
               li: a
-                i.fa.fa-twitter
+                i.fa-brands.fa-twitter
               li: a
-                i.fa.fa-linkedin
+                i.fa-brands.fa-linkedin
               li: a
-                i.fa.fa-google-plus
+                i.fa-brands.fa-google-plus-g
               li: a
-                i.fa.fa-instagram
+                i.fa-brands.fa-instagram
           .btn-group.pull-right.language
             button.btn.btn-default.dropdown-toggle.usa[type="button" data-toggle="dropdown"]
               = link_to 
@@ -61,7 +61,8 @@ header#header
               li: a
                 i.fa.fa-credit-card
                 |  Checkout
-              li: a
+              li: a.cart
+                span.badge.count-product
                 i.fa.fa-shopping-cart
                 |  Cart
               li 

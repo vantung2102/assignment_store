@@ -4,23 +4,22 @@ export default class User {
   }
 
   handleImageInput = () => {
-    $(document).on("change", "#user_avatar", function () {
-      const preview = $(".preview.img-thumbnail");
-
+    $("body").on("change", "#user_avatar", () => {
+      const preview = $(".preview");
       const file = $("#user_avatar")[0].files[0];
 
       const reader = new FileReader();
 
-      reader.onloadend = function () {
-        preview[0].src = reader.result;
-      };
+      $(reader).on("load", ({ target }) => {
+        preview.append(
+          $("<img/>", {
+            src: target.result,
+            class: "img-thumbnail",
+          })
+        );
+      });
 
-      if (file) {
-        preview.css("display", "block");
-        reader.readAsDataURL(file);
-      } else {
-        preview[0].src = "";
-      }
+      reader.readAsDataURL(file);
     });
   };
 }

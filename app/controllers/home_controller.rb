@@ -6,11 +6,11 @@ class HomeController < ApplicationController
     if params[:category].nil? && params[:brand].nil? && params[:page].nil?
       @products = Product.with_attached_images.limit(PER_PAGE)
     else
-      if !params[:category].nil?
+      if params[:category].present?
         @products = Client::Home::ProductsCategoryService.call(params[:category])
-      elsif !params[:brand].nil?
+      elsif params[:brand].present?
         @products = Client::Home::ProductsBrandService.call(params[:brand])
-      elsif !params[:page].nil?
+      elsif params[:page].present?
         @products, @status = Client::Home::LoadMoreService.call(params[:page])
       end
     end

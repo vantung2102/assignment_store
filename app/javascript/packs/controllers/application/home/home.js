@@ -25,14 +25,14 @@ export default class Home {
   }
 
   handleChangeCategory = () => {
-    $(".category").on("click", function () {
-      const slug = $(this).attr("id").split("_")[0];
-      const category = $(this);
+    $("body").on("click", ".category", ({ target }) => {
+      const slug = $(target).attr("id").split("_")[0];
+      const category = $(target);
 
       $.ajax({
         url: "category/" + slug,
         type: "GET",
-        beforeSend: function (xhr) {
+        beforeSend: (xhr) => {
           xhr.setRequestHeader(
             "X-CSRF-Token",
             $('meta[name="csrf-token"]').attr("content")
@@ -40,17 +40,17 @@ export default class Home {
         },
         data: { slug: slug },
         dataType: "json",
-        success: function (response) {
+        success: (response) => {
           if (response.status == 200) {
             $(".category").removeClass("active");
             category.addClass("active");
-
             $(".features_items").replaceWith(response.html);
+            $(".btn-load_more").hide();
             const url = "?category=" + slug;
             window.history.pushState({}, "", url);
           }
         },
-        error: function (response) {},
+        error: (response) => {},
       });
     });
   };
@@ -63,14 +63,14 @@ export default class Home {
   };
 
   handleChangeBrand = () => {
-    $(".brand__item").on("click", function () {
-      const brand = $(this);
-      const slug = $(this).attr("id").split("_")[0];
+    $("body").on("click", ".brand__item", ({ target }) => {
+      const brand = $(target);
+      const slug = $(target).attr("id").split("_")[0];
 
       $.ajax({
         url: "brand/" + slug,
         type: "GET",
-        beforeSend: function (xhr) {
+        beforeSend: (xhr) => {
           xhr.setRequestHeader(
             "X-CSRF-Token",
             $('meta[name="csrf-token"]').attr("content")
@@ -78,27 +78,24 @@ export default class Home {
         },
         data: { slug: slug },
         dataType: "json",
-        success: function (response) {
+        success: (response) => {
           if (response.status == 200) {
+            console.log(122);
             $(".brand__item").removeClass("active");
             brand.addClass("active");
             $(".features_items").replaceWith(response.html);
-
-            // const oldUrl = window.location.href;
-            // const newUrl = oldUrl + "&" + "?brand=" + slug;
+            $(".btn-load_more").hide();
             const url = "?brand=" + slug;
             window.history.pushState({}, "", url);
-
-            console.log(newUrl);
           }
         },
-        error: function (response) {},
+        error: (response) => {},
       });
     });
   };
 
   handleLoadMore = () => {
-    $(".btn-load_more").on("click", function () {
+    $("body").on("click", ".btn-load_more", () => {
       $("#loader").css("display", "flex");
 
       const page =
@@ -107,7 +104,7 @@ export default class Home {
       $.ajax({
         url: "product/load_more",
         type: "GET",
-        beforeSend: function (xhr) {
+        beforeSend: (xhr) => {
           xhr.setRequestHeader(
             "X-CSRF-Token",
             $('meta[name="csrf-token"]').attr("content")
@@ -115,7 +112,7 @@ export default class Home {
         },
         data: { page: page },
         dataType: "json",
-        success: function (response) {
+        success: (response) => {
           if (response.status == 200) {
             console.log(response.page);
             if (response.page != "error_page") {
@@ -133,12 +130,12 @@ export default class Home {
               window.history.pushState({}, "", "?page=1");
             }
 
-            setTimeout(function () {
+            setTimeout(() => {
               $("#loader").css("display", "none");
             }, 200);
           }
         },
-        error: function (response) {},
+        error: (response) => {},
       });
     });
   };

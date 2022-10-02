@@ -14,7 +14,7 @@ class Client::Home::ProductsCategoryService < ApplicationService
         products.concat(item.products.with_attached_images)
       end
     else
-      products = category.products.with_attached_images.limit(6)
+      products = category.products.with_attached_images
     end
     
     products
