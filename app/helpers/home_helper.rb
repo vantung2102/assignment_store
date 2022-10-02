@@ -7,7 +7,7 @@ module HomeHelper
     if status == "error_page"
       return true
     else
-      params_page.to_i < (Product.count.to_f / 6).ceil && !products.nil?
+      params_page.to_i < (Product.count.to_f / 6).ceil && products.present?
     end
   end
 end

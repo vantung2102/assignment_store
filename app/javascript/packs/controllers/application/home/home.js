@@ -25,7 +25,7 @@ export default class Home {
   }
 
   handleChangeCategory = () => {
-    $(".category").on("click", function () {
+    $("body").on("click", ".category", function () {
       const slug = $(this).attr("id").split("_")[0];
       const category = $(this);
 
@@ -44,8 +44,8 @@ export default class Home {
           if (response.status == 200) {
             $(".category").removeClass("active");
             category.addClass("active");
-
             $(".features_items").replaceWith(response.html);
+            $(".btn-load_more").hide();
             const url = "?category=" + slug;
             window.history.pushState({}, "", url);
           }
@@ -80,16 +80,13 @@ export default class Home {
         dataType: "json",
         success: function (response) {
           if (response.status == 200) {
+            console.log(122);
             $(".brand__item").removeClass("active");
             brand.addClass("active");
             $(".features_items").replaceWith(response.html);
-
-            // const oldUrl = window.location.href;
-            // const newUrl = oldUrl + "&" + "?brand=" + slug;
+            $(".btn-load_more").hide();
             const url = "?brand=" + slug;
             window.history.pushState({}, "", url);
-
-            console.log(newUrl);
           }
         },
         error: function (response) {},

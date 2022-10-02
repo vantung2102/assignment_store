@@ -71,7 +71,7 @@
       }
 
       &:hover a {
-        .fa-facebook {
+        .fa-facebook-f {
           background: #0083c9;
         }
 
@@ -83,7 +83,7 @@
           background: #90c9dc;
         }
 
-        .fa-google-plus {
+        .fa-google-plus-g {
           background: #ce3c2d;
         }
 
@@ -181,6 +181,20 @@
         padding-left: 10px;
         padding-right: 10px;
       }
+    }
+
+    .count-product {
+      position: absolute;
+      background-color: rgb(255, 104, 104);
+      color: #fff;
+      top: -14px;
+      right: -11px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 15px;
+      font-size: 10px;
     }
   }
 

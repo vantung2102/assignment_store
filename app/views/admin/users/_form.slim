@@ -25,10 +25,10 @@
       /   img.preview.img-thumbnail
       - avatar = @user.avatar
       - if avatar.attached?
-        #preview
+        .preview
           img class="preview img-thumbnail" src="#{url_for(avatar)}"
       - else
-        #preview
+        .preview
         
       = f.input :avatar, label: false, hint: 'Optional.'
   / .form-group.control-group
@@ -52,5 +52,3 @@
   .form-group.form-actions
     .col-sm-offset-2.col-sm-10
       = f.submit class: "btn btn-primary btn-edit"
-
-= javascript_include_tag "controllers/admin/user"

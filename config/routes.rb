@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  
+  # Client
   root 'home#index'
   get 'category/:slug', to: 'home#change_category'
   get 'brand/:slug', to: 'home#change_brand'
@@ -34,5 +34,10 @@ Rails.application.routes.draw do
   end
   resources :comments do
     post 'reply_comment', to: 'comments#reply_comment'
+  end
+  resource :cart, only: [:show] do
+    get 'show_cart', to: 'cart#show'
+    get 'checkout', to: 'cart#checkout'
+    post 'order', to: 'cart#order'
   end
 end

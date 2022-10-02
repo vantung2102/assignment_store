@@ -6,8 +6,7 @@ html[lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag 'select2.min'
-    
+    = javascript_include_tag Ckeditor.cdn_url
   body
     .container-scroller
       = render "admin/home/shared/navbar"
@@ -17,7 +16,4 @@ html[lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme
             .content-wrapper
               .row
                 = yield
-
-  = javascript_include_tag "select2.min"
-  = javascript_include_tag Ckeditor.cdn_url
     

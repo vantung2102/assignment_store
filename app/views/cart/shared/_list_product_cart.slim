@@ -1,0 +1,67 @@
+#cart_items.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li.active Shopping Cart
+    .table-responsive.cart_info
+      table.table.table-condensed.m-0
+        - if @products.present?
+          thead
+            tr.cart_menu
+              td.image[colspan="2"] Item
+              td.price Price
+              td.quantity Quantity
+              td.total Total
+              td
+          tbody
+            - i = 0; total = 0
+            - @products.each do |product|
+              - i += 1;
+              tr.list-cart[id="#{product.id}_#{product.slug}"]
+                td.cart_product
+                  a
+                    = image_tag(product.display_image, class:"img_product")
+                td.cart_name 
+                  h4
+                    a[href=""] = product.title
+                    p size: L
+                    p color: vang
+                td.cart_price
+                  del = product.price 
+                  | - 
+                  span = product.price - product.discount
+                td.cart_quantity
+                  .cart_quantity_button
+                    button.cart_quantity_down
+                      i.fa-solid.fa-minus
+                    - quantiny = JSON.parse(cookies[:add_to_cart])[i-1]['quantity']
+                    - total = total + (product.price - product.discount)*quantiny.to_f
+                    input.cart_quantity_input[type="text" name="quantity" value="#{quantiny}"]
+                    button.cart_quantity_up
+                      i.fa-solid.fa-plus
+                td.cart_total
+                  p.cart_total_price = (product.price - product.discount)*quantiny.to_f
+                td.cart_delete
+                  a.cart_quantity_delete
+                    i.fa.fa-times
+            tr 
+              td[colspan="3"]
+              td.sum_total
+                span.price_sum
+                  p Total payment ( #{i} Product ): &nbsp;
+                  sup $
+                  span = total
+              td
+                a.btn-checkout[href="#{checkout_cart_url}"] checkout
+        - else
+          thead[style="display: none"]
+            tr.cart_menu
+              td.image[colspan="2"] Item
+              td.price Price
+              td.quantity Quantity
+              td.total Total
+              td
+          tbody
+            h2.cart_empty Shopping cart is empty

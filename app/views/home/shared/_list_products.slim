@@ -3,9 +3,9 @@
     .col-sm-4.col-xs-6 
       .product-image-wrapper
         .single-products
-          .productinfo
+          .productinfo.add_product[id="#{product.id} #{product.slug}"]
             a[href="#{product_detail_url(product.id, product.slug)}"]
-              = image_tag(product.display_image)
+              = image_tag(product.display_image, class:"img_product")
             .price.display-flex
               h2.price_new = discount(product.price, product.discount)
               del.price_old = product.price
@@ -15,9 +15,10 @@
               i.fa.fa-star
               i.fa.fa-star
               i.fa.fa-star
-            p = product.title
+            p.name_product = product.title
             a.btn.btn-default.add-to-cart
-              i.fa.fa-shopping-cart  Add to cart
+              i.fa.fa-shopping-cart  
+              |Add to cart
           = image_tag("home/sale", class: "sale")
         .choose 
           ul.nav.nav-pills.nav-justified
