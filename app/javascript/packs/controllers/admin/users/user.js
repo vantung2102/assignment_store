@@ -14,6 +14,7 @@ export default class User {
         preview.append(
           $("<img/>", {
             src: target.result,
+
             class: "img-thumbnail",
           })
         );

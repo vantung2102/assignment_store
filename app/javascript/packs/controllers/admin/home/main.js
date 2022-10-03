@@ -34,6 +34,7 @@ export default class Main {
       body.toggleClass("sidebar-icon-only");
 
       const logo = $("#logo");
+
       logo.toggleClass("d-none");
     });
 

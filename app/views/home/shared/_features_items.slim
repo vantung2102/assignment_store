@@ -1,7 +1,6 @@
 .features_items
   h2.title_feature_item Products
   = render "home/shared/list_products"
-
 - if last_page?(@products, params, @status)
   .load_more
     button.btn.btn-load_more Load More
