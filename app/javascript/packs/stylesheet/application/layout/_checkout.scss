@@ -18,32 +18,43 @@
         margin-bottom: 10px;
         float: left;
         width: 100%;
+        color: #ee4d2d;
       }
 
       .content_order {
         width: 100%;
       }
 
-      .address_checkout {
-        padding: 20px;
-        background: #fff;
-        margin-bottom: 20px;
-        box-shadow: 0 1px 5px 0 #e7e7ff;
-        border-radius: 10px;
+      // .address_checkout {
+      //   padding: 20px;
+      //   background: #fff;
+      //   margin-bottom: 20px;
+      //   box-shadow: 0 1px 5px 0 #e7e7ff;
+      //   border-bottom-left-radius: 10px;
+      //   border-bottom-right-radius: 10px;
 
-        .form-group {
-          margin: 0 0 15px 0;
+      //   .form-group {
+      //     margin: 0 0 15px 0;
 
-          &.control-group {
-            margin: 0;
-          }
+      //     &.control-group {
+      //       margin: 0;
+      //     }
 
-          input,
-          select {
-            padding: 20px 12px;
-          }
-        }
-      }
+      //     input,
+      //     select {
+      //       padding: 20px 12px;
+      //     }
+      //   }
+
+      //   .address_content {
+      //     font-size: 17px;
+
+      //     .address_content-name {
+      //       font-weight: 700;
+      //       color: #222;
+      //     }
+      //   }
+      // }
 
       .transportation {
         padding: 20px;

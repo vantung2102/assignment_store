@@ -1,0 +1,21 @@
+= simple_form_for @address, url: '', method: :get do |f|
+  .form-group.control-group
+    = f.input :fullname, required:"required", label: false, placeholder: "Please enter your fullname"
+  .form-group.control-group
+    = f.input :phone_number, required:"required", label: false, placeholder: "Please enter your phone"
+  .form-group.control-group
+    .form-group.select.required.order_province
+      select.select.form-control#order_province[name="address[province_id]"]
+        option[value="" disabled selected] Select your province
+  .form-group.control-group
+    .form-group.select.required
+      select.select.form-control#order_district[name="address[district_id]"]
+        option[value="" disabled selected] Select your district
+  .form-group.control-group
+    .form-group.select.required
+      select.select.form-control#order_ward[name="address[ward_id]"]
+        option[value="" disabled selected] Select your ward
+  .form-group.control-group
+    = f.input :addressDetail, required:"required", label: false, placeholder: "Please enter specific address"
+  / = f.submit class: "btn btn-primary"
+/ button.btn.btn-primary.create_address[href="#{user_addresses_path}"] Create address

@@ -6,7 +6,20 @@ export default class Order {
     this.getApiDistrict();
     this.getApiWard();
     this.applyVoucher();
+    this.inputAddress();
+    this.createAddress();
   }
+
+  appendOption = (data, str) => {
+    data.forEach((res) => {
+      $(`#order_${str}`).append(
+        $("<option>", {
+          value: res[`${str}_id`],
+          text: res[`${str}_name`],
+        })
+      );
+    });
+  };
 
   getApiProvince = () => {
     $("#order_province").select2({
@@ -14,22 +27,21 @@ export default class Order {
     });
 
     $.ajax({
-      url: "https://vapi.vnappmob.com/api/province",
+      url: "http://vapi.vnappmob.com/api/province",
       type: "GET",
       dataType: "json",
+      contentType: "application/json",
       success: (response) => {
-        const province = response.results;
-
-        province.forEach((res) => {
-          $("#order_province").append(
-            $("<option>", {
-              value: res.province_id,
-              text: res.province_name,
-            })
-          );
-        });
+        console.log(665);
+        const provinces = response.results;
+        this.appendOption(provinces, "province");
       },
       error: (response) => {},
+    });
+
+    $("body").on("change", "#order_province", () => {
+      $("#order_ward").empty();
+      $("#order_district").empty();
     });
   };
 
@@ -48,18 +60,8 @@ export default class Order {
         dataType: "json",
         success: (response) => {
           $("#order_district").prop("disabled", false);
-
-          const district = response.results;
-          let html =
-            "<option disabled='' selected='' value=''>Select your district</option>";
-
-          district.forEach((res) => {
-            html =
-              html.concat(` <option value='${res.district_id}'>${res.district_name}</option>
-           `);
-          });
-
-          $("#order_district").empty().append(html);
+          const districts = response.results;
+          this.appendOption(districts, "district");
         },
         error: (response) => {},
       });
@@ -68,7 +70,7 @@ export default class Order {
 
   getApiWard = () => {
     $("#order_ward").select2({
-      placeholder: "Select your district",
+      placeholder: "Select your ward",
       disabled: true,
     });
 
@@ -80,19 +82,10 @@ export default class Order {
         type: "GET",
         dataType: "json",
         success: (response) => {
+          $("#order_ward").empty();
           $("#order_ward").prop("disabled", false);
-
-          const district = response.results;
-          let html =
-            "<option disabled='' selected='' value=''>Select your ward</option>";
-
-          district.forEach((res) => {
-            html =
-              html.concat(` <option value='${res.ward_id}'>${res.ward_name}</option>
-           `);
-          });
-
-          $("#order_ward").empty().append(html);
+          const wards = response.results;
+          this.appendOption(wards, "ward");
         },
         error: (response) => {},
       });
@@ -109,5 +102,31 @@ export default class Order {
         $(".btn-apply_voucher").removeClass("btn-apply");
       }
     });
+  };
+
+  inputAddress = () => {
+    $(".back_address, .change_address").on("click", () => {
+      $(".address_content").toggle();
+      $(".list-address_content").toggle();
+    });
+  };
+
+  createAddress = () => {
+    // invalid-feedback
+    // $(".create_address").on("click", () => {
+    //   const name = $("#address_fullname").val();
+    //   const phone = $("#address_phone_number").val();
+    //   const province = $("#order_province")
+    //     .find("option")
+    //     .filter(":selected")
+    //     .val();
+    //   const district = $("#order_district")
+    //     .find("option")
+    //     .filter(":selected")
+    //     .val();
+    //   const ward = $("#order_ward").find("option").filter(":selected").val();
+    //   const addressDetail = $("#address_addressDetail").val();
+    //   if(name=='')
+    // });
   };
 }

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role
 
   has_many :comments, dependent: :destroy
+  has_many :addresses
   has_one_attached :avatar
 
   # Include default devise modules. Others available are:

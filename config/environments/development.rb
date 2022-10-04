@@ -10,7 +10,14 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-
+  config.hosts << /.*\.ngrok\.io/
+  # uri = URI('http://vapi.vnappmob.com/api/province')
+  # http = Net::HTTP.new(uri.host, uri.port)
+  # http.use_ssl = true
+  # request = Net::HTTP::Get.new(uri.request_uri)
+  # request.content_type = 'application/json'
+  # response = http.request(request)
+  # p response.body
   # Show full error reports.
   config.consider_all_requests_local = true
 

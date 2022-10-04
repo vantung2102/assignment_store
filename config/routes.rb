@@ -39,5 +39,11 @@ Rails.application.routes.draw do
     get 'show_cart', to: 'cart#show'
     get 'checkout', to: 'cart#checkout'
     post 'order', to: 'cart#order'
+    # post 'create_address', to: 'cart#create_address'
   end
+  # resource :user do
+  #   resource :addresses do
+  #     get '/', to: 'addresses#index'
+  #   end
+  # end
 end

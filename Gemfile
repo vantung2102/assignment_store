@@ -59,6 +59,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
 gem 'stimulus-rails'
+gem 'rack-cors'
 
 gem 'devise'
 gem 'pundit'

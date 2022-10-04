@@ -14,6 +14,25 @@ class CartController < ApplicationController
   end
 
   def checkout
-    @order = Order.new
+    @address = Address.new
+  end
+
+  # def create_address
+    
+  #   # binding.pry
+    
+  #   @address = Address.new(address_params)
+  #   create = @address.save
+  #   if create
+  #   else
+  #     # redirect_to checkout_cart_path
+  #     render :checkout
+  #   end
+  # end
+
+  private
+
+  def address_params
+    params.require(:address).permit(:fullname, :phone_number, :province_id, :district_id, :ward_id, :addressDetail)
   end
 end
