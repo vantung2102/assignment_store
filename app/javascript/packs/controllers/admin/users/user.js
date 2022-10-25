@@ -1,4 +1,6 @@
-export default class User {
+import Raicon from "raicon";
+
+export default class UserController {
   constructor() {
     this.handleImageInput();
   }
@@ -23,4 +25,22 @@ export default class User {
       reader.readAsDataURL(file);
     });
   };
+
+  // new = () => {
+  //   this.handleImageInput();
+  // };
+
+  // create = () => {
+  //   this.handleImageInput();
+  // };
+
+  // update = () => {
+  //   this.handleImageInput();
+  // };
+
+  // edit = () => {
+  //   this.handleImageInput();
+  // };
 }
+
+// Raicon.register("admin/users", UserController);

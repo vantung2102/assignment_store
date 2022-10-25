@@ -1,0 +1,21 @@
+#user_col_left
+  .info_profile
+    .avatar_profile
+      = image_tag('admin/avatars/user')
+    .name_profile
+      strong Chào Lê Văn Tung
+      br
+      a[href="#{profile_edit_user_url}"] Edit account
+  ul.menu_profile
+    li.menu_profile--profile
+      a Account information
+    li.menu_profile--password
+      a Change the password
+    li.menu_profile--order
+      a[href="#{user_order_url}"] My order
+    li.menu_profile--address
+      a Delivery address
+    li
+      a Favorites List
+    li.menu_profile--item
+      a Q&A

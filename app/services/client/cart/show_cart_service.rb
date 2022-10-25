@@ -6,7 +6,9 @@ class Client::Cart::ShowCartService < ApplicationService
   def call    
     carts = JSON.parse(carts_json)
     ids = []
-    carts.each{ |cart| ids << cart['id'].to_i }
+    carts.each do |cart|
+      ids << cart['id'].to_i 
+    end
     
     Product.where(id: ids)
   end

@@ -1,4 +1,6 @@
-export default class Comment {
+import Raicon from "raicon";
+
+export default class CommentController {
   constructor() {
     this.handleComment();
     this.handleClickReply();

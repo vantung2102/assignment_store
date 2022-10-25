@@ -1,8 +1,8 @@
 = simple_form_for @brand, url: url, :html => {:class => "form-horizontal denser"} do |f|
   .form-group.control-group
     = f.label :title, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
         = f.input :title, label: false, hint: 'Required. Length from 3 to 30'
   .form-group.form-actions
-    .col-sm-offset-2.col-sm-10
+    .col-sm-offset-2.col-sm-8
         = f.submit class: "btn btn-primary btn-edit"

@@ -61,8 +61,4 @@ class Admin::UsersController < Admin::BaseController
       :roles
     )
   end
-
-  def authorize_admin!
-    authorize @user
-  end
 end

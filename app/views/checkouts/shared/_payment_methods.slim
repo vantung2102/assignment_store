@@ -1,0 +1,31 @@
+
+
+.payment_methods
+  .title_order 
+    .pull-left 
+      strong Payment methods
+  .content_order
+    
+    .list_order_online
+      .item
+        input[type="radio" name="payment_gateway" value="COD"]
+        = image_tag('payment/cod')
+        label Cash On Delivery (COD)
+      br
+      .item
+        input[type="radio" name="payment_gateway" value="STRIPE"]
+        = image_tag('payment/stripe')
+        label Pay online with stripe
+      br
+      .item
+        input[type="radio" name="payment_gateway" value="PAYPAL"]
+        = image_tag('payment/paypal')
+        label Pay online with paypal
+        <div id="paypal-button-container"></div>
+      br
+      .item
+        input[type="radio" name="payment_gateway" value="MOMO"]
+        = image_tag('payment/momo')
+        label Pay online with momo
+      br
+

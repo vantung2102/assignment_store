@@ -56,8 +56,4 @@ class Admin::CategoriesController < Admin::BaseController
       :category_id
     )
   end
-
-  def authorize_admin!
-    authorize current_user
-  end
 end

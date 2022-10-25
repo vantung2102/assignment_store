@@ -1,24 +1,24 @@
 = simple_form_for @user, url: url, :html => {:class => "form-horizontal denser"} do |f|
   .form-group.control-group
     = f.label :username, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :name, required:"required", label: false, hint: 'Required. Length form 6 to 30.'
   .form-group.control-group
     = f.label :phone, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :phone, required:"required", label: false, hint: 'Required.'
   .form-group.control-group
     = f.label :email, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :email, required:"required", label: false, hint: 'Required.'
   .form-group.control-group
     = f.label :gender, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :gender, collection: [:men, :women], selected: @user.gender, hint: 'Optional.',
                 :input_html => { class: "input_select2" }, label: false
   .form-group.control-group
     = f.label :avatar, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       / - if @user.avatar.attached?
       /   = image_tag(@user.display_image, class: "preview img-thumbnail")
       / - else
@@ -31,24 +31,24 @@
         .preview
         
       = f.input :avatar, label: false, hint: 'Optional.'
-  / .form-group.control-group
-  /     = f.label :password, class:"col-sm-2 control-label"
-  /     .col-sm-10.controls
-  /         = f.input :password, required:"required", label: false, hint: 'Optional. Length up to 255'
-  / .form-group.control-group
-  /     = f.label :password_confirmation, class:"col-sm-2 control-label"
-  /     .col-sm-10.controls
-  /         = f.input :password_confirmation, required:"required", label: false, hint: 'Optional. Length up to 255'
+  .form-group.control-group
+      = f.label :password, class:"col-sm-2 control-label"
+      .col-sm-8.controls
+          = f.input :password, required:"required", label: false, hint: 'Optional. Length up to 255'
+  .form-group.control-group
+      = f.label :password_confirmation, class:"col-sm-2 control-label"
+      .col-sm-8.controls
+          = f.input :password_confirmation, required:"required", label: false, hint: 'Optional. Length up to 255'
   .form-group.control-group
     = f.label :address, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :address, :input_html => { 'rows' => 2, 'cols' => 20 }, label: false, hint: 'Optional. Length up to 255'
   .form-group.control-group
     - role = @user.has_role?(:admin) ? "admin" : "user"
     = f.label :roles, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :roles, collection: [:admin, :user], 
                 :input_html => { class: "input_select2" }, label: false, selected: role, hint: 'Required.'
   .form-group.form-actions
-    .col-sm-offset-2.col-sm-10
+    .col-sm-offset-2.col-sm-8
       = f.submit class: "btn btn-primary btn-edit"

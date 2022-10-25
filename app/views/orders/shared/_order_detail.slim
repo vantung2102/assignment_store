@@ -1,0 +1,82 @@
+#page_order_detail.user_col_right  
+  .order_detail-profile.row
+    .col-lg-3.col-md-3.col-sm-4
+      .mb-5
+        strong Code Order
+        div = @order.token
+      .mb-5
+        strong Booking date: 
+        div = @order.created_at.strftime("%H:%M %d/%m/%Y")
+    .col-lg-5.col-md-6.col-sm-4
+      .mb-5 
+        strong Receiver's address
+        .info_name = @address.fullname
+        .info_name 
+          strong Phone number: 
+          = @address.phone_number
+        .info_address 
+          | #{@address.addressDetail}, #{@address.ward}, #{@address.district}, #{@address.province}
+    .col-lg-4.col-md-3.col-sm-4
+      .mb-5 
+        strong Payment method: 
+        div = "Payment with #{@order.payment_gateway}"
+      .mb-5
+        strong Shipping Information: 
+        div SMS
+  .order_detail-status
+    - if @order.status == "canceled"
+      = render "orders/shared/status_failed"
+    - else
+      = render "orders/shared/status"
+  .list_orders
+    .item_order
+      - total = 0; discount = 0
+      - @order.order_items.each do |item|
+        - product = item.product
+        .item_order-product.line
+          a.item_order-body[style="flex:1"]
+            .item_order-info
+              .item_order-img
+                = image_tag(product.display_image)
+              .item_order-content
+                .item_order-content__name 
+                  span = product.title
+                .item_order-content__attribute
+                  - price = product.price_cents
+                  - if item.attribute_value_id.present?
+                    - value = item.attribute_value
+                    - price = value.price_attribute_product
+                    span = "Phân loại hàng: #{ value.attribute_2.nil? ? value.attribute_1 : "#{value.attribute_1} #{value.attribute_2}"}"
+                  br
+                  strong = "x #{ item.quantity }"
+          .item-info_price
+            span.item-info_price--old = "$#{price}"
+            span.item-info_price--new = "$#{price.to_f - product.discount.to_f}"
+            - total = total + (price.to_f - product.discount.to_f) * item.quantity
+            - discount = discount + product.discount.to_f
+      .list-detail_price
+        .detail_price
+          .detail_price-name
+            span Total
+          .detail_price-price
+            span = total
+        .detail_price
+          .detail_price-name
+            span Transport fee
+          .detail_price-price
+            span 2000
+        .detail_price
+          .detail_price-name
+            span Discount
+          .detail_price-price
+            span[style="color:red"] ="-#{ discount }"
+        .detail_price
+          .detail_price-name
+            span Voucher
+          .detail_price-price
+            span 0
+        .detail_price
+          .detail_price-name
+            span The total money
+          .detail_price-price.sum
+            span = total

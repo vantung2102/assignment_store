@@ -1,142 +1,153 @@
-const getUrlParameter = (sParam) => {
-  var sPageURL = window.location.search.substring(1),
-    sURLVariables = sPageURL.split("&"),
-    sParameterName,
-    i;
+import Raicon from "raicon";
+import "../../lib/jquery.cookie";
 
-  for (i = 0; i < sURLVariables.length; i++) {
-    sParameterName = sURLVariables[i].split("=");
+import {
+  Ajax,
+  loadPage,
+  changeUrl,
+  getUrlParameter,
+  getLocale,
+} from "../../lib/application";
 
-    if (sParameterName[0] === sParam) {
-      return sParameterName[1] === undefined
-        ? true
-        : decodeURIComponent(sParameterName[1]);
-    }
-  }
-  return false;
-};
+export default class HomeController {
+  locale = getLocale();
 
-export default class Home {
+  api = {
+    search: (keyword) => {
+      return `/search/${keyword}`;
+    },
+    changeCategory: (slug) => {
+      return `/category/${slug}`;
+    },
+    changeBrand: (slug) => {
+      return `/brand/${slug}`;
+    },
+    loadMore: `/product/load_more`,
+  };
+
   constructor() {
-    this.handleChangeCategory();
-    this.handleLoadCategory();
-    this.handleChangeBrand();
-    this.handleLoadMore();
+    this.handleSearch();
   }
 
-  handleChangeCategory = () => {
+  changeCategory = () => {
     $("body").on("click", ".category", ({ target }) => {
       const slug = $(target).attr("id").split("_")[0];
       const category = $(target);
 
-      $.ajax({
-        url: "category/" + slug,
-        type: "GET",
-        beforeSend: (xhr) => {
-          xhr.setRequestHeader(
-            "X-CSRF-Token",
-            $('meta[name="csrf-token"]').attr("content")
-          );
-        },
-        data: { slug: slug },
-        dataType: "json",
-        success: (response) => {
-          if (response.status == 200) {
+      Ajax(this.api.changeCategory(slug), "GET", { slug: slug })
+        .done((res) => {
+          if (res.status == 200) {
             $(".category").removeClass("active");
             category.addClass("active");
-            $(".features_items").replaceWith(response.html);
-            $(".btn-load_more").hide();
-            const url = "?category=" + slug;
-            window.history.pushState({}, "", url);
+
+            $(".features_items").replaceWith(res.html);
+            $(".btn-load_more").remove();
+
+            changeUrl(`?category=${slug}`);
+          } else {
+            console.log(res);
           }
-        },
-        error: (response) => {},
-      });
+        })
+        .fail((res) => {
+          console.log(res);
+        });
     });
   };
 
-  handleLoadCategory = () => {
+  loadCategory = () => {
     const panel = $(".panel.panel-default").find(".category.active");
     if (panel) {
       panel.closest(".panel-collapse").addClass("in");
     }
   };
 
-  handleChangeBrand = () => {
+  changeBrand = () => {
     $("body").on("click", ".brand__item", ({ target }) => {
       const brand = $(target);
       const slug = $(target).attr("id").split("_")[0];
 
-      $.ajax({
-        url: "brand/" + slug,
-        type: "GET",
-        beforeSend: (xhr) => {
-          xhr.setRequestHeader(
-            "X-CSRF-Token",
-            $('meta[name="csrf-token"]').attr("content")
-          );
-        },
-        data: { slug: slug },
-        dataType: "json",
-        success: (response) => {
-          if (response.status == 200) {
-            console.log(122);
+      Ajax(this.api.changeBrand(slug), "GET", { slug: slug })
+        .done((res) => {
+          if (res.status == 200) {
             $(".brand__item").removeClass("active");
             brand.addClass("active");
-            $(".features_items").replaceWith(response.html);
-            $(".btn-load_more").hide();
-            const url = "?brand=" + slug;
-            window.history.pushState({}, "", url);
+
+            $(".features_items").replaceWith(res.html);
+            $(".btn-load_more").remove();
+
+            changeUrl({ url: `?brand=${slug}` });
           }
-        },
-        error: (response) => {},
-      });
+        })
+        .fail((res) => {});
     });
   };
 
-  handleLoadMore = () => {
+  loadMore = () => {
     $("body").on("click", ".btn-load_more", () => {
-      $("#loader").css("display", "flex");
-
       const page =
         getUrlParameter("page") === false ? 1 : getUrlParameter("page");
 
-      $.ajax({
-        url: "product/load_more",
-        type: "GET",
-        beforeSend: (xhr) => {
-          xhr.setRequestHeader(
-            "X-CSRF-Token",
-            $('meta[name="csrf-token"]').attr("content")
-          );
-        },
-        data: { page: page },
-        dataType: "json",
-        success: (response) => {
-          if (response.status == 200) {
-            console.log(response.page);
-            if (response.page != "error_page") {
-              $(".features_items").append(response.html);
+      Ajax(this.api.loadMore, "GET", { page: page })
+        .done((res) => {
+          if (res.status == 200) {
+            if (res.page != "error_page") {
+              $(".features_items").append(res.html);
               const next_page = parseInt(page) + 1;
               const url = "?page=" + next_page;
-              window.history.pushState({}, "", url);
+              changeUrl({ url: url });
 
-              if (response.page == "last_page") {
+              if (res.page == "last_page") {
                 $(".load_more").hide();
               } else {
                 $(".load_more").show();
               }
-            } else if (response.page == "error_page") {
-              window.history.pushState({}, "", "?page=1");
+            } else if (res.page == "error_page") {
+              changeUrl({ url: "?page=1" });
             }
 
-            setTimeout(() => {
-              $("#loader").css("display", "none");
-            }, 200);
+            loadPage({ time: 200 });
           }
-        },
-        error: (response) => {},
-      });
+        })
+        .fail((res) => {});
+    });
+  };
+
+  handleSearch = () => {
+    $("body").on("keypress", ".input_search", (e) => {
+      if (e.keyCode == 13) {
+        const keyword = $(e.target).val();
+
+        Ajax(
+          this.api.search(keyword),
+          "GET",
+
+          { search: keyword }
+        )
+          .done((res) => {
+            loadPage({ time: 200 });
+            $(".features_items").replaceWith(res.html);
+            $(".btn-load_more").remove();
+            $("html, body").animate(
+              {
+                scrollTop: $(".features_items").offset().top,
+              },
+              1000
+            );
+            changeUrl({ url: `?search=${keyword}` });
+          })
+          .fail((res) => {});
+      }
+    });
+  };
+
+  index = () => {
+    document.addEventListener("raicon:after:home#index", () => {
+      this.changeCategory();
+      this.loadCategory();
+      this.changeBrand();
+      this.loadMore();
     });
   };
 }
+
+Raicon.register("home", HomeController);

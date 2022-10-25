@@ -27,7 +27,7 @@ class Admin::BrandsController < Admin::BaseController
   def edit;end
 
   def update
-    update, message = Admin::brands::UpdateService.call(@brand, brand_params)
+    update, message = Admin::Brands::UpdateService.call(@brand, brand_params)
 
     status = update ? :success : :danger
     flash[status] = message
@@ -35,7 +35,7 @@ class Admin::BrandsController < Admin::BaseController
   end
 
   def destroy
-    destroy, message = Admin::brands::DestroyService.call(@brand)
+    destroy, message = Admin::Brands::DestroyService.call(@brand)
 
     status = destroy ? :success : :danger
     flash[status] = message
@@ -50,9 +50,5 @@ class Admin::BrandsController < Admin::BaseController
 
   def brand_params
     params.require(:brand).permit(:title)
-  end
-
-  def authorize_admin!
-    authorize current_user
   end
 end

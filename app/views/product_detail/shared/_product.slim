@@ -6,20 +6,29 @@
             = image_tag(img)
             a[href="" rel="prettyPhoto"]
               h3 ZOOM
+        - if @product_attributes.present?
+          - @product_attributes[0].images.each do |img|
+            .item-img
+              = image_tag(img)
+              a[href="" rel="prettyPhoto"]
+                h3 ZOOM
         
       #similar-product
         .product-dec-slider-small
           - @product.images.each do |img|
             .item.active
               = image_tag(img)
-          
+          - if @product_attributes.present?
+            - @product_attributes[0].images.each do |img|
+              .item.active
+                = image_tag(img)
           a.left.item-control
             i.fa.fa-angle-left
           a.right.item-control
             i.fa.fa-angle-right
 
     .col-sm-7
-      .product-information.add_product[id="#{@product.slug}"]
+      .product-information.add_product[id="#{@product.id} #{@product.slug}"]
         = image_tag('home/new.jpg', class: 'newarrival')
         h2 = @product.title
         .rate-star
@@ -34,30 +43,50 @@
           span 50 Favorite
           span 50 Order
         .price.display-flex
-          span.price_new 
-            |$ 
-            = discount(@product.price, @product.discount)
-          del.price_old 
-            |$ 
-            = @product.price
+          - if @product_attributes.present?
+            - value_min = @product_attributes[0].attribute_values.min_by(&:price_attribute_product)
+            span.price_new 
+              sup $
+              = discount(value_min.price_attribute_product, @product.discount)
+            del.price_old 
+              sup $
+              = value_min.price_attribute_product
         .quantity
           label Quantity: 
-          input.quantity#numberInput[type="number" value="1"]
-          a.btn.btn-fefault.cart.add-to-cart[href="javascript:void(0)" name="add-to-cart-detail"]
-            i.fa.fa-shopping-cart  
-            |  Add to cart
-        .attribute_product
+          input.quantity.numberInput[type="number" value="1"]
+            - if get_stock_product(@product).to_i == 0 
+              a.btn.btn-danger.out-of-stock[href="javascript:void(0)"] Out of stock
+            - else
+              a.btn.btn-fefault.cart.add-to-cart[name="add-to-cart-detail"]
+                i.fa.fa-shopping-cart  
+                |  Add to cart
+        .attribute_product[style="display:#{@product_attributes.present? ? 'block': 'none'}"]
           .item
-            - attributes = @product.product_attributes.includes(:attribute_product_title, :attribute_values)
-            - attributes.each do |attribute|
-              p: b
-                = attribute.attribute_product_title.title
-              .select__items
-                - attribute.attribute_values.each do |value|
-                  button.active = value.value
-        p 
-          b Quantity in stock: 
-          = @product.quantity
+            - if @product_attributes[0].present?
+              .flex[style="align-items: baseline;"]
+                p.flex: b
+                  = @product_attributes[0].name
+                .select__items
+                  - @product_attributes[0].attribute_values.uniq{ |el| el[:attribute_1] }.each do |value|
+                    button.attribute_item.item1[data-attribute="#{@product_attributes[0].id}"] 
+                      = value.attribute_1
+            
+            - if @product_attributes[1].present?
+              .flex[style="align-items: baseline;"]
+                p.flex: b
+                  = @product_attributes[1].name
+                .select__items
+                  - @product_attributes[1].attribute_values.uniq{ |el| el[:attribute_2] }.each do |value|
+                    button.attribute_item.item2[data-attribute="#{@product_attributes[1].id}"] 
+                      = value.attribute_2
+                    
+        p.product__stock
+          b Quantity in stock:
+          - if @product.quantity.present?
+            - if @product.quantity > 0
+              = @product.quantity
+          - elsif @product.quantity.nil?
+            = @product_attributes[0].attribute_values.sum(&:stock)
         p
           b Viewes: 
           |40
@@ -73,5 +102,5 @@
         p
           b Share: 
           a.share_shop
-            i.fa.fa-facebook-square
+            i.fa-brands.fa-facebook-f
         

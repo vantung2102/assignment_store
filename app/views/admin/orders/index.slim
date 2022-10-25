@@ -1,0 +1,82 @@
+.page-header
+  h1 List of Orders
+ol.breadcrumb
+  li.dashboard
+    a.pjax href="#{admin_url}" Dashboard
+  li.active Orders
+
+= render "admin/shared/flash_message_errors"
+
+ul.nav.nav-tabs.action_items
+  li.active
+    a class="pjax" href="#{admin_orders_url}"
+      i.fa.fa-list
+      span List
+  li
+    a.pjax
+      i.fa.fa-share
+      span Export
+
+.col-lg-12.grid-margin.stretch-card
+  .card
+    .card-body
+        .table-responsive
+          table.table.table-striped
+            thead
+              tr
+                th STT
+                th ID
+                th Status
+                th Payment method
+                th Total
+                th Submit order
+                th Canceled order
+                th Created At
+                th Action
+                th Success
+            tbody
+              - i = 0
+              - @orders.each do |order|
+                - i += 1
+                tr[id="#{order.token}"]
+                  td = i
+                  td = order.id
+                  td
+                    - if order.status == 'pending'
+                      label.badge.badge-warning = order.status
+                    - elsif order.status == 'paid'
+                      label.badge.badge-success = order.status
+                    - elsif order.status == 'success'
+                      label.badge.badge-success = order.status
+                    - elsif order.status == 'delivering'
+                      label.badge.badge-info = order.status
+                    - else
+                      label.badge.badge-danger = order.status
+                  td
+                    - if order.payment_gateway == 'cod'
+                      label.badge.badge-success = order.payment_gateway
+                    - elsif order.payment_gateway == 'momo'
+                      label.badge.badge-momo = order.payment_gateway
+                    - elsif order.payment_gateway == 'paypal'
+                      label.badge.badge-info = order.payment_gateway
+                    - else
+                      label.badge.badge-info = order.payment_gateway
+                  td = order.total
+                  td 
+                    button.btn.btn-info.submitOrder[style="color: #fff"] Submit
+                  td
+                    button.btn.btn-danger.cancelOrder Canceled
+                  td = order.created_at.strftime("%H:%M %d/%m/%Y")
+                  td style="width: 80px"
+                    ul.others
+                      li
+                        a href="#{admin_order_url(order.id)}" title="view"
+                          i.fa.fa-info-circle
+                      li
+                        a[data-confirm="Are you sure?" rel="nofollow" 
+                          data-method="delete" href="#{admin_order_url(order.id)}"]
+                          i.fa-solid.fa-trash
+                  td 
+                    button.btn.btn-success.orderSuccess Success
+          == pagy_bootstrap_nav(@pagy)
+                          

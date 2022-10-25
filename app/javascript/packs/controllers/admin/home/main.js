@@ -1,4 +1,4 @@
-export default class Main {
+export default class MainController {
   constructor() {
     this.handleSelectInput();
     this.handleSelectInputTag();
@@ -36,6 +36,8 @@ export default class Main {
       const logo = $("#logo");
 
       logo.toggleClass("d-none");
+
+      $("li.nav-item.nav-category").find(".pull-right").toggleClass("d-none");
     });
 
     $(".nav-link").on("click", ({ target }) => {

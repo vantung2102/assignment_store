@@ -1,0 +1,15 @@
+= simple_form_for @address, url: url do |f|
+  .form-group.control-group
+    = f.input :fullname, required:"required", label: false, placeholder: "Please enter your fullname", hint: 'Required.'
+  .form-group.control-group
+    = f.input :phone_number, required:"required", label: false, placeholder: "Please enter your phone number", hint: 'Required.'
+  .form-group.control-group
+    = f.input :province, collection: [], required:"required", label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.input :district, collection: [], required:"required", label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.input :ward, collection: [], required:"required", label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.input :addressDetail, required:"required", label: false, placeholder: "Please enter specific address", hint: 'Required.'
+  .form-group.control-group[style="text-align: end;"]
+    = f.submit class: "btn btn-primary btn-add-address"

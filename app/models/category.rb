@@ -7,9 +7,9 @@ class Category < ApplicationRecord
   has_many :product_categories, dependent: :destroy
   has_many :products, through: :product_categories, dependent: :destroy
 
-  validates :title, presence: true, length: { minimum:3, maximum: 30 }
-  validates :meta_title, presence: true, length: { minimum:3, maximum: 30 }
-  validates :content, presence: true, length: { minimum:6, maximum: 500 }
+  validates :title, presence: true, length: { minimum:1, maximum: 30 }
+  validates :meta_title, presence: true, length: { minimum:1, maximum: 30 }
+  validates :content, presence: true, length: { minimum:1, maximum: 500 }
 
   scope :show_categories, -> { where category_id: nil }
   scope :include_categories, -> { includes(:child_category) }

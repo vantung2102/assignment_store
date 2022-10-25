@@ -1,0 +1,187 @@
+#page_order_detail {
+  .order_detail-profile {
+    width: 100%;
+    margin: 0 0 12px 0;
+    background: #fff;
+    box-shadow: 0 1px 5px 0 #e7e7ff;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+
+    .item_status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 12px;
+      width: 110px;
+      text-align: center;
+      background-color: #aeaeae;
+    }
+  }
+
+  .order_detail-status {
+    padding: 20px 24px;
+    width: 100%;
+    margin-bottom: 12px;
+    background: #fff;
+    box-shadow: 0 1px 5px 0 #e7e7ff;
+    border-radius: 10px;
+    // padding: 12px 24px;
+
+    .stepper {
+      position: relative;
+      justify-content: space-between;
+      box-sizing: border-box;
+      flex-wrap: nowrap;
+      display: flex;
+
+      .stepper__step {
+        width: 147px;
+        text-align: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        cursor: default;
+        z-index: 1;
+
+        .stepper__step--finish {
+          border-color: #2dc258;
+          color: #2dc258;
+        }
+
+        .stepper__step--error {
+          border-color: #ee4d2d;
+          color: #ee4d2d;
+        }
+
+        .stepper__step--pending {
+          background-color: #2dc258;
+          color: #fff;
+          strike: #fff;
+          fill: #2dc258;
+          border-color: #2dc258;
+        }
+
+        .stepper__step-text {
+          text-transform: capitalize;
+          font-size: 15px;
+          color: rgba(0, 0, 0, 0.8);
+          line-height: 1.25rem;
+          margin: 1.25rem 0 0.25rem;
+        }
+
+        .stepper__step-date {
+          font-size: 13px;
+          color: rgba(0, 0, 0, 0.26);
+          height: 0.875rem;
+        }
+      }
+
+      .stepper__step-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 25px;
+        border: 4px solid #e0e0e0;
+        color: #e0e0e0;
+        background-color: #fff;
+      }
+
+      .stepper__step-text {
+        text-transform: capitalize;
+        font-size: 0.875rem;
+        color: rgba(0, 0, 0, 0.8);
+        line-height: 1.25rem;
+        margin: 1.25rem 0 0.25rem;
+      }
+
+      .stepper__step-date {
+        font-size: 0.75rem;
+        color: rgba(0, 0, 0, 0.26);
+        height: 0.875rem;
+      }
+
+      .stepper__line {
+        position: absolute;
+        top: 29px;
+        height: 4px;
+        width: 100%;
+
+        .stepper__line-background,
+        .stepper__line-foreground {
+          position: absolute;
+          width: calc(100% - 140px);
+          margin: 0 70px;
+          height: 100%;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
+  .order_detail-info {
+    padding: 12px 24px;
+
+    .refund {
+      text-align: right;
+
+      .btn-refund,
+      .btn-repurchase,
+      .btn-not-refund {
+        background-color: #d73211;
+        border: 1px solid #d73211;
+        color: #fff;
+        min-width: 150px;
+        min-height: 40px;
+        padding: 8px 20px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
+        border-radius: 2px;
+        outline: 0;
+      }
+
+      .btn-not-refund {
+        background-color: rgb(224, 224, 224);
+        border-color: rgb(224, 224, 224);
+      }
+    }
+  }
+
+  .list-detail_price {
+    background-color: #fafafa;
+    // border-top: 1px solid rgba(0, 0, 0, 0.09);
+
+    .detail_price {
+      padding: 0 24px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.09);
+      text-align: right;
+
+      .detail_price-name {
+        padding: 13px 10px;
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 15px;
+      }
+
+      .detail_price-price {
+        padding: 13px 0 13px 10px;
+        width: 240px;
+        border-left: 1px dotted rgba(0, 0, 0, 0.09);
+        color: rgba(0, 0, 0, 0.8);
+
+        &.sum {
+          color: #d73211;
+        }
+      }
+    }
+  }
+}

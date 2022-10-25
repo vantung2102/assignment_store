@@ -1,0 +1,40 @@
+.edit-row
+  .edit-label.edit-row-left2
+    span List of Product Categories
+  .edit-row-right-full
+    .variation-model-table-container.variation-model-table
+      .variation-model-table-fixed-left
+        .variation-model-table-header
+          .d-flex
+            .table-cell.table-header.d-flex.header_title_attr1[style="background-color: #f5f5f5;"]
+              .popover-cell-content.tittle_1 Attribute 1
+        .variation-model-table-body.d-flex.variation-header[style="min-height: 70px;" data-index-attribute=1]
+          .d-flex[style="min-height: 70px;"]
+            .table-cell.content-img.border-top-0
+              .table-cell__content
+              .container-image-manager
+                <label for="product_product_attribute_1_images" class="label_image_value">
+                  i.fa-regular.fa-image.add_image_value[aria-hidden="true"]
+                  .img_val
+                  input.form-control.file.optional.input_image_val#product_product_attribute_1_images[type="file" 
+                        name="product[product_attribute_1][images][]" style="display:none"]
+                  i.fa-sharp.fa-solid.fa-circle-plus
+      
+      .middle-scroll-container
+        .shopee-scrollbar__content
+          .variation-model-table-header
+            .variation-model-table-body.d-flex
+              .table-cell.table-header.price-column
+                .popover-cell-content Price
+              .table-cell.table-header.stock-column
+                .popover-cell-content Stock
+          .variation-warp[data-price-stock=1]
+            .variation-model-table-body.d-flex.variation-body[style="min-height:130px" data-item-price=1]
+              .table-cell.flex-grow-1.content-price
+                .popover-wrap.d-flex.align-items-center
+                  .form-group.float.optional.product_product_attribute_values_price_attribute_product
+                    <input class="form-control numeric float optional" multiple="multiple" placeholder="Enter price" type="number" step="any" name="product[product_attribute_1][attribute_value][price_attribute_product][]" id="product_product_attribute_1_attribute_value_price_attribute_product">
+              .table-cell.flex-grow-1.content-stock.border-top-0
+                .popover-wrap.d-flex.align-items-center
+                  .form-group.integer.optional.product_product_attribute_values_stock
+                    <input class="form-control numeric integer optional" multiple="multiple" placeholder="Enter amount stock" type="number" step="1" name="product[product_attribute_1][attribute_value][stock][]" id="product_product_attribute_1_attribute_value_stock">

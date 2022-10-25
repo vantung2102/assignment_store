@@ -1,6 +1,6 @@
 module HomeHelper
   def discount(price, discount)
-    price - discount
+    price.to_f - discount.to_f
   end
 
   def last_page?(products, params, status)
@@ -11,5 +11,9 @@ module HomeHelper
     else params[:page].nil?
       params[:category].present? || params[:brand].present? ? false : true
     end
+  end
+
+  def locale(paramater, en, vi)
+    paramater == 'en' || paramater.nil?  ? en : vi
   end
 end

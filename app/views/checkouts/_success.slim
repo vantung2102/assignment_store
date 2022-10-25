@@ -1,0 +1,53 @@
+#page_checkout-success
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li
+          a[href="#"] Checkout
+        li.active Success
+    #content_checkout
+      #booking_sussces_page
+        .display-flex#icon-success.mb-10
+          i.fa-regular.fa-circle-check
+        .block_info_success
+          .mb-10
+            | Hi 
+            strong Zane
+          .mb-10
+            |Thank you for ordering at 
+            a[href="#{root_path}" target="_blank"] ZaneShope!
+          .mb-10
+            |Your code order: 
+            a.booking_code = @order.token 
+            |You can view order details 
+            <a href="" class="txt_color_1" target="_blank">here</a>
+          .mb-10
+            p
+              | Estimated delivery time on 
+              b 13/10/2022 - 13/10/2022 10:00
+              |  (Excluding Sundays and holidays, pre-order products are not included)
+            |Order details have been sent to your email address 
+            b vantung2102@gmail.com
+            |. If you can't find it, please check your mailbox 
+            b Spam
+          .mb-10.notice_box_gray
+            |In order to process orders quickly, ZaneShope may not call to confirm the order. The system automatically processes and the delivery staff will contact you directly.
+          .mb-10
+            |Any questions please contact: 
+            strong 123456789
+          .down-app-block
+            .thumb_qr_code
+              div
+                img [src="https://hasaki.vn/wap-static/images/graphics/QRCode_App.png"]
+              .block_download_app_sale
+                = image_tag('payment/apple-app-store')
+              .down-app-text
+                p 
+                  |Download the app 
+                  strong ZaneShope
+                p Order tracking made easier!
+      #go-home
+        a[href="#{root_path}"] Continue shopping
+  

@@ -1,0 +1,51 @@
+= simple_form_for @voucher, url: url, :html => { :class => "form-horizontal denser" } do |f|
+  .form-group.control-group
+    = f.label :code, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :code, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :name, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :name, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :cost, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :cost, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :max_user, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :max_user, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :discount_mount, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :discount_mount, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :apply_amount, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :apply_amount, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :type_voucher, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :type_voucher, label: false, hint: 'Required.',
+                  collection: [['normal', Voucher.type_vouchers[:normal]], ['special', Voucher.type_vouchers[:special]]]
+  .form-group.control-group
+    = f.label :status, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :status, label: false, hint: 'Required.',
+                  collection: [['expired', Voucher.statuses[:expired]], ['applying', Voucher.statuses[:applying]]]
+  .form-group.control-group
+    = f.label :start_time, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :start_time, as: :date, html5: true, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :end_time, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :end_time, as: :date, html5: true, label: false, hint: 'Required.'
+  .form-group.control-group
+    = f.label :description, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+        = f.input :description, class:"form-control ckeditor", label: false,
+                :as => :ckeditor, ckeditor: { language: 'uk'}, hint: 'Required.'
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-8
+        = f.submit class: "btn btn-primary btn-edit"

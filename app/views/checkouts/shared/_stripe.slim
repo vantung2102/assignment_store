@@ -1,0 +1,52 @@
+.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li: a Home
+        li: a Checkout
+        li.active Stripe
+    .payment-page
+      .row.step2
+        .col-md-6.step2
+          .box.box-form
+            .title.text-center
+              h2 Payment via International Card
+          .tab-content
+            .cell.example.example2
+              form#payment-form
+                .form-group.has-feedback
+                  .input-group
+                    .input-group-addon
+                      i.fa-solid.fa-credit-card
+                    #card_number.form-control
+                    .input-group-addon.after_input
+                      i.fa-brands.fa-cc-visa
+                #card_number-error[role="alert"]
+                .col50.col_left
+                  .form-group.clearfix.has-feedback
+                    .input-group
+                      .input-group-addon
+                        i.fa-solid.fa-calendar-days
+                      #card_day.form-control
+                .col50.col_right
+                  .form-group.clearfix.has-feedback
+                    .input-group
+                      .input-group-addon
+                        i.fa-solid.fa-lock
+                      #card_cvc.form-control
+                #card_day-error[role="alert"]
+                .form-group
+                  |Điều kiện sử dụng dịch vụ &nbsp
+                  i.fa-regular.fa-circle-question
+                .form-group
+                  <div class="spinner hidden" id="spinner"></div>
+                  button.btn.btn-apply_stripe.form-control#btn_payment Pay now
+                  <p id="card-error" role="alert"></p>
+                  p.result-message.hidden
+                    |Payment succeeded, see the result in your
+                    <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+              .or_back.text-center
+                span or
+              .form-group.btn-cancel
+                button.btn.btn-default.form-control[type="submit"] Hủy
+                            

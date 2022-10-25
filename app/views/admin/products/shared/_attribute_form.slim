@@ -1,0 +1,26 @@
+section.product-edit__section
+  .product-detail-panel.product-sales-info
+    .panel-content-wrapper
+      .panel-content
+        .variation-container
+          .edit-row
+            .edit-row-left.edit-label
+              span Product classification
+            .popover-wrap
+              button.btn-add__attribute[type="button"]
+                i.fa-solid.fa-plus
+                span Add item classification group
+        .edit-row
+          .edit-row-left.edit-label
+            span Price
+          .edit-row-right-medium
+            .basic-price
+              div[class="form-group float optional product_price form-group-valid"]
+                input.form-control.numeric.float.optional[placeholder="Enter price" value="#{@product.nil? ? nil : @product.price}" type="number" step="any" name="product[price]" id="product_price"]
+        .edit-row
+          .edit-row-left.edit-label
+            span Stock
+          .edit-row-right-medium
+            .basic-price
+              div[class="form-group integer optional product_quantity"]
+                input.form-control.numeric.integer.optional[placeholder="Enter stock" value="#{@product.nil? ? nil : @product.quantity }" type="number" step="1" name="product[quantity]" id="product_quantity"]

@@ -25,4 +25,8 @@ class Admin::BaseController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def authorize_admin!
+    authorize current_user
+  end
 end

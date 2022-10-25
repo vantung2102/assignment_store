@@ -1,10 +1,10 @@
-class HomeController < ApplicationController
+class HomeController < ApplicationController  
   def index
     @categories = Category.show_categories.include_categories
     @brands = Brand.all.include_products
 
-    if params[:category].nil? && params[:brand].nil? && params[:page].nil?
-      @products = Product.with_attached_images.limit(PER_PAGE)
+    if params[:category].nil? && params[:brand].nil? && params[:page].nil? && params[:search].nil?
+      @products = Product.with_attached_images.includes(:product_attributes).limit(PER_PAGE)
     else
       if params[:category].present?
         @products = Client::Home::ProductsCategoryService.call(params[:category])
@@ -12,6 +12,8 @@ class HomeController < ApplicationController
         @products = Client::Home::ProductsBrandService.call(params[:brand])
       elsif params[:page].present?
         @products, @status = Client::Home::LoadMoreService.call(params[:page])
+      elsif params[:search].present?
+        @product = Product.query_search(:title, params[:search]).order(created_at: :desc)
       end
     end
   end
@@ -25,8 +27,8 @@ class HomeController < ApplicationController
 
   def change_brand
     @products = Client::Home::ProductsBrandService.call(params[:slug])
-
     html = render_to_string partial: "home/shared/features_items", :layout => false
+
     render json: { status: 200, message: "Successfully", html: html }
   end
 
@@ -45,6 +47,14 @@ class HomeController < ApplicationController
     end
 
     render json: { status: 200, message: "Successfully", html: html, page: next_page}
+  end
+
+  def search
+    @products = Product.query_search(:title, params[:search]).order(created_at: :desc)
+
+    html = render_to_string partial: "home/shared/features_items", :layout => false
+
+    render json: { status: 200, message: "Successfully", html: html }
   end
 
   private

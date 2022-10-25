@@ -13,6 +13,7 @@ Turbolinks.start();
 ActiveStorage.start();
 
 window.jQuery = window.$ = require("jquery");
+import "bootstrap";
 
 import Swal from "sweetalert2";
 window.Swal = Swal;
