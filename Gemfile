@@ -74,6 +74,10 @@ group :test do
   gem 'webdrivers'
 end
 
+group :production do
+  gem 'pg'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
@@ -112,9 +116,6 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main
 gem 'validates_timeliness', '~> 6.0.0'
 
 gem 'rubocop', require: false
-
-# gem "searchkick"
-# gem "elasticsearch"
 
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
