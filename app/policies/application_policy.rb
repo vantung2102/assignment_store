@@ -50,6 +50,4 @@ class ApplicationPolicy
 
     attr_reader :user, :scope
   end
-
-  # def self.authenticate_admin!
 end

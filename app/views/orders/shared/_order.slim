@@ -58,8 +58,8 @@
               span.item-info_price--old 
                 |$#{price}
               span.item-info_price--new 
-                |$#{price.to_f - item.product.discount.to_f}
-            - total = total + (price.to_f - item.product.discount.to_f) * item.quantity
+                |$#{(price.to_f - item.product.discount.to_f).round(2)}
+            - total = total + (price.to_f - item.product.discount.to_f).round(2) * item.quantity
         .item_order-bottom
           i.fa-solid.fa-user-shield
           .item_order-bottom__total The total money: 

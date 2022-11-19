@@ -23,7 +23,6 @@ export default class CheckoutController {
 
       Ajax(this.api.change_address, "POST", { change_address: checked })
         .done((res) => {
-          console.log(res);
           if (res.status === 200) {
             Swal.fire(
               {
@@ -45,7 +44,6 @@ export default class CheckoutController {
 
   //  ================== Voucher =========================
   applyVoucher = () => {
-    console.log(555);
     $("body").on("click", ".btn-apply", ({ target }) => {
       const voucher = $("input[name=apply_voucher]").val();
 
@@ -116,6 +114,7 @@ export default class CheckoutController {
       Ajax(this.api.payment, "POST", data)
         .done((res) => {
           if (res.status === 200) {
+            console.log(res);
             if (res.data.method == "STRIPE") {
               $(".home-page").replaceWith(res.data.html);
               const stripe = new StripeController(
@@ -135,7 +134,6 @@ export default class CheckoutController {
               $.removeCookie("add_to_cart", { path: "/" });
             }
           } else {
-            // this.resetCart();
             redirect("/checkout/error");
             redirect("/", 5000);
           }
@@ -145,56 +143,6 @@ export default class CheckoutController {
   };
 
   // =============== Stripe ======================
-  // styleStripe = () => {
-  //   $("#btn_payment").prop("disabled", true);
-
-  //   const elements = this.stripe.elements();
-
-  //   const style = {
-  //     base: {
-  //       color: "#32325d",
-  //       fontFamily: "Arial, sans-serif",
-  //       fontSmoothing: "antialiased",
-  //       fontSize: "16px",
-  //       "::placeholder": {
-  //         color: "#888",
-  //       },
-  //     },
-  //     invalid: {
-  //       fontFamily: "Arial, sans-serif",
-  //       color: "#fa755a",
-  //       iconColor: "#fa755a",
-  //     },
-  //   };
-
-  //   const cardNumber = elements.create("cardNumber", {
-  //     style: style,
-  //     placeholder: "XXXX XXXX XXXX XXXX",
-  //   });
-  //   const cardExpiry = elements.create("cardExpiry", {
-  //     style: style,
-  //     placeholder: "MM / YY",
-  //   });
-  //   const cardCvc = elements.create("cardCvc", {
-  //     style: style,
-  //     placeholder: "CVC",
-  //   });
-
-  //   const card_number = document.getElementById("card_number");
-  //   const card_day = document.getElementById("card_number");
-  //   const card_cvc = document.getElementById("card_number");
-
-  //   if (card_number && card_day && card_cvc) {
-  //     cardNumber.mount("#card_number");
-  //     cardExpiry.mount("#card_day");
-  //     cardCvc.mount("#card_cvc");
-
-  //     // this.paymentWithStripe(cardNumber);
-
-  //     this.errorInput(cardNumber, "#card_number-error");
-  //     this.errorInput(cardExpiry, "#card_day-error");
-  //   }
-  // };
 
   // ============= Shipping ======================
   handleInputAddress = () => {
@@ -209,11 +157,10 @@ export default class CheckoutController {
       Ajax(this.api.infoCheckout, "POST")
         .done((res) => {
           if (res.status == 200) {
-            console.log(res);
-            const temporaryPrice = parseFloat(res.data.total);
+            const temporaryPrice = parseFloat(res.data.total).toFixed(2);
             const feeShipping = res.data.fee.toFixed(2);
             this.shipping = feeShipping;
-            this.total = temporaryPrice - feeShipping;
+            this.total = (temporaryPrice - feeShipping).toFixed(2);
 
             $("#charge_fee").html(`$${feeShipping}`);
             $("#total_price").html(`$${this.total}`);

@@ -270,15 +270,16 @@
   font-size: 15px;
 }
 
-// .preview {
-//   display: block;
-// }
-
 .preview {
   .img-thumbnail {
     height: 250px;
     width: 250px;
   }
+}
+
+.label_image_value .img-thumbnail {
+  height: 60px;
+  width: 60px;
 }
 
 .text-muted {

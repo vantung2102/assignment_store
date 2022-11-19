@@ -5,7 +5,6 @@ import {
   Ajax,
   changeUrl,
   redirect,
-  popupFire,
 } from "../../lib/application";
 import Raicon from "raicon";
 
@@ -99,6 +98,7 @@ export default class CartController {
 
           item.remove();
           this.showIconCart();
+          redirect("/cart/show_cart");
           Swal.fire("Remove successfully!", "", "success");
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
@@ -156,8 +156,11 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.data.price_attribute_product - res.product.discount) *
+                    (
+                      (res.data.price_attribute_product -
+                        res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }
@@ -192,8 +195,11 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.data.price_attribute_product - res.product.discount) *
+                    (
+                      (res.data.price_attribute_product -
+                        res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }
@@ -218,8 +224,10 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.product.price_cents - res.product.discount) *
+                    (
+                      (res.product.price - res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }

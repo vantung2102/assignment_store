@@ -45,12 +45,9 @@ export default class HomeController {
 
             changeUrl(`?category=${slug}`);
           } else {
-            console.log(res);
           }
         })
-        .fail((res) => {
-          console.log(res);
-        });
+        .fail((res) => {});
     });
   };
 
@@ -74,8 +71,7 @@ export default class HomeController {
 
             $(".features_items").replaceWith(res.html);
             $(".btn-load_more").remove();
-
-            changeUrl({ url: `?brand=${slug}` });
+            changeUrl(`?brand=${slug}`);
           }
         })
         .fail((res) => {});
@@ -94,7 +90,7 @@ export default class HomeController {
               $(".features_items").append(res.html);
               const next_page = parseInt(page) + 1;
               const url = "?page=" + next_page;
-              changeUrl({ url: url });
+              changeUrl(url);
 
               if (res.page == "last_page") {
                 $(".load_more").hide();
@@ -102,7 +98,7 @@ export default class HomeController {
                 $(".load_more").show();
               }
             } else if (res.page == "error_page") {
-              changeUrl({ url: "?page=1" });
+              changeUrl("/?page=1");
             }
 
             loadPage({ time: 200 });
@@ -133,7 +129,7 @@ export default class HomeController {
               },
               1000
             );
-            changeUrl({ url: `?search=${keyword}` });
+            changeUrl(`/?search=${keyword}`);
           })
           .fail((res) => {});
       }

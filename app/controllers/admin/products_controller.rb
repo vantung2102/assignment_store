@@ -1,9 +1,9 @@
 class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: %i[ show edit update destroy edit_product]
-  before_action :authorize_admin!, only: %i[ create update destroy ]
+  before_action :authorize_admin!, only: [:index, :show, :edit, :update, :show, :destory]
 
   def index
-    @pagy, @products = pagy(Product.all, items: 10)
+    @pagy, @products = pagy(Product.all, items: 20)
   end
 
   def show;end
@@ -24,11 +24,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def new
-      @product = Product.new
-      @product_attribute_1 = @product.product_attributes.build
-      @product_attribute_2 = @product.product_attributes.build
-      @value_1 = @product_attribute_1.attribute_values.build
-      @value_2 = @product_attribute_2.attribute_values.build
+    @product = Product.new
   end
 
   def create
@@ -60,24 +56,18 @@ class Admin::ProductsController < Admin::BaseController
 
 
   def update
-    
-    binding.pry
-    
     update = Admin::Products::UpdateService.call(@product, product_params)
     
     if update
       flash[:success] = "Product was successfully updated."
-      redirect_to admin_products_path
     else
       flash[:danger] = "Product was failure updated."
-      render :edit
     end
+
+    redirect_to admin_products_path
   end
 
   def destroy
-    
-    binding.pry
-    
     destroy, message = Admin::Products::DestroyService.call(@product)
 
     status = destroy ? :success : :danger
@@ -104,22 +94,22 @@ class Admin::ProductsController < Admin::BaseController
       images: [],
       category_ids: [],
       product_attribute_1: [
-        name: [],
+        :name,
         attribute_value: [
-          attribute_1: [],
+          attribute: [],
           price_attribute_product: [],
           stock: [],
         ],
         images: []
       ],
       product_attribute_2: [
-        name: [],
+        :name,
         attribute_value: [
-          attribute_2: [],
+          attribute: [],
         ]
       ],
       update: [
-        add: [],
+        :insert ,
         destroy: [
           attribute_value: []
         ]

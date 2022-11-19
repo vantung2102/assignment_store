@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   before_action :authenticate_user
   before_action :set_user
 
-  def edit;end
+  def edit; end
 
   def show_profile
-    html = render_to_string partial: "users/shared/profile"
-    render json: { status: 200, message:"successfully", html: html }
+    html = render_to_string partial: 'users/shared/profile'
+    render json: { status: 200, message: 'successfully', html: html }
   end
 
   def update
@@ -14,11 +14,11 @@ class UsersController < ApplicationController
     render :edit
   end
 
-  def password;end
+  def password; end
 
   def show_password
-    html = render_to_string partial: "users/shared/change_password"
-    render json: { status: 200, message:"successfully", html: html }
+    html = render_to_string partial: 'users/shared/change_password'
+    render json: { status: 200, message: 'successfully', html: html }
   end
 
   private
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
-      :avatar,
+      :avatar
     )
   end
 end

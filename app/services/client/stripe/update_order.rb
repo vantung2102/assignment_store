@@ -1,4 +1,4 @@
-class Client::Stripe::UpdateOrder  < ApplicationService
+class Client::Stripe::UpdateOrder < ApplicationService
   def initialize(charge, status)
     @charge = charge
     @status = status
@@ -14,7 +14,7 @@ class Client::Stripe::UpdateOrder  < ApplicationService
 
     order.update(status: status)
   end
-  
+
   private
 
   attr_accessor :charge, :status

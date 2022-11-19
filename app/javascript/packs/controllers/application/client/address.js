@@ -129,7 +129,6 @@ export default class AddressController {
 
       Ajax(this.api.change_address, "POST", { change_address: checked })
         .done((res) => {
-          console.log(res);
           if (res.status === 200) {
             Swal.fire(
               {

@@ -11,7 +11,7 @@ class Client::Stripe::DetroyOrder < ApplicationService
     order = user.orders.find_by(token: charge.payment_intent)
     order.destroy if order
   end
-  
+
   private
 
   attr_accessor :charge

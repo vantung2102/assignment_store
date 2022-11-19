@@ -42,7 +42,7 @@
                 .item_order-content__name 
                   span = product.title
                 .item_order-content__attribute
-                  - price = product.price_cents
+                  - price = product.price
                   - if item.attribute_value_id.present?
                     - value = item.attribute_value
                     - price = value.price_attribute_product
@@ -51,7 +51,7 @@
                   strong = "x #{ item.quantity }"
           .item-info_price
             span.item-info_price--old = "$#{price}"
-            span.item-info_price--new = "$#{price.to_f - product.discount.to_f}"
+            span.item-info_price--new = "$#{(price.to_f - product.discount.to_f).round(2)}"
             - total = total + (price.to_f - product.discount.to_f) * item.quantity
             - discount = discount + product.discount.to_f
       .list-detail_price
@@ -64,7 +64,7 @@
           .detail_price-name
             span Transport fee
           .detail_price-price
-            span 2000
+            span = @order.shipping
         .detail_price
           .detail_price-name
             span Discount

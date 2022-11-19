@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  has_many :user_vouchers, dependent: :destroy 
+  has_many :user_vouchers, dependent: :destroy
   has_many :vouchers, through: :user_vouchers, dependent: :destroy
   has_many :orders, dependent: :destroy
 
@@ -18,11 +18,12 @@ class User < ApplicationRecord
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :trackable,
-         :omniauthable , omniauth_providers: [:facebook, :google_oauth2]
-      
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+
   validates :password, password: true, unless: -> { from_omniauth? }
   validates :phone, phone_number: true, presence: true, unless: -> { from_omniauth? }
-  validates :name, presence: true, length: { minimum:6, maximum: 30 }, unless: -> { from_omniauth? }
+  validates :name, presence: true, length: { minimum: 6, maximum: 30 }, unless: -> { from_omniauth? }
+  validates :email, presence: true, uniqueness: true
 
   def display_image
     avatar.variant resize_to_limit: [300, 200]
@@ -48,7 +49,7 @@ class User < ApplicationRecord
   def set_default_role
     self.roles ||= :user
   end
-  
+
   def from_omniauth?
     provider && uid
   end

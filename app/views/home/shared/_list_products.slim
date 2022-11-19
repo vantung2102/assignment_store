@@ -6,12 +6,14 @@
           .productinfo.add_product[id="#{product.id} #{product.slug}"]
             a[href="#{product_detail_url(product.id, product.slug)}"]
               = image_tag(product.display_image, class:"img_product")
+              - if get_stock_product(product).to_i == 0
+                = image_tag("home/stock", class: "sold_out")
               - price = get_price(product)
             .price.display-flex
               h2.price_new
                 = discount(price, product.discount)
                 sup $
-                
+      
               del.price_old 
                 = price
                 sup $
@@ -22,10 +24,6 @@
               i.fa.fa-star
               i.fa.fa-star
             p.name_product = product.title
-            - if get_stock_product(product).to_i == 0
-              a.btn.btn-danger.out-of-stock
-                i.fa.fa-shopping-cart  
-                |Out of stock
 
           - if (Date.today.mjd - product.created_at.to_date.mjd) > 10
             = image_tag("home/sale", class: "sale")

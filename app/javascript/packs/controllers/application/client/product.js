@@ -273,7 +273,6 @@ export default class ProductController {
                       this.setCart(carts);
                     }
                   } else {
-                    console.log(res);
                     if (amount > res.product.quantity) {
                       Swal.fire(
                         "Sorry, the quantity is larger than the quantity in stock.",
@@ -317,7 +316,6 @@ export default class ProductController {
           Ajax(this.api.checkAmount, "GET", { cart: data })
             .done((res) => {
               if (res.status == 200) {
-                console.log(res);
                 if (addItem) {
                   if (
                     parseInt(addItem.amount) + amount >

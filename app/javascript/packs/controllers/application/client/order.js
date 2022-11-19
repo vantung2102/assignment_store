@@ -37,7 +37,6 @@ export default class OrderController {
           Ajax(this.api.refundStripe, "POST", { code: code })
             .done((res) => {
               if (res.status == 200) {
-                console.log(res);
                 Swal.fire("Refund successfully!", "", "success");
 
                 redirect(`/user/order/detail/${code}`, 1000);

@@ -1,15 +1,15 @@
 class Admin::BrandsController < Admin::BaseController
-  before_action :set_brand, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ update destroy ]
+  before_action :set_brand, only: %i[show edit update destroy]
+  before_action :authorize_admin!
 
   def index
-      @pagy, @brands = pagy(Brand.all, items: 10)
+    @pagy, @brands = pagy(Brand.all, items: 10)
   end
 
-  def show;end
+  def show; end
 
   def new
-      @brand = Brand.new
+    @brand = Brand.new
   end
 
   def create
@@ -24,7 +24,7 @@ class Admin::BrandsController < Admin::BaseController
     end
   end
 
-  def edit;end
+  def edit; end
 
   def update
     update, message = Admin::Brands::UpdateService.call(@brand, brand_params)

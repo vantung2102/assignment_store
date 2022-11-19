@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include Pundit::Authorization
   include Pagy::Backend
-  
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :switch_locale
 
@@ -21,16 +21,16 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-      added_attrs = [:name, :email, :phone, :gender, :password, :password_confirmation, :remember_me, :role]
-      update_attrs = [:password, :password_confirmation, :current_password]
-      devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-      devise_parameter_sanitizer.permit :account_update, keys: update_attrs
+    added_attrs = %i[name email phone gender password password_confirmation remember_me role]
+    update_attrs = %i[password password_confirmation current_password]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
 
   def is_admin?
-      current_user.has_role? :admin
+    current_user.has_role? :admin
   end
-  
+
   def after_sign_in_path_for(resource)
     if is_admin?
       stored_location_for(resource) || admin_path

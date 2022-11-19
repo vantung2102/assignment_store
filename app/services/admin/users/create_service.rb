@@ -7,13 +7,11 @@ class Admin::Users::CreateService < ApplicationService
   def call
     @user = User.new(user_params.except(:roles))
     create = @user.save
-    message = create ? "User was successfully created." : "User was failure created."
+    message = create ? 'User was successfully created.' : 'User was failure created.'
 
-    if create
-      add_role(@user)
-    end
+    add_role(@user) if create
 
-    [create, @user, message]  
+    [create, @user, message]
   end
 
   private

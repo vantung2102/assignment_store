@@ -39,7 +39,7 @@
     .pull-left
       strong Temporary price
     .pull-right
-      strong = total
+      strong = total.round(2)
       sup $
   .sale_order
     a Do you have a voucher? &nbsp;
@@ -52,7 +52,7 @@
   .transport_fee
     .item_fee
       .pull-left Temporary price:
-      .pull-right#temporary_price = "$#{total}"
+      .pull-right#temporary_price = "$#{total.round(2)}"
     .item_fee#transport_fee
       .pull-left Transport fee:
       .pull-right#charge_fee
