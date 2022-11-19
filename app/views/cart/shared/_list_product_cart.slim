@@ -42,7 +42,7 @@
                     sup $
                     = productDetail[:price]
                   |&nbsp&nbsp&nbsp
-                  - price = productDetail[:price].to_f - productDetail[:discount].to_f
+                  - price = (productDetail[:price].to_f - productDetail[:discount].to_f).round(2)
                   span
                     sup $
                     = price

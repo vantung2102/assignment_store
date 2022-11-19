@@ -1,15 +1,15 @@
 class Admin::CategoriesController < Admin::BaseController
-  before_action :set_category, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ create update destroy ]
+  before_action :set_category, only: %i[show edit update destroy]
+  before_action :authorize_admin!
 
   def index
-      @pagy, @categories = pagy(Category.all, items: 10)
+    @pagy, @categories = pagy(Category.all, items: 10)
   end
 
-  def show;end
+  def show; end
 
   def new
-      @category = Category.new
+    @category = Category.new
   end
 
   def create
@@ -24,7 +24,7 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
 
-  def edit;end
+  def edit; end
 
   def update
     update, message = Admin::Categories::UpdateService.call(@category, category_params)

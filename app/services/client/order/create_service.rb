@@ -1,4 +1,4 @@
-class Client::Order::CreateService  < ApplicationService
+class Client::Order::CreateService < ApplicationService
   def initialize(user, status, payment_gateway, shipping, code_voucher, token)
     @user = user
     @status = status
@@ -11,20 +11,21 @@ class Client::Order::CreateService  < ApplicationService
   def call
     total, products, address = Client::Stripe::GetInfoOrder.call(user)
     return [false] if address.nil?
+
     cart = user.cart.cart_items
     voucher = Voucher.find_by(code: code_voucher) if code_voucher.present?
     attribute_value_ids = cart.group_by(&:attribute_value_id).keys.uniq
     attribute_values = AttributeValue.where(id: attribute_value_ids)
 
-    order = Order.new(  
-      status: status, 
-      address_id: address.id, 
+    order = Order.new(
+      status: status,
+      address_id: address.id,
       payment_gateway: payment_gateway,
-      user_id: user.id, 
-      total: total - shipping.to_f - ( voucher.nil? ? 0 : voucher.cost.to_f ), 
+      user_id: user.id,
+      total: total - shipping.to_f - (voucher.nil? ? 0 : voucher.cost.to_f),
       token: token,
       discount: voucher.nil? ? 0 : voucher.cost.to_f,
-      shipping: shipping,
+      shipping: shipping
     )
 
     ActiveRecord::Base.transaction do
@@ -39,10 +40,10 @@ class Client::Order::CreateService  < ApplicationService
       end
 
       create = order.save
-      
+
       cart.each do |cart_item|
-        order_item = order.order_items.build( 
-          product_id: cart_item.product_id, 
+        order_item = order.order_items.build(
+          product_id: cart_item.product_id,
           quantity: cart_item.quantity
         )
 
@@ -56,7 +57,7 @@ class Client::Order::CreateService  < ApplicationService
           end
         else
           product = products.find_by(id: cart_item.product_id)
-          
+
           if product.quantity < cart_item.quantity
             raise ActiveRecord::Rollback
             return [false, order]
@@ -79,12 +80,11 @@ class Client::Order::CreateService  < ApplicationService
         end
         user.cart.destroy
       end
-      
-      
+
       [create, order]
     end
   end
-  
+
   private
 
   attr_accessor :user, :status, :payment_gateway, :shipping, :code_voucher, :token

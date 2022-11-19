@@ -22,11 +22,13 @@ export default class ProductController {
     this.appendAttribute();
     this.deleteAttribute1();
     this.deleteAttribute2();
-    this.beforeUpdate();
+    this.beforeUpdateDestroy();
+    this.beforeUpdateInsert();
   }
 
   handleImageProductInput = () => {
-    $("body").on("change", "#product_images", ({ target }) => {
+    $("body").on("change", "#product_images", ({ target, event }) => {
+      event.preventDefault();
       const $preview = $(".preview");
       $(".preview").empty();
 
@@ -63,7 +65,7 @@ export default class ProductController {
   };
 
   inputImageAttributeValue = () => {
-    $(document).on("change", ".input_image_val", ({ target }) => {
+    $("body").on("change", ".input_image_val", ({ target, event }) => {
       const $img_val = $(target).closest(".label_image_value").find(".img_val");
       const file = $(target)
         .closest(".label_image_value")
@@ -87,9 +89,9 @@ export default class ProductController {
         return;
       }
 
-      const reader = new FileReader();
+      const image = new FileReader();
 
-      $(reader).on("load", ({ target }) => {
+      $(image).on("load", ({ target }) => {
         $img_val.append(
           $("<img/>", {
             src: target.result,
@@ -97,9 +99,9 @@ export default class ProductController {
           }).attr("aria-hidden", "false")
         );
       });
+      image.readAsDataURL(file);
 
-      reader.readAsDataURL(file);
-
+      $img_val.show();
       if ($img_val.html().length == 0)
         $(target).closest(".label_image_value").find(".add_image_value").hide();
     });
@@ -458,6 +460,7 @@ export default class ProductController {
         data: { id: id },
         dataType: "json",
         success: (response) => {
+          console.log(response);
           if (response.status == 200) {
             if (response.data != undefined) {
               const attributes = response.data.attributes;
@@ -475,30 +478,38 @@ export default class ProductController {
 
                 values.map((item, index) => {
                   const htmlInput = this.htmlInput({
-                    index: index,
+                    index: index + 1,
                     value: item.attribute_1,
                     isValid: true,
                   });
                   $(".variation-edit-right.d-flex:last").after(htmlInput);
 
                   const htmlImage = this.htmlImage(
-                    index,
+                    index + 1,
                     images[index],
                     item.attribute_1
                   );
-                  $(".variation-model-table-body.variation-header:last").after(
-                    htmlImage
-                  );
+                  $(".variation-header:last").after(htmlImage);
 
                   const htmlPriceAndStock = this.htmlPriceAndStock({
                     price: item.price_attribute_product,
                     stock: item.stock,
-                    height: "128px",
+                    height: "129px",
+                    dataItem: 1,
                     isValid: true,
                   });
+
+                  // $(".variation-warp:last").after(
+                  //   $("<div>", { class: "variation-warp" })
+                  // );
+
                   $(".variation-warp:last").after(
-                    $("<div>", { class: "variation-warp" })
+                    $("<div>", { class: "variation-warp" }).attr(
+                      "data-price-stock",
+                      index + 1
+                    )
                   );
+
                   $(".variation-warp:last").append(htmlPriceAndStock);
                 });
                 $(".variation-edit-right.d-flex:first").remove();
@@ -524,9 +535,11 @@ export default class ProductController {
                 const attribute_value_1 = [
                   ...new Set(values.map((item) => item.attribute_1)),
                 ];
+
                 const attribute_value_2 = [
                   ...new Set(values.map((item) => item.attribute_2)),
                 ];
+
                 attribute_value_1.map((item, index) => {
                   const htmlInput = this.htmlInput({
                     index: index + 1,
@@ -553,7 +566,7 @@ export default class ProductController {
                 let i = 1;
                 let count = 0;
                 values.map((item, index) => {
-                  if (count == parseInt(attribute_value_1.length)) {
+                  if (count == parseInt(attribute_value_2.length)) {
                     i += 1;
                     count = 0;
                   }
@@ -659,7 +672,7 @@ export default class ProductController {
     });
   };
 
-  beforeUpdate = () => {
+  beforeUpdateDestroy = () => {
     const url = window.location.href.split("/");
     const length = url.length;
 
@@ -685,10 +698,32 @@ export default class ProductController {
               value: val,
             })
             .appendTo("form");
-
-          // $("form").append(a);
         }
       );
+    }
+  };
+
+  beforeUpdateInsert = () => {
+    const url = window.location.href.split("/");
+    const length = url.length;
+
+    const edit = url[length - 1];
+
+    if (edit == "edit") {
+      const id = url[length - 2];
+
+      $("body").on("click", ".add_attribute, .add_attribute2", ({ target }) => {
+        if ($("#insert_attribute").length == 0) {
+          $("<input>")
+            .attr({
+              type: "hidden",
+              id: "insert_attribute",
+              name: "product[update][insert]",
+              value: "action",
+            })
+            .appendTo("form");
+        }
+      });
     }
   };
 
@@ -721,7 +756,7 @@ export default class ProductController {
               boolean == true ? "is-valid" : ""
             }" multiple="multiple" 
             placeholder="example: red, blue v.v" type="text" 
-            name="product[product_attribute_1][attribute_value][attribute_1][]" 
+            name="product[product_attribute_1][attribute_value][attribute][]" 
             id="product_product_attribute_1_attribute_value_attribute_1 ${
               id == undefined ? "" : id
             }" value="${value == undefined ? "" : value}">
@@ -743,7 +778,7 @@ export default class ProductController {
             <input class="form-control ${
               boolean == true ? "is-valid" : ""
             } string optional attribute2" multiple="multiple" 
-            name="product[product_attribute_2][attribute_value][attribute_2][]" 
+            name="product[product_attribute_2][attribute_value][attribute][]" 
             id="product_product_attribute_2_attribute_value_attribute_2" placeholder="example: red, blue v.v" type="text" value="${
               value == undefined ? "" : value
             }">
@@ -777,7 +812,7 @@ export default class ProductController {
                   }">
                     <img class="img-thumbnail" style="display:${
                       img == undefined ? "none" : "block"
-                    } 
+                    }" 
                     aria-hidden="false" src="${img == undefined ? "" : img}">
                   </div>
                   <input class="form-control file optional input_image_val" 

@@ -4,7 +4,7 @@ class Brand < ApplicationRecord
 
   has_many :products
 
-  validates :title, presence: true, length: { minimum: 2, maximum: 30}
+  validates :title, presence: true, length: { minimum: 2, maximum: 30}, uniqueness: true
 
   scope :include_products, -> { includes(:products) }
 end

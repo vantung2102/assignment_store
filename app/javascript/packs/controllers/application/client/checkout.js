@@ -23,7 +23,6 @@ export default class CheckoutController {
 
       Ajax(this.api.change_address, "POST", { change_address: checked })
         .done((res) => {
-          console.log(res);
           if (res.status === 200) {
             Swal.fire(
               {
@@ -45,7 +44,6 @@ export default class CheckoutController {
 
   //  ================== Voucher =========================
   applyVoucher = () => {
-    console.log(555);
     $("body").on("click", ".btn-apply", ({ target }) => {
       const voucher = $("input[name=apply_voucher]").val();
 
@@ -209,11 +207,10 @@ export default class CheckoutController {
       Ajax(this.api.infoCheckout, "POST")
         .done((res) => {
           if (res.status == 200) {
-            console.log(res);
-            const temporaryPrice = parseFloat(res.data.total);
+            const temporaryPrice = parseFloat(res.data.total).toFixed(2);
             const feeShipping = res.data.fee.toFixed(2);
             this.shipping = feeShipping;
-            this.total = temporaryPrice - feeShipping;
+            this.total = (temporaryPrice - feeShipping).toFixed(2);
 
             $("#charge_fee").html(`$${feeShipping}`);
             $("#total_price").html(`$${this.total}`);

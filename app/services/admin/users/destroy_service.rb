@@ -4,7 +4,7 @@ class Admin::Users::DestroyService < ApplicationService
   end
 
   def call
-    user&.destroy ? [true, "User was successfully destroy."] : [false, "User was failure destroy."]
+    user&.destroy ? [true, 'User was successfully destroy.'] : [false, 'User was failure destroy.']
   end
 
   private

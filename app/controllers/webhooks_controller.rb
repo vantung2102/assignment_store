@@ -14,9 +14,9 @@ class WebhooksController < ApplicationController
         payload, sig_header, endpoint_secret
       )
     rescue JSON::ParserError => e
-      render json: { status: 400, message: "Invalid payload" }
+      render json: { status: 400, message: 'Invalid payload' }
     rescue Stripe::SignatureVerificationError => e
-      render json: { status: 400, message: "Invalid signature" }
+      render json: { status: 400, message: 'Invalid signature' }
     end
 
     case event.type
@@ -24,7 +24,7 @@ class WebhooksController < ApplicationController
       payment_intent = event.data.object
       create, order = Client::Stripe::CreateOrder.call(payment_intent)
 
-      render json: { status: 500, message: "Invalid" } if create == false
+      render json: { status: 500, message: 'Invalid' } if create == false
     when 'payment_method.attached'
       payment_method = event.data.object
     when 'charge.succeeded'
@@ -40,7 +40,7 @@ class WebhooksController < ApplicationController
 
           if stop > 5
             Stud.stop!
-            render json: { status: 500, message: "Invalid" }
+            render json: { status: 500, message: 'Invalid' }
           end
           stop += 1
         end
@@ -54,7 +54,7 @@ class WebhooksController < ApplicationController
       Client::Stripe::UpdateOrder.call(charge, Order.statuses[:canceled])
     end
 
-    render json: { status: 200, message: "successfully" }
+    render json: { status: 200, message: 'successfully' }
   end
 
   def momo
@@ -64,22 +64,22 @@ class WebhooksController < ApplicationController
       Order.connection.query_cache.clear
       order = Order.find_by(token: even[:orderId])
       Stud.stop! unless order.nil?
-      
+
       if stop > 5
         Stud.stop!
-        render json: { status: 500, message: "Invalid" }
+        render json: { status: 500, message: 'Invalid' }
       end
       stop += 1
     end
 
     if even[:resultCode] == 0
       order.update(status: Order.statuses[:paid])
-    elsif even[:resultCode] == 90000
+    elsif even[:resultCode] == 90_000
 
     else
       order.update(status: Order.statuses[:failed])
     end
 
-    render json: { status: 200, message: "successfully" }
+    render json: { status: 200, message: 'successfully' }
   end
 end

@@ -5,7 +5,6 @@ import {
   Ajax,
   changeUrl,
   redirect,
-  popupFire,
 } from "../../lib/application";
 import Raicon from "raicon";
 
@@ -99,6 +98,7 @@ export default class CartController {
 
           item.remove();
           this.showIconCart();
+          redirect("/cart/show_cart");
           Swal.fire("Remove successfully!", "", "success");
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");

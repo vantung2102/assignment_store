@@ -9,11 +9,11 @@ class Admin::Users::UpdateService < ApplicationService
 
     message = if update
                 change_role(user_params[:roles])
-                "User was successfully updated."
+                'User was successfully updated.'
               else
-                "User was failure updated."
+                'User was failure updated.'
               end
-    [update, message] 
+    [update, message]
   end
 
   private

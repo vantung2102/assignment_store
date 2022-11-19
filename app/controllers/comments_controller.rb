@@ -1,20 +1,21 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create reply_comment]
   before_action :authenticate_user
-  
-  def index;end
+
+  def index; end
 
   def new
     @comment = Comment.new
   end
 
-  def show;end
+  def show; end
 
   def create
     create, comment, message = Client::Product::CommentService.call(comment_params, current_user)
 
     if create
-      html = render_to_string(partial: "product_detail/shared/list_comment", locals: { comment: comment }, :layout => false)
+      html = render_to_string(partial: 'product_detail/shared/list_comment', locals: { comment: comment },
+                              layout: false)
       render json: { status: 200, message: message, html: html }
     else
       render json: { status: 500, message: message }
@@ -25,12 +26,12 @@ class CommentsController < ApplicationController
     create, comment, message = Client::Product::CommentService.call(comment_params, current_user)
 
     if create
-      html = render_to_string(partial: "product_detail/shared/child_comment", locals: { child: comment }, :layout => false)
+      html = render_to_string(partial: 'product_detail/shared/child_comment', locals: { child: comment },
+                              layout: false)
       render json: { status: 200, html: html }
     else
       render json: { status: 500 }
     end
-    
   end
 
   private

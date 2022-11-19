@@ -51,6 +51,13 @@
             del.price_old 
               sup $
               = value_min.price_attribute_product
+          - else
+            span.price_new 
+              sup $
+              = discount(@product.price, @product.discount)
+            del.price_old 
+              sup $
+              = @product.price
         .quantity
           label Quantity: 
           input.quantity.numberInput[type="number" value="1"]

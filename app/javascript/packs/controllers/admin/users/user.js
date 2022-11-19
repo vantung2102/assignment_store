@@ -25,22 +25,4 @@ export default class UserController {
       reader.readAsDataURL(file);
     });
   };
-
-  // new = () => {
-  //   this.handleImageInput();
-  // };
-
-  // create = () => {
-  //   this.handleImageInput();
-  // };
-
-  // update = () => {
-  //   this.handleImageInput();
-  // };
-
-  // edit = () => {
-  //   this.handleImageInput();
-  // };
 }
-
-// Raicon.register("admin/users", UserController);
