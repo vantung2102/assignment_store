@@ -40,6 +40,12 @@
       height: 36px;
       border-radius: 100%;
     }
+
+    img.img-product {
+      width: 150px;
+      height: 150px;
+      border-radius: 0;
+    }
   }
 }
 
@@ -153,6 +159,7 @@
   .control-label {
     font-size: 15px;
     font-weight: 500;
+    margin-right: 20px;
   }
 
   input,
@@ -227,6 +234,24 @@
   background-color: transparent;
 }
 
+.badge-danger {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  background-color: transparent;
+}
+
+.badge-momo {
+  color: #ee54b0;
+  border: 1px solid #ee54b0;
+  background-color: transparent;
+}
+
+.badge-primary {
+  color: #007bff;
+  border: 1px solid #007bff;
+  background-color: transparent;
+}
+
 .form-show {
   h4 {
     font-size: 2rem;
@@ -245,15 +270,16 @@
   font-size: 15px;
 }
 
-// .preview {
-//   display: block;
-// }
-
 .preview {
   .img-thumbnail {
     height: 250px;
     width: 250px;
   }
+}
+
+.label_image_value .img-thumbnail {
+  height: 60px;
+  width: 60px;
 }
 
 .text-muted {
@@ -313,4 +339,12 @@ ul {
   background-color: #63ed7a;
   border-radius: 50%;
   display: inline-block;
+}
+
+.order_status {
+  margin: 0 0 15px 0 !important;
+}
+
+.form-group {
+  margin-bottom: 0;
 }

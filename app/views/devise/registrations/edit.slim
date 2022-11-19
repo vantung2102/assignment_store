@@ -1,0 +1,29 @@
+#page_user.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li.active Account information
+    #content_user
+      .col-lg-3.col-md-3.col-sm-3
+        = render "users/shared/list_menu"
+      .col-sm-9
+        .user_col_right#change_password_page
+          #container-profile_page
+            = simple_form_for @user, url: registration_path(:user), :html => {:class => "form-horizontal", method: :put} do |f|
+              .form-group.control-group
+                = f.label :current_password, class:"col-sm-2 control-label"
+                .col-sm-6.controls
+                  = f.input :current_password, required:"required", label: false, hint: 'Optional. Length up to 255'
+              .form-group.control-group
+                = f.label :new_password, class:"col-sm-2 control-label"
+                .col-sm-6.controls
+                  = f.input :password, required:"required", label: false, hint: 'Optional. Length up to 255'
+              .form-group.control-group
+                = f.label :new_password_confirmation, class:"col-sm-2 control-label"
+                .col-sm-6.controls
+                  = f.input :password_confirmation, required:"required", label: false, hint: 'Optional. Length up to 255'
+              .form-group.form-actions
+                .col-sm-offset-2.col-sm-6
+                  = f.submit class: "btn btn-primary btn-edit"

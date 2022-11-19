@@ -12,17 +12,21 @@ class Admin::BaseController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:danger] = "You are not authorized to perform this action."
+    flash[:danger] = 'You are not authorized to perform this action.'
     redirect_back(fallback_location: root_path)
   end
 
-  def is_admin?
+  def admin?
     current_user.has_role? :admin
   end
 
   def authenticate_admin!
-    unless is_admin?
-      redirect_to root_path
-    end
+    return if admin?
+
+    redirect_to root_path
+  end
+
+  def authorize_admin!
+    authorize current_user
   end
 end

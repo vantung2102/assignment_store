@@ -1,0 +1,34 @@
+#content_address.user_col_right
+  .line_address_content
+  .address_checkout
+    .title_order 
+      .pull-left 
+        i.fa-solid.fa-location-dot
+        strong&nbspDelivery address
+      a.pull-right[href="#{new_user_address_url}"]
+        i.fa-solid.fa-plus
+        |Add new address 
+    .address_content
+      - @addresses.each do |address|
+        .item
+          - if address.status == true
+            input[type="radio" name="address" value="#{address.id}" checked]
+          - else
+            input[type="radio" name="address" value="#{address.id}"]
+          .show-address
+            .address_content-name
+              p 
+                |#{address.fullname}
+                |&nbsp - &nbsp
+                |#{address.phone_number}
+              - if address.status == true
+                span Default
+            .address_content-detail
+              |#{address.addressDetail},&nbsp#{address.ward},&nbsp#{address.district},&nbsp#{address.province}               
+          .edit-address
+            a[href="#{edit_user_address_url(address.id)}"]
+              i.fa-regular.fa-pen-to-square
+            a.destroy_address
+              i.fa-solid.fa-trash
+    .confirm_address
+      button.btn.btn-primary.btn-confirm_address Confirm

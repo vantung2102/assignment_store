@@ -1,0 +1,16 @@
+.home-page#page_user
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li
+          a[href="#"] Address 
+        li.active Edit
+    #content_user
+      .col-lg-3.col-md-3.col-sm-3
+        = render "users/shared/list_menu"
+      .col-sm-9
+        #content_address.user_col_right
+          .line_address_content
+          = render "addresses/shared/form", url: user_address_url

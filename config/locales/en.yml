@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  menu:
+    home: "Home"
+    shop: "Shop"
+    contact: "Contact"
+    profile: "Profile"
+    checkout: "Checkout"
+    cart: "Cart"
+    my_orders: "My Orders"
+    account: "Account"
+    notification: "Notifications"
+    login: "Login"
+    logout: "Logout"
+    address: "Address"
+  product:
+    see_detail: "See Detail"
+    quick_view: "Quick View"

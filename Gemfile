@@ -34,6 +34,24 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'dotenv-rails', groups: [:development, :test]
+
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rspec-mocks', '~> 3.12'
+  gem 'rspec-expectations', '~> 3.12'
+
+  gem "factory_bot_rails"
+
+  gem 'shoulda-matchers'
+
+  gem 'database_cleaner'
+  
+  gem 'capybara', '>= 3.26'
+
+  gem 'rails-controller-testing'
+
+  gem 'webdrivers'
+
+   gem 'pundit-matchers'
 end
 
 group :development do
@@ -45,6 +63,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem "letter_opener"
 end
 
 group :test do
@@ -80,6 +99,22 @@ gem 'carrierwave'
 gem 'ckeditor'
 
 gem "pagy"
+
+gem 'stripe-rails'
+gem "money-rails"
+
+gem 'rails-i18n'
+
+gem 'httparty'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+
+gem 'validates_timeliness', '~> 6.0.0'
+
+gem 'rubocop', require: false
+
+# gem "searchkick"
+# gem "elasticsearch"
 
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'

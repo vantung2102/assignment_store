@@ -21,7 +21,7 @@ section#form
             = button_to 'Facebook', user_facebook_omniauth_authorize_path
 
             = image_tag("login/google", class: "google")
-            = button_to 'Google', user_facebook_omniauth_authorize_path
+            = button_to 'Google', user_google_oauth2_omniauth_authorize_path
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
           = link_to "Forgot your password?", new_password_path(resource_name)
       

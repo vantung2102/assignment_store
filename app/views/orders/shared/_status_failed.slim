@@ -1,0 +1,17 @@
+.stepper
+  .stepper__step
+    .stepper__step-icon.stepper__step--finish
+      i.fa-solid.fa-cart-shopping
+    .stepper__step-date = @order.created_at.strftime("%d/%m/%Y")
+    .stepper__step-text Order success
+  .stepper__step
+    .stepper__step-icon.stepper__step--error
+      i.fa-solid.fa-circle-exclamation
+    .stepper__step-date = @order.updated_at.strftime("%d/%m/%Y")
+    .stepper__step-text Order canceled
+  .stepper__line
+    .stepper__line-background[style="background: rgb(224, 224, 224);"]
+    .stepper__line-foreground[style="width: calc((100% - 175px)); background: rgb(45, 194, 88);"]
+.order_detail-info
+  .refund
+    button.btn-repurchase[id="#{@order.token}"] Repurchase

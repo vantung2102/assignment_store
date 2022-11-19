@@ -1,12 +1,12 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :authorize_admin!, only: %i[ update destroy ]
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :authorize_admin!
 
   def index
     @pagy, @users = pagy(User.all, items: 10)
   end
 
-  def show;end
+  def show; end
 
   def new
     @user = User.new
@@ -24,7 +24,7 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  def edit;end
+  def edit; end
 
   def update
     update, message = Admin::Users::UpdateService.call(@user, user_params)
@@ -53,16 +53,11 @@ class Admin::UsersController < Admin::BaseController
       :name,
       :phone,
       :gender,
-      :address,
       :email,
       :password,
       :password_confirmation,
       :avatar,
       :roles
     )
-  end
-
-  def authorize_admin!
-    authorize @user
   end
 end

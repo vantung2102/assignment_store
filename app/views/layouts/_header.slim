@@ -16,31 +16,22 @@ header#header
           .social-icons
             ul.nav.nav-bar
               li: a
-                i.fa.fa-facebook
+                i.fa-brands.fa-facebook-f
               li: a
-                i.fa.fa-twitter
+                i.fa-brands.fa-twitter
               li: a
-                i.fa.fa-linkedin
+                i.fa-brands.fa-linkedin
               li: a
-                i.fa.fa-google-plus
+                i.fa-brands.fa-google-plus-g
               li: a
-                i.fa.fa-instagram
+                i.fa-brands.fa-instagram
           .btn-group.pull-right.language
             button.btn.btn-default.dropdown-toggle.usa[type="button" data-toggle="dropdown"]
-              = link_to 
-                = image_tag('home/uk') 
-                |ENGLISH
+              = link_to "#{locale(params[:locale], '🇬🇧 English', '🇻🇳 Vietnamese')}", locale:"#{locale(params[:locale], 'en', 'vi')}"
               span.caret
             ul.dropdown-menu
               li
-                = link_to 
-                  = image_tag('home/vietnam') 
-                  |VIETNAMESE
-              li
-                = link_to 
-                  = image_tag('home/japan') 
-                  |JAPAN
-                                
+                = link_to "#{locale(params[:locale], '🇻🇳 Vietnamese', '🇬🇧 English')}", locale:"#{locale(params[:locale], 'vi', 'en')}"
   / --------------------- header middle ----------------------
   .header_middle
     .container
@@ -52,27 +43,33 @@ header#header
         .col-sm-8
           .shop-menu
             ul.nav.navbar-nav
-              li: a
-                i.fa.fa-user
-                |  Account
-              li: a
-                i.fa.fa-bell
-                |  Notifications
-              li: a
-                i.fa.fa-credit-card
-                |  Checkout
-              li: a
-                i.fa.fa-shopping-cart
-                |  Cart
+              li: a.cart.sendCart[href="#{show_cart_cart_url}"]
+                span.badge.count-product
+                i.fa.fa-shopping-cart &nbsp
+                = t "menu.cart"
+              - if user_signed_in?
+                li: a
+                  i.fa.fa-bell &nbsp
+                  = t "menu.notification"
+                li: a[href="#{checkout_url}"]
+                  i.fa.fa-credit-card &nbsp
+                  = t "menu.checkout"
+                li: a[href="#{profile_edit_user_url}"]
+                  i.fa.fa-user
+                  |  #{current_user.name}
+                - if current_user.has_role?(:admin)
+                  li: a[href="#{admin_users_url}"]
+                    i.fa.fa-user
+                    |  Admin
               li 
                 - if user_signed_in?
                   = link_to logout_path 
-                    i.fa.fa-lock
-                    |  Logout
+                    i.fa.fa-lock &nbsp
+                    = t "menu.logout"
                 - else 
                   = link_to login_path
-                    i.fa.fa-lock
-                    |  Login
+                    i.fa.fa-lock &nbsp
+                    = t "menu.login"
   / --------------------- header bottom ----------------------
   .header_bottom 
     .container 
@@ -88,32 +85,30 @@ header#header
               ul.nav.navbar-nav.collapse.navbar-collapse
                 li  
                   a.active[href="#{root_path}"]
-                    | Home
+                    = t "menu.home"
                 li.dropdown
                     a
-                      | Shop 
+                      = t "menu.shop" 
                       i.fa.fa-angle-down
                       ul.sub-menu[role="menu"]
+                        - if user_signed_in?
+                          li: a 
+                            = t "menu.cart"
+                          li: a[href="#{user_order_url}"]
+                            = t "menu.my_orders"
+                          li: a[href="#{user_addresses_url}"]
+                            = t "menu.address"
                         li: a 
-                          | Products
-                        li: a 
-                          | Checkout
-                        li: a 
-                          | Cart
-                        li: a 
-                          | Login
-                        li: a 
-                          | Contact
+                          = t "menu.contact"
                 li.dropdown
                   a
                     | Blog 
                     i.fa.fa-angle-down
                     ul.sub-menu[role="menu"]
                       li: a Blog List
-                      li: a Blog Single
-                li: a 
-                  | Contact
+                      li: a = t "menu.contact"
+                li: a = t "menu.contact"
         .col-sm-3
           .search
             .search_box
-              input[type="text" placeholder="Enter Name Product"]
+              input.input_search[type="text" placeholder="Enter Name Product"]

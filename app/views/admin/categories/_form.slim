@@ -1,21 +1,21 @@
 = simple_form_for @category, url: url, :html => {:class => "form-horizontal denser"} do |f|
   .form-group.control-group
     = f.label "Parent Category", class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.association :parent_category, selected: @category.category_id, 
                       :input_html => { class: "input_select2" }, include_blank: true, label: false, hint: 'Optional.'
   .form-group.control-group
     = f.label :title, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
         = f.input :title, label: false, hint: 'Required. Length from 3 to 30'
   .form-group.control-group
     = f.label :meta_title, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
         = f.input :meta_title, label: false, hint: 'Required. Length from 3 to 30'
   .form-group.control-group
     = f.label :content, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.input :content, :as => :ckeditor, class:"form-control ckeditor", label: false, ckeditor: { language: 'uk'}, hint: 'Required. Length up to 1000'
+    .col-sm-8.controls
+      = f.input :content, :as => :ckeditor, class:"form-control ckeditor", label: false, ckeditor: { language: 'uk'}, hint: 'Required. Length up to 800'
   .form-group.form-actions
-    .col-sm-offset-2.col-sm-10
+    .col-sm-offset-2.col-sm-8
         = f.submit class: "btn btn-primary btn-edit"

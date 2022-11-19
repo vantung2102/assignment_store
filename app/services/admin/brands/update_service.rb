@@ -1,16 +1,16 @@
 class Admin::Brands::UpdateService < ApplicationService
-  def initialize(category, category_params)
-      @category = category
-      @category_params = category_params
+  def initialize(brand, brand_params)
+    @brand = brand
+    @brand_params = brand_params
   end
 
   def call
-      update = category.update(category_params)
-      message = update ? "Category was successfully updated." : "Category was failure updated."
-      [update, message]  
+    update = brand.update(brand_params)
+    message = update ? 'Brand was successfully updated.' : 'Brand was failure updated.'
+    [update, message]
   end
 
   private
 
-  attr_accessor :category, :category_params
+  attr_accessor :brand, :brand_params
 end

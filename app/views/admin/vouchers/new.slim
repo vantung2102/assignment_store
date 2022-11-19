@@ -1,0 +1,26 @@
+.page-header
+  h1 New Vouchers
+ol.breadcrumb
+  li.dashboard
+    a class="pjax" href="#{admin_url}" Dashboard
+  li.dashboard.active
+    a class="pjax" href="#{admin_vouchers_url}" Vouchers
+  li.active New
+
+= render "admin/shared/flash_message_errors"
+
+ul.nav.nav-tabs.action_items
+  li
+    a class="pjax" href="#{admin_vouchers_url}"
+      i.fa.fa-list
+      span List
+  li.active
+    a class="pjax" href="#{new_admin_voucher_url}"
+      i.fa.fa-plus
+      span New
+  li
+    a class="pjax"
+      i.fa.fa-share
+      span Export
+
+= render "admin/vouchers/form", url: admin_vouchers_path

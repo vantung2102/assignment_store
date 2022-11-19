@@ -5,6 +5,13 @@
   overflow: hidden;
   margin-top: 10px;
 
+  .attribute_error {
+    padding: 0px 0 15px 0px;
+    color: #ff424f;
+    margin: 0;
+    // display: none;
+  }
+
   .view-product {
     position: relative;
 
@@ -153,12 +160,12 @@
       border: 1px solid #dededc;
       color: #696763;
       font-family: "Roboto", sans-serif;
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 700;
       height: 33px;
       outline: medium none;
       text-align: center;
-      width: 50px;
+      width: 60px;
 
       @media #{$sm-layout} {
         width: 35px;
@@ -189,12 +196,26 @@
       }
     }
 
+    .out-of-stock {
+      color: #ffffff;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      margin-bottom: 10px;
+      margin-left: 20px;
+
+      @media #{$sm-layout} {
+        font-size: 10px;
+      }
+    }
+
     .attribute_product {
       text-align: center;
 
       .item {
         p {
-          margin: 0;
+          margin: 0 0 0 15px;
+          width: 110px;
+          text-transform: capitalize;
         }
         .select__items {
           text-align: center;

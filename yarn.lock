@@ -6375,6 +6375,11 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
+raicon@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/raicon/-/raicon-1.0.4.tgz#4d8164dfe7e428d5893b7a7c15f546bb8e30f748"
+  integrity sha512-3CDxvKJQ3SKDWAZ3jcGtiJs+Vu+lWxQ64txspgJuux32AxZ5+U7JKcRJc/PMwdp04uc02MJJDQUwXXxL3xxq6A==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"

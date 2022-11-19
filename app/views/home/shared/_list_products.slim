@@ -3,27 +3,37 @@
     .col-sm-4.col-xs-6 
       .product-image-wrapper
         .single-products
-          .productinfo
+          .productinfo.add_product[id="#{product.id} #{product.slug}"]
             a[href="#{product_detail_url(product.id, product.slug)}"]
-              = image_tag(product.display_image)
+              = image_tag(product.display_image, class:"img_product")
+              - if get_stock_product(product).to_i == 0
+                = image_tag("home/stock", class: "sold_out")
+              - price = get_price(product)
             .price.display-flex
-              h2.price_new = discount(product.price, product.discount)
-              del.price_old = product.price
+              h2.price_new
+                = discount(price, product.discount)
+                sup $
+      
+              del.price_old 
+                = price
+                sup $
             .rate-star
               i.fa.fa-star
               i.fa.fa-star
               i.fa.fa-star
               i.fa.fa-star
               i.fa.fa-star
-            p = product.title
-            a.btn.btn-default.add-to-cart
-              i.fa.fa-shopping-cart  Add to cart
-          = image_tag("home/sale", class: "sale")
+            p.name_product = product.title
+
+          - if (Date.today.mjd - product.created_at.to_date.mjd) > 10
+            = image_tag("home/sale", class: "sale")
+          - elsif product.discount > 0
+            = image_tag("home/new", class: "new")
         .choose 
           ul.nav.nav-pills.nav-justified
             li: a
               i.fa.fa-plus-square
-              |  See Detail
+              = t "product.see_detail"
             li: a
               i.fa.fa-plus-square
-              |  Quick View
+              = t "product.quick_view"

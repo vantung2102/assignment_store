@@ -1,0 +1,41 @@
+#page_checkout-success.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li
+          a[href="#"] Checkout
+        li.active Error
+    #content_checkout
+      #booking_sussces_page
+        .display-flex#icon-success.mb-10
+          i.fa-solid.fa-circle-exclamation
+        .block_info_success
+          .mb-10
+            | Hi 
+            strong Zane
+          .mb-10
+            |Thank you for visiting at 
+            a[href="#{root_path}" target="_blank"] ZaneShope!
+          .mb-10
+            |Your order has had 
+            strong problem 
+            | completing
+          .mb-10
+            |Any questions please contact: 
+            strong 123456789
+          .down-app-block
+            .thumb_qr_code
+              div
+                img [src="https://hasaki.vn/wap-static/images/graphics/QRCode_App.png"]
+              .block_download_app_sale
+                = image_tag('payment/apple-app-store')
+              .down-app-text
+                p 
+                  |Download the app 
+                  strong ZaneShope
+                p Order tracking made easier!
+      #go-home
+        a[href="#{root_path}"] Continue shopping
+  

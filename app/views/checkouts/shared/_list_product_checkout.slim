@@ -1,0 +1,67 @@
+.title_order
+  strong Your order
+  a.pull-right repair
+.list_order
+  - total = 0
+  - @cart.each do |item|
+    - quantiny = item['amount']
+    - product = Product.find_by(id: item['id'])
+    - productDetail = get_product_cart(product, item)
+    .item_order
+      .thumb_order
+        = image_tag(product.display_image)
+      .info_order
+        .title_product_order = product.title
+        .price_product_order
+          .pull-left
+            | Amount: &nbsp
+            strong
+              | #{item['amount']}
+            br
+            - if item['id_1'].present? && item['id_2'].present?
+              | Attribute: &nbsp
+              strong 
+                | #{ productDetail[:name][:attr1] } : #{ productDetail[:attribute_value][:attr1] } &nbsp
+  
+              strong 
+                | #{ productDetail[:name][:attr2] } : #{ productDetail[:attribute_value][:attr2] }
+            - if item['id_1'].present? && item['id_2'].nil?
+                strong 
+                  | #{ productDetail[:name] } : #{ productDetail[:attribute_value] }
+          .pull-right
+            |x &nbsp
+            span = productDetail[:price]
+            sup $
+          - total = total + (productDetail[:price].to_f - productDetail[:discount].to_f) * quantiny.to_f
+          
+.list_order_checkout
+  .total_temp
+    .pull-left
+      strong Temporary price
+    .pull-right
+      strong = total.round(2)
+      sup $
+  .sale_order
+    a Do you have a voucher? &nbsp;
+    a.icon-voucher
+      i.fa-solid.fa-circle-question
+    .input_sale_code
+      .form-group.item_input_checkout
+        input.form-control.apply_voucher[type="text" placeholder="Enter Voucher" name="apply_voucher"]
+        button.btn-apply_voucher Apply
+  .transport_fee
+    .item_fee
+      .pull-left Temporary price:
+      .pull-right#temporary_price = "$#{total.round(2)}"
+    .item_fee#transport_fee
+      .pull-left Transport fee:
+      .pull-right#charge_fee
+    .item_fee#discount_price
+      .pull-left Discount:
+      .pull-right#sale_price 0
+  .into_money
+    .into_money-title
+      .pull-left Total:
+      .pull-right#total_price
+    .into_money-btn
+      button Place an Order

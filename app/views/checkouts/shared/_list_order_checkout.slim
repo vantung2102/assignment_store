@@ -1,0 +1,31 @@
+.list_order_checkout
+  .total_temp
+    .pull-left
+      strong Temporary price
+    .pull-right
+      strong 4000619
+      sup $
+  .sale_order
+    a Do you have a voucher? &nbsp;
+    a.icon-voucher
+      i.fa-solid.fa-circle-question
+    .input_sale_code
+      .form-group.item_input_checkout
+        input.form-control.apply_voucher[type="text" placeholder="Enter Voucher" name="apply_voucher"]
+        button.btn-apply_voucher Apply
+  .transport_fee
+    .item_fee
+      .pull-left Temporary price:
+      .pull-right 1000
+    .item_fee
+      .pull-left Transport fee:
+      .pull-right 1000
+    .item_fee
+      .pull-left Discount:
+      .pull-right#sale - 1000
+  .into_money
+    .into_money-title
+      .pull-left Total:
+      .pull-right 1000
+    .into_money-btn
+      button[data-turbolinks-action="replace"] Place an Order

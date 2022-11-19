@@ -1,49 +1,30 @@
 = simple_form_for @product, url: url, :html => {:class => "form-horizontal denser"} do |f|
   .form-group.control-group
     = f.label :title, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :title, label: false, hint: 'Required. Length up to 20'
   .form-group.control-group
     = f.label :meta_title, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :meta_title, label: false, hint: 'Optional. Length up to 20'
   .form-group.control-group
     = f.label :categories, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.association :categories, selected: @product.category_ids, label: false, hint: 'Required.',
                       :input_html => { class: "input_select2" }
   .form-group.control-group
     = f.label :brand, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       = f.input :brand_id, collection: Brand.all, selected: @product.brand_id, label: false, hint: 'Required.', 
                 include_blank: true, :input_html => { class: "input_select2" }
   .form-group.control-group
     = f.label :attributes, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.simple_fields_for :product_attributes do |attribute|
-        = render 'admin/products/attributes_form', f: attribute
-      .links
-        = link_to_add_association 'Add attribute', f, :product_attributes, :partial => 'admin/products/attributes_form', class: "btn btn-info"
-  .form-group.control-group
-    = f.label :price_base, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.input :price, label: false, hint: 'Required. Original cost'
-  .form-group.control-group
-    = f.label :discount, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.input :discount, label: false, hint: 'Optional.'
-  .form-group.control-group
-    = f.label :content, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.input :content, class:"form-control ckeditor", label: false,
-                :as => :ckeditor, ckeditor: { language: 'uk'}, hint: 'Required. Length up to 1000'
-  .form-group.control-group
-    = f.label :quantity, class:"col-sm-2 control-label"
-    .col-sm-10.controls
-      = f.input :quantity, label: false, hint: 'Required. Length form 6 to 30.'
+    .col-sm-8.controls.container_attribute
+      = render 'admin/products/shared/attribute_form', f: f
+  
   .form-group.control-group
     = f.label :images, class:"col-sm-2 control-label"
-    .col-sm-10.controls
+    .col-sm-8.controls
       - images = @product.images
       - if images.nil?
         .preview
@@ -53,8 +34,20 @@
             a href="#{url_for(image)}"
               img class="img-thumbnail" src="#{url_for(image)}"
       = f.input :images, :input_html => { class: "input_img", :multiple => true}, label: false , hint: 'Optional.'
-  .form-group.form-actions
-    .col-sm-offset-2.col-sm-10
-      = f.submit class: "btn btn-primary btn-edit"
 
-= javascript_include_tag "controllers/admin/product"
+  .form-group.control-group
+    = f.label :discount, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+      = f.input :discount, label: false, hint: 'Optional.'
+  .form-group.control-group
+    = f.label :content, class:"col-sm-2 control-label"
+    .col-sm-8.controls
+      = f.input :content, class:"form-control ckeditor", label: false,
+                :as => :ckeditor, ckeditor: { language: 'uk'}, hint: 'Required. Length up to 800'
+  / .form-group.control-group
+  /   = f.label :quantity, class:"col-sm-2 control-label"
+  /   .col-sm-8.controls
+  /     = f.input :quantity, label: false, hint: 'Required. Length form 8 to 30.'
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-8
+      = f.submit class: "btn btn-primary btn-edit"

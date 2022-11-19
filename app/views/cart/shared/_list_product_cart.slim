@@ -1,0 +1,86 @@
+#cart_items.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li.active Shopping Cart
+    .table-responsive.cart_info
+      table.table.table-condensed.m-0
+        - if @cart.present?
+          thead
+            tr.cart_menu
+              td.image[colspan="2"] Item
+              td.price Price
+              td.quantity Quantity
+              td.total Total
+              td
+          tbody
+            - total = 0
+            - @cart.each do |item|
+              - product = Product.find(item['id'])
+              - productDetail = get_product_cart(product, item)
+              tr.list-cart[id="#{product.id}_#{product.slug}"]
+                td.cart_product
+                  a
+                    = image_tag(product.display_image, class:"img_product")
+                td.cart_name 
+                  h4
+                    a[href=""] = product.title
+                    - if item['id_1'].present? && item['id_2'].present?
+                      p.item_attr1[id="#{ item['id_1'] }_#{ item['val_1'] }"]
+                        | #{ productDetail[:name][:attr1] } : #{ productDetail[:attribute_value][:attr1] }
+
+                      p.item_attr2[id="#{ item['id_2'] }_#{ item['val_2'] }"]
+                        | #{ productDetail[:name][:attr2] } : #{ productDetail[:attribute_value][:attr2] }
+
+                    - if item['id_1'].present? && item['id_2'].nil?
+                      p.item_attr1[id=" #{item['id_1'] }_#{ item['val_1'] }"]
+                        | #{ productDetail[:name] } : #{ productDetail[:attribute_value] }
+                td.cart_price
+                  del
+                    sup $
+                    = productDetail[:price]
+                  |&nbsp&nbsp&nbsp
+                  - price = (productDetail[:price].to_f - productDetail[:discount].to_f).round(2)
+                  span
+                    sup $
+                    = price
+                td.cart_quantity
+                  .cart_quantity_button
+                    button.cart_quantity_down
+                      i.fa-solid.fa-minus
+                    - quantiny = item['amount']
+                    - total = total + price * quantiny.to_f
+                    input.cart_quantity_input[type="text" name="quantity" value="#{quantiny}"]
+                    button.cart_quantity_up
+                      i.fa-solid.fa-plus
+                  div 
+                    | There are #{productDetail[:stock]} products left 
+                td.cart_total
+                  p.cart_total_price
+                    sup $
+                    = price * quantiny.to_i
+                td.cart_delete
+                  a.cart_quantity_delete
+                    i.fa.fa-times
+            tr 
+              td[colspan="3"]
+              td.sum_total
+                span.price_sum
+                  p Total payment: &nbsp;
+                  sup $
+                  span
+                    = total
+              td
+                a.btn-checkout[href="#{checkout_url}"] checkout
+        - else
+          thead[style="display: none"]
+            tr.cart_menu
+              td.image[colspan="2"] Item
+              td.price Price
+              td.quantity Quantity
+              td.total Total
+              td
+          tbody
+            h2.cart_empty Shopping cart is empty

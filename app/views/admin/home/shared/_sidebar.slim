@@ -1,20 +1,20 @@
 nav.sidebar.sidebar-offcanvas
   ul.nav
-    li.nav-item.nav-category.active
+    li.nav-item.nav-category
       a.nav-link[href="/admin"]
         i.fa-solid.fa-house-user
         span.menu-title.ms-3 Dashboard
     li.nav-item.nav-category
       a.nav-link.collapsed[data-toggle="collapse"]
-        span
-          i.fa.fa-user 
-          span.menu-title.ms-3 user
+        / span
+        i.fa.fa-user 
+        span.menu-title.ms-3 user
         .pull-right
           i.fa-solid.fa-caret-down
       .panel-collapse.collapse
         .panel-body.pt-0.pb-0
           ul.menu-sub.p-0
-            li.menu-item.active
+            li.menu-item
               a.menu-link[href="#{admin_users_url}"]
                 i.fa-solid.fa-circle.me-4
                 span User
@@ -24,18 +24,14 @@ nav.sidebar.sidebar-offcanvas
                 span Admin
     li.nav-item.nav-category
       a.nav-link.collapsed[data-toggle="collapse"]
-        span
-          i.fa-sharp.fa-solid.fa-shirt
-          span.menu-title.ms-3 products
+        / span
+        i.fa-sharp.fa-solid.fa-shirt
+        span.menu-title.ms-3 products
         .pull-right
           i.fa-solid.fa-caret-down
       .panel-collapse.collapse
         .panel-body.pt-0.pb-0
           ul.menu-sub.p-0
-            li.menu-item
-              a.menu-link[href="#{admin_attribute_product_titles_url}"]
-                i.fa-solid.fa-circle.me-4
-                span Attributes
             li.menu-item
               a.menu-link[href="#{admin_brands_url}"]
                 i.fa-solid.fa-circle.me-4
@@ -50,16 +46,16 @@ nav.sidebar.sidebar-offcanvas
                 span Products
     li.nav-item.nav-category
       a.nav-link.collapsed[data-toggle="collapse"]
-        span
-          i.fa.fa-shopping-cart
-          span.menu-title.ms-3 orders
+        / span
+        i.fa.fa-shopping-cart
+        span.menu-title.ms-3 orders
         .pull-right
           i.fa-solid.fa-caret-down
       .panel-collapse.collapse
         .panel-body.pt-0.pb-0
           ul.menu-sub.p-0
             li.menu-item
-              a.menu-link[href=""]
+              a.menu-link[href="#{admin_orders_url}"]
                 i.fa-solid.fa-circle.me-4
                 span Orders
             li.menu-item
@@ -67,15 +63,20 @@ nav.sidebar.sidebar-offcanvas
                 i.fa-solid.fa-circle.me-4
                 span Order detail
     li.nav-item.nav-category
-      a.nav-link.collapsed[data-toggle="collapse"]
-        span
-          i.fa-sharp.fa-solid.fa-headset
-          span.menu-title.ms-3 Supports
+      a.nav-link[href="#{admin_vouchers_url}"]
+        / span
+        i.fa-solid.fa-money-bill
+        span.menu-title.ms-3 Vouchers
     li.nav-item.nav-category
       a.nav-link.collapsed[data-toggle="collapse"]
-        span
-          i.fa-solid.fa-comment
-          span.menu-title.ms-3 Chats
+        / span
+        i.fa-sharp.fa-solid.fa-headset
+        span.menu-title.ms-3 Supports
+    li.nav-item.nav-category
+      a.nav-link.collapsed[data-toggle="collapse"]
+        / span
+        i.fa-solid.fa-comment
+        span.menu-title.ms-3 Chats
     li.nav-item.nav-category
       a.nav-link.collapsed[data-toggle="collapse"]
         span

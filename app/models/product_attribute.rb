@@ -1,9 +1,14 @@
 class ProductAttribute < ApplicationRecord
-  has_many :attribute_values, dependent: :destroy, dependent: :destroy, inverse_of: :product_attribute
-  accepts_nested_attributes_for :attribute_values, reject_if: :all_blank, allow_destroy: true
+  has_many :product_attribute_values, dependent: :destroy
+  has_many :attribute_values, through: :product_attribute_values, dependent: :destroy
 
-  belongs_to :attribute_product_title
   belongs_to :product
 
-  validates :product_attribute, presence: false
+  validates :name, presence: true
+
+  has_many_attached :images
+
+  def display_image
+    images[0].variant resize_to_limit: [720, 1280]
+  end
 end

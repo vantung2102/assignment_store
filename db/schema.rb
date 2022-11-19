@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_022816) do
+ActiveRecord::Schema.define(version: 2022_11_07_022206) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,19 +40,30 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "attribute_product_titles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "title"
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "fullname"
+    t.string "phone_number"
+    t.string "province"
+    t.string "district"
+    t.string "ward"
+    t.text "addressDetail"
+    t.boolean "status", default: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "province_id"
+    t.integer "district_id"
+    t.integer "ward_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "attribute_values", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_attribute_id", null: false
-    t.string "value"
     t.float "price_attribute_product"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_attribute_id"], name: "index_attribute_values_on_product_attribute_id"
+    t.integer "stock"
+    t.string "attribute_1"
+    t.string "attribute_2"
   end
 
   create_table "brands", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -64,31 +75,18 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
 
   create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "stock_keeping_unit"
-    t.float "price"
-    t.float "discount"
     t.integer "quantity"
-    t.boolean "active"
-    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "product_id", null: false
     t.bigint "cart_id", null: false
+    t.bigint "attribute_value_id"
+    t.index ["attribute_value_id"], name: "index_cart_items_on_attribute_value_id"
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
     t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
 
   create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "session_id"
-    t.string "token"
-    t.integer "status"
-    t.string "username"
-    t.string "email"
-    t.string "phone"
-    t.string "gender"
-    t.string "address"
-    t.string "city"
-    t.string "province"
-    t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -149,6 +147,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "product_id", null: false
     t.bigint "order_id", null: false
+    t.bigint "attribute_value_id"
+    t.index ["attribute_value_id"], name: "index_order_items_on_attribute_value_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -156,36 +156,41 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "session_id"
     t.string "token"
-    t.string "status"
+    t.bigint "status"
     t.float "sub_total"
     t.float "item_discount"
-    t.float "tax"
     t.float "shipping"
     t.float "total"
-    t.string "promo"
     t.float "discount"
     t.float "grand_total"
-    t.string "username"
-    t.string "phone"
-    t.string "email"
-    t.string "gender"
-    t.string "address"
-    t.string "city"
     t.string "province"
-    t.string "country"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.string "charge_id"
+    t.string "error_message"
+    t.integer "payment_gateway"
+    t.integer "price_cents", default: 0, null: false
+    t.bigint "address_id", null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "product_attribute_values", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_attribute_id", null: false
+    t.bigint "attribute_value_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["attribute_value_id"], name: "index_product_attribute_values_on_attribute_value_id"
+    t.index ["product_attribute_id"], name: "index_product_attribute_values_on_product_attribute_id"
   end
 
   create_table "product_attributes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
-    t.bigint "attribute_product_title_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["attribute_product_title_id"], name: "index_product_attributes_on_attribute_product_title_id"
+    t.string "name"
     t.index ["product_id"], name: "index_product_attributes_on_product_id"
   end
 
@@ -219,6 +224,15 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.index ["tag_id"], name: "index_product_tags_on_tag_id"
   end
 
+  create_table "product_vouchers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "voucher_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_vouchers_on_product_id"
+    t.index ["voucher_id"], name: "index_product_vouchers_on_voucher_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "meta_title"
@@ -232,7 +246,12 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "brand_id"
+    t.string "stripe_plan_name"
+    t.string "paypal_plan_name"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["title"], name: "title_index_fulltext", type: :fulltext
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -253,6 +272,16 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_vouchers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "voucher_id", null: false
+    t.boolean "checked"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_vouchers_on_user_id"
+    t.index ["voucher_id"], name: "index_user_vouchers_on_voucher_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -294,9 +323,26 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "vouchers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "description"
+    t.integer "max_user"
+    t.bigint "type_voucher"
+    t.integer "discount_mount"
+    t.boolean "status"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "cost"
+    t.integer "apply_amount"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "attribute_values", "product_attributes"
+  add_foreign_key "addresses", "users"
+  add_foreign_key "cart_items", "attribute_values"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "users"
@@ -304,10 +350,13 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
   add_foreign_key "comments", "comments"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "order_items", "attribute_values"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
-  add_foreign_key "product_attributes", "attribute_product_titles"
+  add_foreign_key "product_attribute_values", "attribute_values"
+  add_foreign_key "product_attribute_values", "product_attributes"
   add_foreign_key "product_attributes", "products"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
@@ -315,5 +364,9 @@ ActiveRecord::Schema.define(version: 2022_09_26_022816) do
   add_foreign_key "product_reviews", "products"
   add_foreign_key "product_tags", "products"
   add_foreign_key "product_tags", "tags"
+  add_foreign_key "product_vouchers", "products"
+  add_foreign_key "product_vouchers", "vouchers"
   add_foreign_key "products", "brands"
+  add_foreign_key "user_vouchers", "users"
+  add_foreign_key "user_vouchers", "vouchers"
 end

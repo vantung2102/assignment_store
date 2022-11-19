@@ -1,0 +1,76 @@
+.page-header
+  h1 List of Vouchers
+ol.breadcrumb
+  li.dashboard
+    a.pjax href="#{admin_url}" Dashboard
+  li.active Vouchers
+
+= render "admin/shared/flash_message_errors"
+
+ul.nav.nav-tabs.action_items
+  li.active
+    a class="pjax" href="#{admin_vouchers_url}"
+      i.fa.fa-list
+      span List
+  li
+    a.pjax href="#{new_admin_voucher_url}"
+      i.fa.fa-plus
+      span New
+  li
+    a.pjax
+      i.fa.fa-share
+      span Export
+
+.col-lg-12.grid-margin.stretch-card
+  .card
+    .card-body
+        .table-responsive
+          table.table.table-striped
+            thead
+              tr
+                th STT
+                th Code
+                th Name
+                th Cost
+                th Max User
+                th Discount amount
+                th apply amount
+                th Type
+                th Status
+                th Start
+                th End
+                th Action
+            tbody
+              - i = 0
+              - @vouchers.each do |voucher|
+                - i += 1
+                tr
+                  td = i
+                  td = voucher.code
+                  td = voucher.name
+                  td = voucher.cost
+                  td = voucher.max_user
+                  td = voucher.discount_mount
+                  td = voucher.apply_amount
+                  td
+                    label.badge[class="badge-#{voucher.type_voucher == 'normal' ? 'success' : 'info'}"]
+                      = voucher.type_voucher
+                  td
+                    label.badge[class="badge-#{voucher.status == 'expired' ? 'danger' : 'success'}"]
+                      = voucher.status
+                  td = voucher.start_time
+                  td = voucher.end_time
+                  td style="width: 80px"
+                    ul.others
+                      li
+                        a href="#{admin_voucher_url(voucher.id)}" title="view"
+                          i.fa.fa-info-circle
+                      li
+                        a href="#{edit_admin_voucher_path(voucher.id)}" title="edit"
+                          i.fa.fa-edit
+                      li
+                        a[data-confirm="Are you sure?" rel="nofollow" 
+                          data-method="delete" href="#{admin_voucher_url(voucher.id)}"]
+                          i.fa-solid.fa-trash
+          == pagy_bootstrap_nav(@pagy)
+                          

@@ -312,8 +312,8 @@ Devise.setup do |config|
   config.scoped_views = true
   require 'omniauth-facebook'
   config.omniauth :facebook, '1234297120679689', '443ca028dc6e83122b2e479954955a36', scope: 'email', info_fields: 'email,name'
+  config.omniauth :google_oauth2, '223720805466-ls0lt386j8rhmnvrqieaik8309hbscti.apps.googleusercontent.com', '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', scope: 'email'
 
   # config.scoped_views = true
-  # require 'omniauth-facebook'
   # config.omniauth :facebook, '1664658960568128', '20353406802904ddd9fcd9a7affaf7b8', scope: 'email', info_fields: 'email'
 end

@@ -1,0 +1,69 @@
+.user_col_right  
+  #container-filters
+    a[href=""]
+        span All (#{@orders.length})
+    a[href=""]
+        span Wait for confirmation (#{@orders.count{ |e| e.status == 'pending'} + @orders.count{ |e| e.status == 'paying_excute'}})
+    a[href=""]
+      span Delivering (#{@orders.count{ |e| e.status == 'paid'} + @orders.count{ |e| e.status == 'delivering'}})
+    a[href=""]
+      span Success (#{@orders.count{ |e| e.status == 'success'}})
+    a[href=""]
+      span Failed (#{@orders.count{ |e| e.status == 'failed'}})
+    a[href=""]
+      span Canceled (#{@orders.count{ |e| e.status == 'cancel'}})
+  .list_orders
+    - @orders.each do |order|
+      .item_order
+        .item_order-top
+          .item_order-top__left
+            div
+              - if order.status == 'success'
+                i.success.fa-solid.fa-circle-check
+                span.success Delivery successful
+              - elsif order.status == 'pending' || order.status == 'paid'
+                i.warning.fa-solid.fa-truck-fast
+                span.warning The order isn't confirmed
+              - elsif order.status == 'delivering'
+                i.pending.fa-solid.fa-truck-fast
+                span.pending Dang giao hang
+              - elsif order.status == 'canceled'
+                i.failed.fa-solid.fa-circle-exclamation
+                span.failed The order is canceled
+            div
+              | &nbsp| 
+              span.txt_color_1 Order date: 
+              span = order.created_at.strftime("%H:%M %d/%m/%Y")
+          .item_order-top__right
+            span.success Xem chi tiet 
+            i.success.fa-solid.fa-caret-right
+        - total = 0
+        - order.order_items.each do |item|
+          .item_order-product
+            a.item_order-body[id="#{order.token}" style="flex:1"]
+              .item_order-info
+                .item_order-img
+                  img src="#{url_for(item.product.images[0])}"
+                .item_order-content
+                  .item_order-content__name 
+                    span = item.product.title
+                  .item_order-content__attribute
+                    span 
+                      / |Phân loại hàng: #{Đen 510ml}, #{ Khắc Tên 1 Bên}
+                    br
+                    strong 
+                      |x #{item.quantity}
+            .item-info_price
+              - price = item.attribute_value_id.nil? ? item.product.price : item.attribute_value.price_attribute_product
+              span.item-info_price--old 
+                |$#{price}
+              span.item-info_price--new 
+                |$#{price.to_f - item.product.discount.to_f}
+            - total = total + (price.to_f - item.product.discount.to_f) * item.quantity
+        .item_order-bottom
+          i.fa-solid.fa-user-shield
+          .item_order-bottom__total The total money: 
+          .item_order-bottom__price 
+            |$#{total}
+    == pagy_bootstrap_nav(@pagy)
+    

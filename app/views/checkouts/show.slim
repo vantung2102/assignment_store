@@ -1,0 +1,12 @@
+#page_checkout.home-page
+  .container
+    .breadcrumbs
+      ol.breadcrumb
+        li
+          a[href="#"] Home
+        li.active Checkout
+    #content_checkout
+      .col-sm-8
+        = render "checkouts/shared/checkout_left"
+      .col-sm-4
+        = render "checkouts/shared/checkout_right"

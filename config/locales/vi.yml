@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 vi:
-  hello: "Hello world"
+  menu:
+    home: "Trang chủ"
+    shop: "Cửa Hàng"
+    contact: "Liên Hệ"
+    profile: "Cá nhân"
+    checkout: "Thanh Toán"
+    cart: "Giỏ Hàng"
+    my_orders: "Đơn hàng của tôi"
+    account: "Tài khoản"
+    notification: "Thông báo"
+    login: "Đăng nhập"
+    logout: "Đăng xuất"
+    address: "Địa chỉ"
+  product:
+    see_detail: "Xem chi tiết"
+    quick_view: "Xem nhanh"

@@ -1,0 +1,45 @@
+.address_checkout
+  .title_order 
+    .pull-left 
+      strong Delivery address
+    .pull-right
+      i.fa-solid.fa-sliders.change_address
+  .address_content
+    - if @address_default.nil?
+      .address_content-name[style="display:block;"]
+        p Please choose an address
+    - else
+      .address_content-name[style="display:block;"]
+        p 
+          |#{@address_default.fullname}
+          |&nbsp - &nbsp
+          |#{@address_default.phone_number}
+      .address_content-detail 
+        |#{@address_default.addressDetail}
+        p #{@address_default.ward},&nbsp#{@address_default.district},&nbsp#{@address_default.province}
+  .list-address_content
+    - @addresses.each do |address|
+      .item
+        - if address.status == true
+          input[type="radio" name="address" value="#{address.id}" checked]
+        - else
+          input[type="radio" name="address" value="#{address.id}"]
+        .show-address
+          .address_content-name
+            p 
+              |#{address.fullname}
+              |&nbsp - &nbsp
+              |#{address.phone_number}
+            - if address.status == true
+              span Default
+          .address_content-detail
+            |#{address.addressDetail}
+            p #{address.ward},&nbsp#{address.district},&nbsp#{address.province}               
+        .edit-address
+          a[href="#{edit_user_address_url(address.id)}"]
+            i.fa-regular.fa-pen-to-square
+          a.destroy_address
+            i.fa-solid.fa-trash
+    .btn-chosse
+      button.btn.btn-light.back_address Back
+      button.btn.btn-primary.btn-confirm_address Confirm

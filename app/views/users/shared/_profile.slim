@@ -1,0 +1,33 @@
+.user_col_right#profile_page
+  #container-profile_page
+    = simple_form_for @user, url: profile_edit_user_path, :html => {:class => "form-horizontal"} do |f|
+      .form-group.control-group
+        = f.label :username, class:"col-sm-2 control-label"
+        .col-sm-6.controls
+          = f.input :name, required:"required", label: false, hint: 'Required. Length form 6 to 30.'
+      .form-group.control-group
+        = f.label :phone, class:"col-sm-2 control-label"
+        .col-sm-6.controls
+          = f.input :phone, required:"required", label: false, hint: 'Required.'
+      .form-group.control-group
+        = f.label :email, class:"col-sm-2 control-label"
+        .col-sm-6.controls
+          = f.input :email, required:"required", label: false, hint: 'Required.'
+      .form-group.control-group
+        = f.label :gender, class:"col-sm-2 control-label"
+        .col-sm-6.controls
+          = f.input :gender, collection: [:men, :women], selected: @user.gender, hint: 'Optional.',
+                    :input_html => { class: "input_select2" }, label: false
+      .form-group.control-group
+        = f.label :avatar, class:"col-sm-2 control-label"
+        .col-sm-6.controls
+          - avatar = @user.avatar
+          - if avatar.attached?
+            .preview
+              img class="preview img-thumbnail" src="#{url_for(avatar)}"
+          - else
+            .preview
+          = f.input :avatar, label: false, hint: 'Optional.'
+      .form-group.form-actions
+        .col-sm-offset-2.col-sm-6
+          = f.submit class: "btn btn-primary btn-edit"
