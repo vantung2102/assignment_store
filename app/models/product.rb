@@ -36,6 +36,7 @@ class Product < ApplicationRecord
   private
 
   def price?
+    # price.fractional == 0
     price == 0
   end
 
