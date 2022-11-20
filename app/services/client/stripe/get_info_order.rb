@@ -13,7 +13,7 @@ class Client::Stripe::GetInfoOrder < ApplicationService
     cart.each do |cart_item|
       product = products.find_by(id: cart_item.product_id)
       price = if cart_item.attribute_value_id.nil?
-                products.find_by(id: cart_item.product_id).price_cents
+                products.find_by(id: cart_item.product_id).price
               else
                 AttributeValue.find_by(id: cart_item.attribute_value_id).price_attribute_product
               end

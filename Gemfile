@@ -6,8 +6,7 @@ ruby '3.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6', '>= 6.1.6.1'
 # Use mysql as the database for Active Record
-# gem 'mysql2', '~> 0.5'
-gem 'pg'
+gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -53,6 +52,11 @@ group :development, :test do
   gem 'webdrivers'
 
    gem 'pundit-matchers'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development do
@@ -114,6 +118,8 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main
 gem 'validates_timeliness', '~> 6.0.0'
 
 gem 'rubocop', require: false
+
+gem 'aws-sdk-s3', require: false
 
 # gem "searchkick"
 # gem "elasticsearch"

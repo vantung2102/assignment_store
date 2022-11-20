@@ -42,7 +42,7 @@
                 .item_order-content__name 
                   span = product.title
                 .item_order-content__attribute
-                  - price = product.price_cents
+                  - price = product.price
                   - if item.attribute_value_id.present?
                     - value = item.attribute_value
                     - price = value.price_attribute_product
