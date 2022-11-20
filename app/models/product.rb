@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   extend FriendlyId
   extend SearchKeyword::QuerySearch
   friendly_id :title, use: :slugged
-  monetize :price_cents
+  # monetize :price_cents
 
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories, dependent: :destroy
@@ -36,7 +36,7 @@ class Product < ApplicationRecord
   private
 
   def price?
-    price.fractional == 0
+    price == 0
   end
 
   def quantity?

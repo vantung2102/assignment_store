@@ -3,7 +3,7 @@ class AddInOrder < ActiveRecord::Migration[6.1]
     add_column :orders, :charge_id, :string
     add_column :orders, :error_message, :string
     add_column :orders, :payment_gateway, :integer
-    add_money :orders, :price, currency: { present: false }
+    # add_money :orders, :price, currency: { present: false }
     add_reference :orders, :addresses, null: false, foreign_key: true
     remove_column :orders, :tax
     remove_column :orders, :promo
