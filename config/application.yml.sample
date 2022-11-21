@@ -1,0 +1,9 @@
+default: &default
+  STRIPE_PUBLISHABLE_KEY: asdasd
+  STRIPE_SECRET_KEY: asdasd
+
+test:
+  <<: *default
+
+development:
+  <<: *default
