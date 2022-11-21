@@ -156,8 +156,11 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.data.price_attribute_product - res.product.discount) *
+                    (
+                      (res.data.price_attribute_product -
+                        res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }
@@ -192,8 +195,11 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.data.price_attribute_product - res.product.discount) *
+                    (
+                      (res.data.price_attribute_product -
+                        res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }
@@ -218,8 +224,10 @@ export default class CartController {
                 item
                   .find(".cart_total_price")
                   .html(
-                    (res.product.price_cents - res.product.discount) *
+                    (
+                      (res.product.price - res.product.discount) *
                       newQuantity
+                    ).toFixed(2)
                   );
               }
             }

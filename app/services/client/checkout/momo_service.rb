@@ -12,7 +12,7 @@ class Client::Checkout::MomoService < ApplicationService
     orderInfo = 'pay with MoMo'
     redirectUrl = 'http://localhost:3000/'
     ipnUrl = 'https://4b4e-42-116-183-132.ap.ngrok.io/webhook/momo'
-    amount = (order.total * 23_000).to_i.to_s
+    amount = (order.total * 23000).to_i.to_s
     orderId = order.token
     requestId = SecureRandom.uuid
     requestType = 'payWithMethod'

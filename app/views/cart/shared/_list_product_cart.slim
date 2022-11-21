@@ -59,8 +59,8 @@
                     | There are #{productDetail[:stock]} products left 
                 td.cart_total
                   p.cart_total_price
-                    sup $
-                    = price * quantiny.to_i
+                    / sup $
+                    = (price * quantiny.to_i).round(2)
                 td.cart_delete
                   a.cart_quantity_delete
                     i.fa.fa-times

@@ -4,5 +4,5 @@ class Comment < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
-  validates :content, presence: true, length: { minimum: 6, maximum: 500 }
+  validates :content, presence: true, length: { minimum: 1, maximum: 500 }
 end

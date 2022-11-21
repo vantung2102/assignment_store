@@ -29,6 +29,7 @@ class CheckoutsController < ApplicationController
   def payment
     case params[:payment_gateway]
     when 'STRIPE'
+      status = 200
       html = render_to_string partial: 'checkouts/shared/stripe', layout: false
       data = { method: 'STRIPE', html: html }
     when 'MOMO'

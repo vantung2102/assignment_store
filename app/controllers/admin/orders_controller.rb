@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
   before_action :set_order, only: %i[show edit update destroy]
-  before_action :authorize_admin!
+  before_action :authorize_admin!, only: %i[index show edit update destroy]
   before_action :set_status, only: %i[submit cancel success]
 
   def index

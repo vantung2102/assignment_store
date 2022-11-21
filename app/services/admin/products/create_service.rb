@@ -4,9 +4,6 @@ class Admin::Products::CreateService < ApplicationService
   end
 
   def call
-    
-    binding.pry
-    
     ActiveRecord::Base.transaction do
       product = Product.new(product_params.except(:product_attribute_1, :product_attribute_2))
       product.save!
@@ -59,8 +56,6 @@ class Admin::Products::CreateService < ApplicationService
         return [true, product]
       end
     rescue StandardError => e
-      p '@@@@@@@@@@@@@@@'
-      p e
       return [false, product]
     end
   end

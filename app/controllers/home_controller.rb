@@ -12,7 +12,7 @@ class HomeController < ApplicationController
     elsif params[:page].present?
       @products, @status = Client::Home::LoadMoreService.call(params[:page])
     elsif params[:search].present?
-      @product = Product.query_search(:title, params[:search]).order(created_at: :desc)
+      @products = Product.query_search(:title, params[:search]).order(created_at: :desc)
     end
   end
 

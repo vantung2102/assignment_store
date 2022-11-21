@@ -21,7 +21,7 @@ class Product < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3, maximum: 100 }
   validates :meta_title, presence: true, length: { minimum: 3, maximum: 100 }
   validates :discount, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :price, numericality: { less_than: 500_000_000, greater_than: :discount }, unless: -> { price? }
+  validates :price, numericality: { less_than: 500_000_000, greater_than: :discount }, if: -> { price? }
   validates :quantity, numericality: { greater_than_or_equal_to: 0, less_than: 500 }, if: -> { quantity? }
   validates :content, presence: true, length: { minimum: 6, maximum: 10_000_000_000 }
   validates :brand_id, presence: true
@@ -37,7 +37,7 @@ class Product < ApplicationRecord
 
   def price?
     # price.fractional == 0
-    price == 0
+    price.present?
   end
 
   def quantity?

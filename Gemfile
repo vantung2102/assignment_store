@@ -116,7 +116,6 @@ gem 'validates_timeliness', '~> 6.0.0'
 gem 'rubocop', require: false
 
 gem 'aws-sdk-s3', require: false
-
 # gem "searchkick"
 # gem "elasticsearch"
 

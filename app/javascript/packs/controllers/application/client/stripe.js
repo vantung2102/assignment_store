@@ -118,32 +118,32 @@ export default class StripeController {
       });
   };
 
-  // refund = () => {
-  //   $("body").on("click", ".btn-refund", ({ target }) => {
-  //     const code = $(target).attr("id");
+  refund = () => {
+    $("body").on("click", ".btn-refund", ({ target }) => {
+      const code = $(target).attr("id");
 
-  //     Swal.fire({
-  //       title: "Are you sure you want to cancel your order?",
-  //       showDenyButton: true,
-  //       confirmButtonText: "ok!",
-  //       denyButtonText: `No`,
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         Ajax(this.api.refundStripe, "POST", { code: code })
-  //           .done((res) => {
-  //             if (res.status == 200) {
-  //               Swal.fire("Refund successfully!", "", "success");
+      Swal.fire({
+        title: "Are you sure you want to cancel your order?",
+        showDenyButton: true,
+        confirmButtonText: "ok!",
+        denyButtonText: `No`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Ajax(this.api.refundStripe, "POST", { code: code })
+            .done((res) => {
+              if (res.status == 200) {
+                Swal.fire("Refund successfully!", "", "success");
 
-  //               redirect(`/user/order/detail/${code}`, 1000);
-  //             }
-  //           })
-  //           .fail((res) => {});
+                redirect(`/user/order/detail/${code}`, 1000);
+              }
+            })
+            .fail((res) => {});
 
-  //         Swal.fire("Changes are not saved", "", "info");
-  //       }
-  //     });
-  //   });
-  // };
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+    });
+  };
 
   // ---------------- UI Helper -------------------
   renderSuccess = (payment_intent_id) => {

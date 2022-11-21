@@ -45,12 +45,9 @@ export default class HomeController {
 
             changeUrl(`?category=${slug}`);
           } else {
-            console.log(res);
           }
         })
-        .fail((res) => {
-          console.log(res);
-        });
+        .fail((res) => {});
     });
   };
 
@@ -74,8 +71,7 @@ export default class HomeController {
 
             $(".features_items").replaceWith(res.html);
             $(".btn-load_more").remove();
-
-            changeUrl({ url: `?brand=${slug}` });
+            changeUrl(`?brand=${slug}`);
           }
         })
         .fail((res) => {});
