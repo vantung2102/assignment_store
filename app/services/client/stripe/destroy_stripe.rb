@@ -1,4 +1,4 @@
-class Client::Stripe::DetroyOrder < ApplicationService
+class Client::Stripe::DetroyStripe < ApplicationService
   def initialize(charge)
     @charge = charge
   end

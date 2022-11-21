@@ -10,7 +10,7 @@ class Client::Checkout::GetInfo < ApplicationService
     cart = JSON.parse(carts_json)
     ids = cart.map { |item| item['id'].to_i }.uniq
     products = Product.where(id: ids)
-
+    
     total = 0
     cart.each do |item|
       product = products.find(item['id'])
@@ -24,7 +24,7 @@ class Client::Checkout::GetInfo < ApplicationService
                   attribute.where(attribute_1: item['val_1']).find_by(attribute_2: item['val_2']).price_attribute_product
                 end
       end
-      total += (price.to_f - product.discount)
+      total += (price.to_f - product.discount) * item['amount'].to_i
     end
 
     data_services = {

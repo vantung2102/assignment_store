@@ -17,7 +17,7 @@ class Client::Stripe::GetInfoOrder < ApplicationService
               else
                 AttributeValue.find_by(id: cart_item.attribute_value_id).price_attribute_product
               end
-      total += (price - product.discount)
+      total += (price - product.discount) * cart_item.quantity.to_i
     end
 
     [total, products, address]

@@ -60,7 +60,6 @@ class CheckoutsController < ApplicationController
         params[:voucher],
         Order.new_token
       )
-
       if create
         html = render_to_string partial: 'checkouts/success', layout: false
         data = { method: 'COD', html: html }

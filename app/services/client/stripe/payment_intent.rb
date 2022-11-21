@@ -13,14 +13,13 @@ class Client::Stripe::PaymentIntent < ApplicationService
     code = voucher.nil? ? '' : voucher.code
 
     intent = Stripe::PaymentIntent.create({
-                                            amount: total_payment,
-                                            currency: 'usd',
-                                            description: code,
-                                            metadata: {
-                                              shipping: shipping,
-                                              code_voucher: code
-                                            }
-                                          })
+        amount: total_payment,
+        currency: 'usd',
+        metadata: {
+          shipping: shipping,
+          code_voucher: code
+        }
+      })
 
     [intent, address]
   end

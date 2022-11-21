@@ -41,6 +41,8 @@ class Client::Order::CreateService < ApplicationService
 
       create = order.save
 
+# binding.pry
+
       cart.each do |cart_item|
         order_item = order.order_items.build(
           product_id: cart_item.product_id,

@@ -191,6 +191,7 @@ export default class CartController {
                 input.val(1);
                 this.setCartAgain(itemCart, carts, 1);
               } else {
+                console.log(res);
                 this.setCartAgain(itemCart, carts, newQuantity);
                 item
                   .find(".cart_total_price")
@@ -267,22 +268,22 @@ export default class CartController {
           cart = cart.filter((res) => res.id != id);
         }
 
-        Swal.fire({
-          title: "Do you want to remove item?",
-          showDenyButton: true,
-          confirmButtonText: "ok!",
-          denyButtonText: `No`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            item.remove();
-            this.setCart(cart);
-            this.showIconCart();
+        // Swal.fire({
+        //   title: "Do you want to remove item?",
+        //   showDenyButton: true,
+        //   confirmButtonText: "ok!",
+        //   denyButtonText: `No`,
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //     item.remove();
+        //     this.setCart(cart);
+        //     this.showIconCart();
 
-            Swal.fire("Remove successfully!", "", "success");
-          } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "info");
-          }
-        });
+        //     Swal.fire("Remove successfully!", "", "success");
+        //   } else if (result.isDenied) {
+        //     Swal.fire("Changes are not saved", "", "info");
+        //   }
+        // });
       } else {
         input.val(parseInt(quantity) - 1);
         const newQuantity = parseInt(quantity) - 1;
@@ -308,6 +309,8 @@ export default class CartController {
           );
           this.setCartAgain(itemCart, cart, newQuantity);
           total.html((parseFloat(total.html()) / quantity) * newQuantity);
+
+          // $(".price_sum").find("span").html(this.getTotalCart());
         } else {
           const itemCart = cart.find((res) => res.id === id);
           this.setCartAgain(itemCart, cart, newQuantity);

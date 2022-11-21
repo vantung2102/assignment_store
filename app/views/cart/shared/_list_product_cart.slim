@@ -64,14 +64,14 @@
                 td.cart_delete
                   a.cart_quantity_delete
                     i.fa.fa-times
-            tr 
+            tr[style="height:60px"]
               td[colspan="3"]
               td.sum_total
                 span.price_sum
-                  p Total payment: &nbsp;
-                  sup $
+                  / p Total payment: &nbsp;
+                  / sup $
                   span
-                    = total
+                    / = total
               td
                 a.btn-checkout[href="#{checkout_url}"] checkout
         - else
