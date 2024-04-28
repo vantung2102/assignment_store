@@ -44,7 +44,7 @@ group :development, :test do
   gem 'shoulda-matchers'
 
   gem 'database_cleaner'
-  
+
   gem 'capybara', '>= 3.26'
 
   gem 'rails-controller-testing'

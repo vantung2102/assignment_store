@@ -24,13 +24,13 @@ module AssignmentStore
 
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
 
-    config_file = Rails.application.config_for(:application)
-    config_file.each do |key, value|
-      ENV[key.to_s] = value
-    end unless config_file.nil?
+    # config_file = Rails.application.config_for(:application)
+    # config_file.each do |key, value|
+    #   ENV[key.to_s] = value
+    # end unless config_file.nil?
 
-    Rails.application.configure do
-      config.hosts << 'b97a-222-253-42-176.ap.ngrok.io'
-    end
+    # Rails.application.configure do
+    #   config.hosts << 'b97a-222-253-42-176.ap.ngrok.io'
+    # end
   end
 end
