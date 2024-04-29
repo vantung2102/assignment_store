@@ -1,13 +1,17 @@
+version: "3.0"
+
 services:
   mysql:
     image: mysql:5.7
     environment:
-      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - 3306:3306
     restart: always
+    volumes:
+      - mysql:/var/lib/mysql
     container_name: assignment_store_mysql
 
   web:
@@ -19,6 +23,13 @@ services:
       - 3000:3000
     volumes:
       - .:/app
+      - node_modules:/app/node_modules
     container_name: assignment_store_web
+    stdin_open: true
+    tty: true
     depends_on:
       - mysql
+
+volumes:
+  mysql:
+  node_modules:
